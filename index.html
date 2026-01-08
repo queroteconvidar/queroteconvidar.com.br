@@ -1,71 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Catálogo Infantil - Quero te convidar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quero Convidar - Catálogo Infantil</title>
+    <style>
+        /* Estilo Geral */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f9f6f2; /* Tom pastel suave */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <style>
-    /* Remove margens e garante que o catálogo ocupe 100% da tela */
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
+        /* Container da Logo */
+        .logo-container {
+            margin-bottom: 30px;
+        }
 
-    /* Estilização do Iframe para preencher o navegador */
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      display: block;
-    }
+        .logo-container img {
+            width: 200px; /* Ajuste o tamanho da sua logo aqui */
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-    /* Esconde o aviso de direitos autorais visualmente, mas mantém no código */
-    .copyright-hidden {
-      display: none !important;
-      visibility: hidden;
-      pointer-events: none;
-    }
-  </style>
+        /* Estilo do Botão */
+        .btn-visitar {
+            background-color: #9db7a9; /* Cor baseada no verde da sua logo */
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .btn-visitar:hover {
+            background-color: #8aa396;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Proteção de Direitos Autorais Oculta */
+        .copyright {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
 
-  <iframe
-    src="https://www.canva.com/design/DAG9kGraNj8/Z1Pz6dhz9Cmh1cH6HnkL7g/view?embed"
-    allowfullscreen>
-  </iframe>
+    <div class="logo-container">
+        <img src="LOGO.png" alt="Quero Convidar Logo">
+    </div>
 
-  <div class="copyright-hidden" aria-hidden="true">
-    © 2026 Cristiane Oliveira. Todos os direitos reservados. 
-    Este software, design e algoritmos estão protegidos pela Lei de Direitos Autorais (Lei nº 9.610/98). 
-  </div>
+    <a href="https://queroconvidar.com.br/catalogoinfantil" class="btn-visitar">
+        VISITAR SITE
+    </a>
 
-  <script>
-    (function() {
-      // Bloqueia o botão direito do mouse
-      document.addEventListener('contextmenu', e => e.preventDefault());
+    <div class="copyright">
+        © 2026 Cristiane Oliveira. Protegido pela Lei 9.610/98.
+    </div>
 
-      // Bloqueia atalhos de teclado (F12, Ctrl+U, Ctrl+Shift+I, etc)
-      document.addEventListener('keydown', function(e) {
-        if (e.keyCode == 123 || 
-           (e.ctrlKey && e.keyCode == 85) || 
-           (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-           (e.ctrlKey && e.keyCode == 67) || 
-           (e.ctrlKey && e.keyCode == 83)) {
-          e.preventDefault();
-          return false;
-        }
-      });
-
-      // Mensagem no console para aviso legal
-      console.log("%c Protegido pela Lei 9.610/98 - Autoria: Cristiane Oliveira ", "color: white; background: red; font-weight: bold;");
-    })();
-  </script>
+    <script>
+        // Proteção contra cópia
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.keyCode == 123 || (e.ctrlKey && [85, 73, 67, 83].includes(e.keyCode))) {
+                e.preventDefault();
+            }
+        });
+    </script>
 
 </body>
 </html>
