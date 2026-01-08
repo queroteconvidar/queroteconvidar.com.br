@@ -2,10 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Quero te convidar</title>
+  <title>Catálogo Infantil - Quero te convidar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    /* Remove margens e garante que o catálogo ocupe 100% da tela */
     html, body {
       margin: 0;
       padding: 0;
@@ -15,92 +16,56 @@
       background: #000;
     }
 
+    /* Estilização do Iframe para preencher o navegador */
     iframe {
       width: 100vw;
       height: 100vh;
       border: none;
+      display: block;
     }
 
-    /* Botão flutuante WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background-color: #25D366;
-      color: #ffffff;
-      padding: 14px 20px;
-      border-radius: 50px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      text-decoration: none;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-      z-index: 99999;
-      animation: fadeIn 0.6s ease;
-    }
-
-    .whatsapp-float:hover {
-      background-color: #1ebe5d;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* Esconde o aviso de direitos autorais visualmente, mas mantém no código */
+    .copyright-hidden {
+      display: none !important;
+      visibility: hidden;
+      pointer-events: none;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- BOTÃO FALE COMIGO -->
-  <a
-    id="whatsappButton"
-    class="whatsapp-float"
-    href="https://wa.me/5521983130320"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Fale comigo
-  </a>
-
-  <!-- IFRAME CANVA (LINK SUBSTITUÍDO) -->
   <iframe
     src="https://www.canva.com/design/DAG9kGraNj8/Z1Pz6dhz9Cmh1cH6HnkL7g/view?embed"
-
     allowfullscreen>
   </iframe>
 
+  <div class="copyright-hidden" aria-hidden="true">
+    © 2026 Cristiane Oliveira. Todos os direitos reservados. 
+    Este software, design e algoritmos estão protegidos pela Lei de Direitos Autorais (Lei nº 9.610/98). 
+  </div>
+
   <script>
-    const button = document.getElementById('whatsappButton');
+    (function() {
+      // Bloqueia o botão direito do mouse
+      document.addEventListener('contextmenu', e => e.preventDefault());
 
-    function hideButton(e) {
-      if (e.target.closest('#whatsappButton')) return;
-      button.style.display = 'none';
-      document.removeEventListener('click', hideButton);
-      document.removeEventListener('touchstart', hideButton);
-    }
+      // Bloqueia atalhos de teclado (F12, Ctrl+U, Ctrl+Shift+I, etc)
+      document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 123 || 
+           (e.ctrlKey && e.keyCode == 85) || 
+           (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+           (e.ctrlKey && e.keyCode == 67) || 
+           (e.ctrlKey && e.keyCode == 83)) {
+          e.preventDefault();
+          return false;
+        }
+      });
 
-    document.addEventListener('click', hideButton);
-    document.addEventListener('touchstart', hideButton);
+      // Mensagem no console para aviso legal
+      console.log("%c Protegido pela Lei 9.610/98 - Autoria: Cristiane Oliveira ", "color: white; background: red; font-weight: bold;");
+    })();
   </script>
-<div style="display: none !important; visibility: hidden; pointer-events: none;" aria-hidden="true">
-        © 2026 Cristiane Oliveira. Todos os direitos reservados. 
-        Este software, design e algoritmos estão protegidos pela Lei de Direitos Autorais (Lei nº 9.610/98). 
-    </div>
 
-    <script>
-        (function() {
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            document.addEventListener('keydown', function(e) {
-                if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || 
-                   (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-                   (e.ctrlKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 83)) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            console.log("%c Protegido pela Lei 9.610/98 - Autoria: Cristiane Oliveira ", "color: white; background: red; font-weight: bold;");
-        })();
-    </script>
-    </body> </html>
 </body>
 </html>
