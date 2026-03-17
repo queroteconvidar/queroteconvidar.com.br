@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Termo de Contratação - Quero Convidar</title>
@@ -124,216 +124,213 @@
     }
   </style>
   <style>body { box-sizing: border-box; }</style>
- </head>
- <body class="h-full bg-gradient-to-br from-[#ffffff] via-[#fffdf8] to-[#f8f6f1] text-[#2b2b2b] overflow-auto">
+</head>
+<body class="h-full bg-gradient-to-br from-[#ffffff] via-[#fffdf8] to-[#f8f6f1] text-[#2b2b2b] overflow-auto">
   <div id="app" class="w-full min-h-full py-6 px-4">
-   <div class="max-w-2xl mx-auto">
-    <header class="text-center mb-6">
-     <div class="text-2xl tracking-wide font-bold" id="header-title">
-      <span id="empresa-nome">Quero Convidar</span>
-      <span class="inline-block mx-2 text-[#D4AF37]">•</span>
-      <span class="font-normal" id="empresa-subtitulo">Convites Digitais</span>
-     </div>
-     <div class="mt-3 h-0.5 w-36 gradient-line mx-auto rounded"></div>
-     <div class="mt-3 text-base text-[#6a6a6a] font-sans-alt" id="documento-titulo">
-      Termo de contratação
-     </div>
-    </header>
-
-    <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
-
-    <div id="form-section">
-     <form id="contract-form" class="space-y-5">
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do contratante</h2>
-       <div class="space-y-4">
-        <div>
-         <label for="nome_completo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome completo</label>
-         <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+    <div class="max-w-2xl mx-auto">
+      <header class="text-center mb-6">
+        <div class="text-2xl tracking-wide font-bold" id="header-title">
+          <span id="empresa-nome">Quero Convidar</span>
+          <span class="inline-block mx-2 text-[#D4AF37]">•</span>
+          <span class="font-normal" id="empresa-subtitulo">Convites Digitais</span>
         </div>
-       </div>
+        <div class="mt-3 h-0.5 w-36 gradient-line mx-auto rounded"></div>
+        <div class="mt-3 text-base text-[#6a6a6a] font-sans-alt" id="documento-titulo">
+          Termo de contratação
+        </div>
+      </header>
+
+      <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+      <div id="form-section">
+        <form id="contract-form" class="space-y-5">
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do contratante</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="nome_completo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome completo</label>
+                <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do aniversariante</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="nome_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
+                <input type="text" id="nome_aniversariante" name="nome_aniversariante" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+              <div>
+                <label for="idade_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Idade</label>
+                <input type="text" id="idade_aniversariante" name="idade_aniversariante" placeholder="Ex: 5 anos" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Detalhes do evento</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="data_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do evento</label>
+                <input type="date" id="data_evento" name="data_evento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+              <div>
+                <label for="horario_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Horário do evento</label>
+                <input type="time" id="horario_evento" name="horario_evento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label for="local_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Local do evento</label>
+              <input type="text" id="local_evento" name="local_evento" placeholder="Salão, endereço ou ponto de referência" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+            </div>
+            <div class="mt-4">
+              <label for="tema_festa" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tema da festa</label>
+              <input type="text" id="tema_festa" name="tema_festa" placeholder="Ex: Floresta encantada, Borboletas, Minnie rosa" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Experiência contratada</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="tipo_experiencia" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tipo de experiência</label>
+                <select id="tipo_experiencia" name="tipo_experiencia" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="Primeiro Encanto - Convite tradicional">Primeiro Encanto - Convite tradicional</option>
+                  <option value="Encanto que Marca - Interativo ou estendido">Encanto que Marca - Interativo ou estendido</option>
+                  <option value="Encanto em Movimento - Animado (páginas ou MP4)">Encanto em Movimento - Animado (páginas ou MP4)</option>
+                  <option value="Luxo Afetivo - Cinemático ou livrinho">Luxo Afetivo - Cinemático ou livrinho</option>
+                  <option value="Outros serviços">Outros serviços</option>
+                </select>
+              </div>
+              <div>
+                <label for="adicionais" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Adicionais contratados</label>
+                <textarea id="adicionais" name="adicionais" rows="2" placeholder="Ex: Confimação de Presença, Álbum I.A., Álbum personalizado da festa, Mascotes..." class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações adicionais</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="paleta_cores" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Paleta de cores ou estilo</label>
+                <input type="text" id="paleta_cores" name="paleta_cores" placeholder="Ex: Rosa pastel, branco, dourado / Aquarela, GIF, 3D" class="input-field w-full px-4 py-3 rounded-xl outline-none">
+              </div>
+              <div>
+                <label for="frases_versiculos" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Frases ou versículos</label>
+                <textarea id="frases_versiculos" name="frase no convite" rows="2" placeholder="Ex: Uma frase especial, versículo bíblico ou citação para o convite" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+              </div>
+              <div>
+                <label for="musica" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Música</label>
+                <textarea id="musica" name="musica" rows="2" placeholder="Ex: Nome da música, artista, link ou observações sobre a trilha sonora" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+              </div>
+              <div>
+                <label for="link_externo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Link externo</label>
+                <input type="text" id="link_externo" name="link_externo" placeholder="Ex: Mapa, listas de presentes, sites" class="input-field w-full px-4 py-3 rounded-xl outline-none">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Pagamento</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="forma_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Forma de pagamento</label>
+                <input type="text" id="forma_pagamento" name="forma_pagamento" placeholder="Ex: PIX ou cartão" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+              <div>
+                <label for="data_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do pagamento</label>
+                <input type="date" id="data_pagamento" name="data_pagamento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Termos e condições</h2>
+            <div class="space-y-4 text-base font-sans-alt mb-5">
+              <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
+                <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade da marca</h3>
+                <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
+                  <li>O design desenvolvido é autoral, exclusivo para o evento e não será reutilizado ou comercializado para terceiros no mesmo formato personalizado.</li>
+                  <li>O projeto inclui 2 rodadas de alterações gratuitas. Após esse limite: R$10 por alteração de imagem e R$30 por alteração de vídeo</li>
+                  <li>O convite será entregue em formato digital finalizado, não sendo enviado arquivo editável.</li>
+                  <li>O funcionamento de botões, links e interações pode variar conforme aparelho, sistema operacional, navegador e velocidade da internet.</li>
+                  <li>O prazo de produção inicia após confirmação de 100% do pagamento e envio completo do material necessário.</li>
+                  <li>O trabalho poderá ser divulgado em portfólio e redes sociais, com ocultação de dados sensíveis quando necessário.</li>
+                  <li>O arquivo final ficará armazenado por até 7 dias após a data do evento.</li>
+                </ul>
+              </div>
+              <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
+                <h3 class="font-bold text-[#2b2b2b] mb-3">Reembolso e cancelamento</h3>
+                <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
+                  <li>Após o início da produção, não há devolução de valores pagos.</li>
+                  <li>Em caso de cancelamento antes do início da produção, poderá haver retenção de taxa administrativa referente à reserva de agenda.</li>
+                  <li>Alterações estruturais como mudança de tema, paleta ou identidade visual após aprovação inicial poderão ser consideradas novo projeto.</li>
+                </ul>
+              </div>
+              <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
+                <h3 class="font-bold text-[#2b2b2b] mb-3">Imagens por I.A.</h3>
+                <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
+                  <li>Imagens geradas por inteligência artificial são interpretações artísticas baseadas no material enviado.</li>
+                  <li>Não garantem reprodução 100% fiel de traços físicos, proporções ou detalhes específicos.</li>
+                  <li>O resultado final depende diretamente da qualidade das imagens fornecidas pelo cliente.</li>
+                  <li>Pequenas variações estéticas são inerentes ao processo criativo com I.A.</li>
+                </ul>
+              </div>
+              <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
+                <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade do cliente</h3>
+                <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
+                  <li>Garantir que todas as fotos, textos e informações enviadas possuem autorização de uso.</li>
+                  <li>Conferir atentamente todas as informações antes da aprovação final.</li>
+                  <li>Enviar o material dentro do prazo combinado para que a entrega ocorra dentro do cronograma previsto.</li>
+                  <li>Testar o convite antes do envio oficial aos convidados.</li>
+                  <li>Compreender que o funcionamento de plataformas externas como WhatsApp, Google Maps ou navegadores não depende da marca.</li>
+                </ul>
+              </div>
+            </div>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="aceite_termos" name="aceite_termos" class="checkbox-custom w-5 h-5 mt-0.5 rounded" required>
+              <span class="text-base text-[#4b4b4b] font-sans-alt">
+                Declaro que li, compreendi e concordo com todos os termos acima.
+              </span>
+            </label>
+          </div>
+
+          <div class="card-section rounded-2xl p-5">
+            <h2 class="font-bold mb-4 text-[#2b2b2b]">Confirmação e assinatura</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="nome_assinante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
+                <input type="text" id="nome_assinante" name="nome_assinante" placeholder="Digite seu nome" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+              <div>
+                <label for="data_assinatura" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data</label>
+                <input type="date" id="data_assinatura" name="data_assinatura" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center p-4 rounded-2xl border border-[rgba(212,175,55,0.35)] bg-white">
+            <p class="text-base font-sans-alt text-[#2b2b2b]" id="closing-phrase">"Será um prazer criar esse momento com você 💕 "</p>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-2xl text-white font-bold text-lg tracking-wide shadow-md">
+            <span id="submit-text">✨ LI E CONCORDO COM OS TERMOS ✨</span>
+            <span id="submit-loading" class="hidden">
+              <span class="inline-block w-5 h-5 rounded-full loading-spinner"></span>
+            </span>
+          </button>
+        </form>
       </div>
 
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do aniversariante</h2>
-       <div class="space-y-4">
-        <div>
-         <label for="nome_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
-         <input type="text" id="nome_aniversariante" name="nome_aniversariante" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-        <div>
-         <label for="idade_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Idade</label>
-         <input type="text" id="idade_aniversariante" name="idade_aniversariante" placeholder="Ex: 5 anos" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-       </div>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Detalhes do evento</h2>
-       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-         <label for="data_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do evento</label>
-         <input type="text" id="data_evento" name="data_evento" placeholder="Ex: 15/08/2026" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-        <div>
-         <label for="horario_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Horário do evento</label>
-         <input type="text" id="horario_evento" name="horario_evento" placeholder="Ex: 16:00" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-       </div>
-       <div class="mt-4">
-        <label for="local_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Local do evento</label>
-        <input type="text" id="local_evento" name="local_evento" placeholder="Salão, endereço ou ponto de referência" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-       </div>
-       <div class="mt-4">
-        <label for="tema_festa" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tema da festa</label>
-        <input type="text" id="tema_festa" name="tema_festa" placeholder="Ex: Floresta encantada, Borboletas, Minnie rosa" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-       </div>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Experiência contratada</h2>
-       <div class="space-y-4">
-        <div>
-         <label for="tipo_experiencia" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tipo de experiência</label>
-         <select id="tipo_experiencia" name="tipo_experiencia" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-          <option value="">Selecione uma opção</option>
-          <option value="Primeiro Encanto - Convite tradicional">Primeiro Encanto - Convite tradicional</option>
-          <option value="Encanto que Marca - Interativo ou estendido">Encanto que Marca - Interativo ou estendido</option>
-          <option value="Encanto em Movimento - Animado (páginas ou MP4)">Encanto em Movimento - Animado (páginas ou MP4)</option>
-          <option value="Luxo Afetivo - Cinemático ou livrinho">Luxo Afetivo - Cinemático ou livrinho</option>
-         </select>
-        </div>
-        <div>
-         <label for="adicionais" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Adicionais contratados</label>
-         <textarea id="adicionais" name="adicionais" rows="2" placeholder="Ex: Formulários, Álbum I.A., Álbum personalizado da festa, Mascotes..." class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
-        </div>
-       </div>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações adicionais</h2>
-       <div class="space-y-4">
-        <div>
-         <label for="paleta_cores" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Paleta de cores ou estilo</label>
-         <input type="text" id="paleta_cores" name="paleta_cores" placeholder="Ex: Rosa pastel, branco, dourado / Aquarela, GIF, 3D" class="input-field w-full px-4 py-3 rounded-xl outline-none">
-        </div>
-        <div>
-         <label for="frases_versiculos" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Frases ou versículos</label>
-         <textarea id="frases_versiculos" name="frases_versiculos" rows="2" placeholder="Ex: Uma frase especial, versículo bíblico ou citação para o convite" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
-        </div>
-        <div>
-         <label for="musica" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Música</label>
-         <textarea id="musica" name="musica" rows="2" placeholder="Ex: Nome da música, artista, link ou observações sobre a trilha sonora" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
-        </div>
-        <div>
-         <label for="link_externo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Link externo</label>
-         <input type="text" id="link_externo" name="link_externo" placeholder="Ex: Link do álbum, mapa, RSVP" class="input-field w-full px-4 py-3 rounded-xl outline-none">
-        </div>
-       </div>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Pagamento</h2>
-       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-         <label for="forma_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Forma de pagamento</label>
-         <input type="text" id="forma_pagamento" name="forma_pagamento" placeholder="Ex: PIX, cartão, transferência" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-        <div>
-         <label for="data_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do pagamento</label>
-         <input type="text" id="data_pagamento" name="data_pagamento" placeholder="Ex: 02/03/2026" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-       </div>
-       <div class="mt-4">
-        <label for="responsavel_aprovacao" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Responsável pela aprovação da arte</label>
-        <input type="text" id="responsavel_aprovacao" name="responsavel_aprovacao" placeholder="Nome de quem aprova (evita opiniões de muitas pessoas)" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-       </div>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Termos e condições</h2>
-       <div class="space-y-4 text-base font-sans-alt mb-5">
-        <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
-         <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade da marca</h3>
-         <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
-          <li>O design desenvolvido é autoral, exclusivo para o evento e não será reutilizado ou comercializado para terceiros no mesmo formato personalizado.</li>
-          <li>O projeto inclui 2 rodadas de alterações gratuitas. Após esse limite: R$30 por alteração de imagem/vídeo, R$20 por alteração de cor/fonte/link</li>
-          <li>O convite será entregue em formato digital finalizado, não sendo enviado arquivo editável.</li>
-          <li>O funcionamento de botões, links e interações pode variar conforme aparelho, sistema operacional, navegador e velocidade da internet.</li>
-          <li>O prazo de produção inicia após confirmação de 100% do pagamento e envio completo do material necessário.</li>
-          <li>O trabalho poderá ser divulgado em portfólio e redes sociais, com ocultação de dados sensíveis quando necessário.</li>
-          <li>O arquivo final ficará armazenado por até 30 dias após a data do evento.</li>
-         </ul>
-        </div>
-        <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
-         <h3 class="font-bold text-[#2b2b2b] mb-3">Reembolso e cancelamento</h3>
-         <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
-          <li>Após o início da produção, não há devolução de valores pagos.</li>
-          <li>Em caso de cancelamento antes do início da produção, poderá haver retenção de taxa administrativa referente à reserva de agenda.</li>
-          <li>Alterações estruturais como mudança de tema, paleta ou identidade visual após aprovação inicial poderão ser consideradas novo projeto.</li>
-         </ul>
-        </div>
-        <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
-         <h3 class="font-bold text-[#2b2b2b] mb-3">Imagens por I.A.</h3>
-         <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
-          <li>Imagens geradas por inteligência artificial são interpretações artísticas baseadas no material enviado.</li>
-          <li>Não garantem reprodução 100% fiel de traços físicos, proporções ou detalhes específicos.</li>
-          <li>O resultado final depende diretamente da qualidade das imagens fornecidas pelo cliente.</li>
-          <li>Pequenas variações estéticas são inerentes ao processo criativo com I.A.</li>
-         </ul>
-        </div>
-        <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
-         <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade do cliente</h3>
-         <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
-          <li>Garantir que todas as fotos, textos e informações enviadas possuem autorização de uso.</li>
-          <li>Conferir atentamente todas as informações antes da aprovação final.</li>
-          <li>Enviar o material dentro do prazo combinado para que a entrega ocorra dentro do cronograma previsto.</li>
-          <li>Testar o convite antes do envio oficial aos convidados.</li>
-          <li>Compreender que o funcionamento de plataformas externas como WhatsApp, Google Maps ou navegadores não depende da marca.</li>
-         </ul>
-        </div>
-       </div>
-       <label class="flex items-start gap-3 cursor-pointer">
-        <input type="checkbox" id="aceite_termos" name="aceite_termos" class="checkbox-custom w-5 h-5 mt-0.5 rounded" required>
-        <span class="text-base text-[#4b4b4b] font-sans-alt">
-         Declaro que li, compreendi e concordo com todos os termos acima.
-        </span>
-       </label>
-      </div>
-
-      <div class="card-section rounded-2xl p-5">
-       <h2 class="font-bold mb-4 text-[#2b2b2b]">Confirmação e assinatura</h2>
-       <div class="space-y-4">
-        <div>
-         <label for="nome_assinante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
-         <input type="text" id="nome_assinante" name="nome_assinante" placeholder="Digite seu nome" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-        <div>
-         <label for="data_assinatura" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data</label>
-         <input type="text" id="data_assinatura" name="data_assinatura" placeholder="____ / ____ / ______" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
-        </div>
-       </div>
-      </div>
-
-      <div class="text-center p-4 rounded-2xl border border-[rgba(212,175,55,0.35)] bg-white">
-       <p class="text-base font-sans-alt text-[#2b2b2b]" id="closing-phrase">"Será um prazer criar esse momento com você 🤍"</p>
-      </div>
-
-      <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-2xl text-white font-bold text-lg tracking-wide shadow-md">
-       <span id="submit-text">✨ LI E CONCORDO COM OS TERMOS ✨</span>
-       <span id="submit-loading" class="hidden">
-        <span class="inline-block w-5 h-5 rounded-full loading-spinner"></span>
-       </span>
-      </button>
-     </form>
+      <footer class="text-center mt-8 pb-4">
+        <div class="h-0.5 w-24 gradient-line mx-auto rounded mb-4"></div>
+        <p class="text-sm text-[#9a9a9a] font-sans-alt">Quero Convidar © 2025 • Todos os direitos reservados</p>
+      </footer>
     </div>
-
-    <footer class="text-center mt-8 pb-4">
-     <div class="h-0.5 w-24 gradient-line mx-auto rounded mb-4"></div>
-     <p class="text-sm text-[#9a9a9a] font-sans-alt">Quero Convidar © 2024 • Todos os direitos reservados</p>
-    </footer>
-   </div>
   </div>
 
   <script>
@@ -481,7 +478,6 @@
         link_externo: document.getElementById('link_externo').value,
         forma_pagamento: document.getElementById('forma_pagamento').value,
         data_pagamento: document.getElementById('data_pagamento').value,
-        responsavel_aprovacao: document.getElementById('responsavel_aprovacao').value,
         nome_assinante: document.getElementById('nome_assinante').value,
         data_assinatura: document.getElementById('data_assinatura').value,
         aceite_termos: document.getElementById('aceite_termos').checked,
@@ -533,7 +529,6 @@ Link externo: ${formData.link_externo || 'Não informado'}
 💳 PAGAMENTO
 Forma de pagamento: ${formData.forma_pagamento}
 Data do pagamento: ${formData.data_pagamento}
-Responsável pela aprovação da arte: ${formData.responsavel_aprovacao}
 
 ✍️ CONFIRMAÇÃO E ASSINATURA
 Nome do assinante: ${formData.nome_assinante}
@@ -554,5 +549,5 @@ Aceitou os termos: ${formData.aceite_termos ? 'Sim' : 'Não'}`;
       }
     });
   </script>
- </body>
+</body>
 </html>
