@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Contratação | Convite de Casamento - Quero Convidar</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --qc-ivory: #f8f5f0;
+      --qc-white: #ffffff;
+      --qc-champagne: #d8c3a5;
+      --qc-gold: #b99868;
+      --qc-deep-gold: #9f7d4d;
+      --qc-text: #2f2924;
+      --qc-muted: #7d746d;
+      --qc-border: rgba(185, 152, 104, 0.28);
+      --qc-shadow: 0 14px 40px rgba(70, 52, 33, 0.08);
+      --qc-soft-shadow: 0 8px 22px rgba(70, 52, 33, 0.05);
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--qc-text);
+      background:
+        radial-gradient(circle at top left, rgba(216, 195, 165, 0.16), transparent 26%),
+        radial-gradient(circle at top right, rgba(185, 152, 104, 0.10), transparent 18%),
+        linear-gradient(135deg, #fcfaf7 0%, #f8f5f0 52%, #f4efe8 100%);
+    }
+
+    .font-sans-alt,
+    input, textarea, select, button {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(185, 152, 104, 0.22);
+      box-shadow: var(--qc-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.25), transparent 30%, transparent 70%, rgba(255,255,255,0.18)),
+        radial-gradient(circle at top center, rgba(216,195,165,0.10), transparent 32%);
+      pointer-events: none;
+    }
+
+    .ornament-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(185,152,104,0.35), rgba(185,152,104,0.9), rgba(185,152,104,0.35), transparent);
+    }
+
+    .section-card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--qc-border);
+      box-shadow: var(--qc-soft-shadow);
+      position: relative;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 28px;
+      right: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(185,152,104,0.7), transparent);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--qc-text);
+    }
+
+    .section-bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--qc-champagne), var(--qc-deep-gold));
+      box-shadow: 0 0 0 5px rgba(185, 152, 104, 0.10);
+      flex-shrink: 0;
+    }
+
+    .input-field {
+      width: 100%;
+      border: 1px solid rgba(185, 152, 104, 0.32);
+      background: rgba(255,255,255,0.95);
+      color: var(--qc-text);
+      transition: all 0.25s ease;
+    }
+
+    .input-field::placeholder {
+      color: #9c938b;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--qc-gold);
+      box-shadow: 0 0 0 4px rgba(185, 152, 104, 0.12);
+    }
+
+    .soft-box {
+      background: linear-gradient(180deg, rgba(248,245,240,0.9), rgba(255,255,255,0.92));
+      border: 1px solid rgba(185, 152, 104, 0.18);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #c8af88 0%, #9f7d4d 100%);
+      transition: all 0.3s ease;
+      box-shadow: 0 14px 28px rgba(159, 125, 77, 0.16);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(159, 125, 77, 0.20);
+      background: linear-gradient(135deg, #bea47c 0%, #8e6f45 100%);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .checkbox-custom {
+      accent-color: #9f7d4d;
+    }
+
+    .loading-spinner {
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .toast {
+      animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="h-full overflow-auto">
+  <div id="app" class="min-h-full px-4 py-8">
+    <div class="max-w-3xl mx-auto">
+
+      <header class="hero-card rounded-[32px] px-6 py-10 sm:px-10 sm:py-12 text-center mb-7">
+        <p class="font-sans-alt uppercase tracking-[0.28em] text-[11px] text-[#8a7f74] mb-3">
+          Quero Convidar
+        </p>
+
+        <h1 id="header-title" class="text-[2.2rem] sm:text-[2.9rem] leading-tight font-semibold text-[#2f2924]">
+          Formulário de Contratação
+        </h1>
+
+        <div class="w-40 mx-auto mt-5 ornament-line"></div>
+
+        <p class="font-sans-alt text-[0.98rem] sm:text-[1rem] text-[#756b63] mt-5 leading-relaxed max-w-2xl mx-auto">
+          Obrigada por nos escolher para fazer parte deste momento tão especial em suas vidas.
+          Preencha as informações abaixo para darmos início à criação do seu convite interativo de casamento.
+        </p>
+      </header>
+
+      <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+      <form id="contract-form" class="space-y-5">
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Dados principais dos noivos
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="nome_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome dos noivos</label>
+              <input type="text" id="nome_noivos" name="nome_noivos" placeholder="Ex: Maria Eduarda & João Pedro" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+
+            <div>
+              <label for="nome_pais" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome dos pais</label>
+              <textarea id="nome_pais" name="nome_pais" rows="3" placeholder="Caso desejem incluir no convite, informe aqui os nomes dos pais." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="frase_versiculo" class="block font-sans-alt text-sm text-[#615952] mb-2">Frase ou versículo</label>
+              <textarea id="frase_versiculo" name="frase_versiculo" rows="3" placeholder="Caso desejem incluir uma mensagem especial no convite." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Informações do evento
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="data_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Data</label>
+              <input type="date" id="data_evento" name="data_evento" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+
+            <div>
+              <label for="horario_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Horário</label>
+              <input type="time" id="horario_evento" name="horario_evento" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label for="local_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Local</label>
+            <textarea id="local_evento" name="local_evento" rows="3" placeholder="Informe o endereço completo do evento." class="input-field rounded-2xl px-4 py-3.5 resize-none" required></textarea>
+          </div>
+
+          <div class="mt-4">
+            <label for="link_localizacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Link de localização</label>
+            <input type="text" id="link_localizacao" name="link_localizacao" placeholder="Cole aqui o link do Google Maps ou outro localizador." class="input-field rounded-2xl px-4 py-3.5">
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Confirmação de presença e presentes
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="confirmacao_presenca" class="block font-sans-alt text-sm text-[#615952] mb-2">Contato para confirmação de presença</label>
+              <input type="text" id="confirmacao_presenca" name="confirmacao_presenca" placeholder="Ex: WhatsApp, telefone ou nome do responsável pela confirmação." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="link_confirmacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Link do site ou confirmação</label>
+              <input type="text" id="link_confirmacao" name="link_confirmacao" placeholder="Caso tenham site dos noivos ou página de RSVP, informe aqui." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="qr_code_presente" class="block font-sans-alt text-sm text-[#615952] mb-2">QR Code para presente</label>
+              <textarea id="qr_code_presente" name="qr_code_presente" rows="3" placeholder="Caso desejem incluir QR Code, descrevam aqui ou informem como ele será enviado." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="chave_pix" class="block font-sans-alt text-sm text-[#615952] mb-2">Chave Pix</label>
+              <input type="text" id="chave_pix" name="chave_pix" placeholder="Informe a chave Pix, caso deseje adicioná-la na sugestão de presente." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="site_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Site dos noivos</label>
+              <input type="text" id="site_noivos" name="site_noivos" placeholder="Caso possuam um site, insiram o link aqui." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Observações adicionais
+          </h2>
+
+          <div class="soft-box rounded-[24px] p-4 mb-4">
+            <p class="font-sans-alt text-sm text-[#70655d] leading-relaxed">
+              Caso tenham alguma preferência estética, orientação de estilo, informações complementares ou detalhes importantes para a criação do convite, escrevam abaixo.
+            </p>
+          </div>
+
+          <div>
+            <label for="observacoes" class="block font-sans-alt text-sm text-[#615952] mb-2">Observações</label>
+            <textarea id="observacoes" name="observacoes" rows="5" placeholder="Ex: estilo clássico, minimalista, floral, sofisticado, com brasão, tons claros, linguagem mais formal, etc." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Atenção
+          </h2>
+
+          <div class="soft-box rounded-[24px] p-5">
+            <p class="font-sans-alt text-[0.96rem] text-[#5f564e] leading-7">
+              Após o recebimento das informações acima, dentro do prazo de produção combinado, a arte será enviada para aprovação.
+            </p>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Termo de contrato
+          </h2>
+
+          <div class="space-y-4 font-sans-alt text-[0.95rem] text-[#5f564e]">
+            <div class="soft-box rounded-[22px] p-5">
+              <h3 class="font-semibold text-[#2f2924] mb-3">Condições gerais</h3>
+              <ul class="list-disc pl-5 space-y-2 leading-7">
+                <li>O convite será desenvolvido de forma personalizada, conforme as informações enviadas pelos contratantes.</li>
+                <li>O prazo de produção começa a contar após o envio completo dos dados necessários para a criação.</li>
+                <li>A arte será enviada para aprovação dentro do prazo previamente informado.</li>
+                <li>O projeto contempla ajustes básicos de texto, alinhamento e pequenos refinamentos visuais. Alterações estruturais podem ser consideradas à parte.</li>
+                <li>É responsabilidade dos contratantes conferir atentamente todos os dados antes da aprovação final.</li>
+              </ul>
+            </div>
+
+            <div class="soft-box rounded-[22px] p-5">
+              <h3 class="font-semibold text-[#2f2924] mb-3">Responsabilidade sobre informações enviadas</h3>
+              <ul class="list-disc pl-5 space-y-2 leading-7">
+                <li>Os contratantes declaram que todas as informações fornecidas estão corretas e autorizadas para uso no convite.</li>
+                <li>Links, contatos, chaves Pix, QR Codes e dados de localização serão inseridos conforme enviados, não sendo de responsabilidade da marca eventuais erros nas informações recebidas.</li>
+                <li>Os contratantes se responsabilizam por testar todos os links e informações após a entrega final.</li>
+              </ul>
+            </div>
+
+            <div class="soft-box rounded-[22px] p-5">
+              <h3 class="font-semibold text-[#2f2924] mb-3">Direitos e entrega</h3>
+              <ul class="list-disc pl-5 space-y-2 leading-7">
+                <li>O material será entregue em formato digital finalizado, não incluindo arquivo editável.</li>
+                <li>O design é autoral e desenvolvido exclusivamente para o evento contratado.</li>
+                <li>A marca poderá utilizar trechos do projeto para portfólio e divulgação, preservando dados sensíveis quando necessário.</li>
+              </ul>
+            </div>
+          </div>
+
+          <label class="flex items-start gap-3 mt-5 cursor-pointer">
+            <input type="checkbox" id="aceite_termos" name="aceite_termos" class="checkbox-custom w-5 h-5 mt-0.5 rounded" required>
+            <span class="font-sans-alt text-sm text-[#5e554d] leading-6">
+              Declaro que li, compreendi e concordo com as condições descritas neste formulário e no termo de contrato.
+            </span>
+          </label>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
+            <span class="section-bullet"></span>
+            Confirmação final
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="nome_responsavel" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome do responsável</label>
+              <input type="text" id="nome_responsavel" name="nome_responsavel" placeholder="Digite seu nome" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+
+            <div>
+              <label for="data_preenchimento" class="block font-sans-alt text-sm text-[#615952] mb-2">Data</label>
+              <input type="date" id="data_preenchimento" name="data_preenchimento" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+          </div>
+        </section>
+
+        <div class="text-center rounded-[26px] px-5 py-6 bg-[rgba(255,255,255,0.82)] border border-[rgba(185,152,104,0.20)] shadow-[0_8px_22px_rgba(70,52,33,0.05)]">
+          <p class="font-sans-alt text-[0.98rem] text-[#655b53] leading-relaxed">
+            Obrigada por nos escolher para viver esse capítulo com vocês. Será uma alegria transformar esse momento em uma apresentação inesquecível.
+          </p>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-primary w-full rounded-[22px] py-4 text-white text-[0.98rem] font-semibold tracking-[0.08em] uppercase">
+          <span id="submit-text">Enviar informações</span>
+          <span id="submit-loading" class="hidden">
+            <span class="inline-block w-5 h-5 rounded-full loading-spinner"></span>
+          </span>
+        </button>
+      </form>
+
+      <footer class="text-center mt-8 pb-4">
+        <div class="w-24 mx-auto ornament-line mb-4"></div>
+        <p class="font-sans-alt text-sm text-[#9b9188]">Quero Convidar © 2026 • Todos os direitos reservados</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const defaultConfig = {
+      titulo_empresa: 'Quero Convidar',
+      titulo_documento: 'Formulário de Contratação',
+      subtitulo_documento: 'Convite Interativo de Casamento',
+      background_color: '#fcfaf7',
+      accent_color: '#b99868',
+      text_color: '#2f2924',
+      font_family: 'Cormorant Garamond',
+      font_size: 17
+    };
+
+    let currentRecords = [];
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const cfg = { ...defaultConfig, ...config };
+          document.body.style.color = cfg.text_color;
+          document.body.style.background =
+            `radial-gradient(circle at top left, rgba(216, 195, 165, 0.16), transparent 26%),
+             radial-gradient(circle at top right, rgba(185, 152, 104, 0.10), transparent 18%),
+             linear-gradient(135deg, ${cfg.background_color} 0%, #f8f5f0 52%, #f4efe8 100%)`;
+
+          const fontStack = `${cfg.font_family}, serif`;
+          document.body.style.fontFamily = fontStack;
+          document.getElementById('header-title').style.fontFamily = fontStack;
+        },
+        mapToCapabilities: (config) => {
+          const cfg = { ...defaultConfig, ...config };
+          return {
+            recolorables: [
+              {
+                get: () => cfg.background_color,
+                set: (value) => window.elementSdk.setConfig({ background_color: value })
+              },
+              {
+                get: () => cfg.accent_color,
+                set: (value) => window.elementSdk.setConfig({ accent_color: value })
+              },
+              {
+                get: () => cfg.text_color,
+                set: (value) => window.elementSdk.setConfig({ text_color: value })
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => cfg.font_family,
+              set: (value) => window.elementSdk.setConfig({ font_family: value })
+            },
+            fontSizeable: {
+              get: () => cfg.font_size,
+              set: (value) => window.elementSdk.setConfig({ font_size: value })
+            }
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const cfg = { ...defaultConfig, ...config };
+          return new Map([
+            ['titulo_empresa', cfg.titulo_empresa],
+            ['titulo_documento', cfg.titulo_documento],
+            ['subtitulo_documento', cfg.subtitulo_documento]
+          ]);
+        }
+      });
+    }
+
+    const dataHandler = {
+      onDataChanged(data) {
+        currentRecords = data;
+      }
+    };
+
+    async function initDataSdk() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Erro ao iniciar Data SDK:', result.error);
+        }
+      }
+    }
+
+    initDataSdk();
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast px-4 py-3 rounded-2xl shadow-lg mb-2 font-sans-alt text-sm ${type === 'success' ? 'bg-[#9f7d4d] text-white' : 'bg-red-500 text-white'}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    document.getElementById('contract-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submit-btn');
+      const submitText = document.getElementById('submit-text');
+      const submitLoading = document.getElementById('submit-loading');
+
+      submitBtn.disabled = true;
+      submitText.classList.add('hidden');
+      submitLoading.classList.remove('hidden');
+
+      const formData = {
+        nome_noivos: document.getElementById('nome_noivos').value,
+        nome_pais: document.getElementById('nome_pais').value,
+        frase_versiculo: document.getElementById('frase_versiculo').value,
+        data_evento: document.getElementById('data_evento').value,
+        horario_evento: document.getElementById('horario_evento').value,
+        local_evento: document.getElementById('local_evento').value,
+        link_localizacao: document.getElementById('link_localizacao').value,
+        confirmacao_presenca: document.getElementById('confirmacao_presenca').value,
+        link_confirmacao: document.getElementById('link_confirmacao').value,
+        qr_code_presente: document.getElementById('qr_code_presente').value,
+        chave_pix: document.getElementById('chave_pix').value,
+        site_noivos: document.getElementById('site_noivos').value,
+        observacoes: document.getElementById('observacoes').value,
+        aceite_termos: document.getElementById('aceite_termos').checked,
+        nome_responsavel: document.getElementById('nome_responsavel').value,
+        data_preenchimento: document.getElementById('data_preenchimento').value,
+        data_contratacao: new Date().toISOString()
+      };
+
+      let savedOk = true;
+
+      if (window.dataSdk && typeof window.dataSdk.create === 'function') {
+        const result = await window.dataSdk.create(formData);
+        savedOk = result.isOk;
+      }
+
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
+
+      if (savedOk) {
+        showToast('Informações enviadas com sucesso.');
+
+        const whatsappPhone = '5521967647527';
+
+        const whatsappMessage =
+`Olá! Segue um novo formulário de contratação para convite de casamento:
+
+💍 DADOS DOS NOIVOS
+Nome dos noivos: ${formData.nome_noivos}
+Nome dos pais: ${formData.nome_pais || 'Não informado'}
+Frase ou versículo: ${formData.frase_versiculo || 'Não informado'}
+
+📅 INFORMAÇÕES DO EVENTO
+Data: ${formData.data_evento}
+Horário: ${formData.horario_evento}
+Local: ${formData.local_evento}
+Link de localização: ${formData.link_localizacao || 'Não informado'}
+
+🕊️ CONFIRMAÇÃO E PRESENTES
+Contato para confirmação: ${formData.confirmacao_presenca || 'Não informado'}
+Link do site ou RSVP: ${formData.link_confirmacao || 'Não informado'}
+QR Code para presente: ${formData.qr_code_presente || 'Não informado'}
+Chave Pix: ${formData.chave_pix || 'Não informado'}
+Site dos noivos: ${formData.site_noivos || 'Não informado'}
+
+📝 OBSERVAÇÕES
+${formData.observacoes || 'Não informado'}
+
+✅ TERMO
+Aceitou os termos: ${formData.aceite_termos ? 'Sim' : 'Não'}
+
+✍️ CONFIRMAÇÃO FINAL
+Responsável: ${formData.nome_responsavel}
+Data: ${formData.data_preenchimento}`;
+
+        const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappUrl, '_blank');
+
+        setTimeout(() => {
+          document.getElementById('contract-form').reset();
+        }, 500);
+      } else {
+        showToast('Erro ao enviar. Tente novamente.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>
