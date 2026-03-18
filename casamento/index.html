@@ -3,35 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Contratação | Convite de Casamento - Quero Convidar</title>
+  <title>Briefing de Casamento | Quero Convidar</title>
+
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
 
     :root {
-      --qc-ivory: #f8f5f0;
-      --qc-white: #ffffff;
-      --qc-champagne: #d8c3a5;
-      --qc-gold: #b99868;
-      --qc-deep-gold: #9f7d4d;
-      --qc-text: #2f2924;
-      --qc-muted: #7d746d;
-      --qc-border: rgba(185, 152, 104, 0.28);
-      --qc-shadow: 0 14px 40px rgba(70, 52, 33, 0.08);
-      --qc-soft-shadow: 0 8px 22px rgba(70, 52, 33, 0.05);
+      --qc-bg-1: #fcfaf7;
+      --qc-bg-2: #f5efe7;
+      --qc-white: rgba(255,255,255,0.88);
+      --qc-card: rgba(255,255,255,0.92);
+      --qc-gold: #b79a72;
+      --qc-gold-deep: #9f7f56;
+      --qc-beige: #e9dccb;
+      --qc-text: #2f2925;
+      --qc-muted: #766c63;
+      --qc-border: rgba(183, 154, 114, 0.24);
+      --qc-shadow: 0 18px 45px rgba(84, 61, 37, 0.08);
+      --qc-soft-shadow: 0 10px 24px rgba(84, 61, 37, 0.05);
     }
 
     body {
       font-family: 'Cormorant Garamond', serif;
       color: var(--qc-text);
       background:
-        radial-gradient(circle at top left, rgba(216, 195, 165, 0.16), transparent 26%),
-        radial-gradient(circle at top right, rgba(185, 152, 104, 0.10), transparent 18%),
-        linear-gradient(135deg, #fcfaf7 0%, #f8f5f0 52%, #f4efe8 100%);
+        radial-gradient(circle at top left, rgba(233,220,203,0.35), transparent 26%),
+        radial-gradient(circle at top right, rgba(183,154,114,0.12), transparent 18%),
+        linear-gradient(135deg, var(--qc-bg-1) 0%, #f8f4ee 48%, var(--qc-bg-2) 100%);
     }
 
     .font-sans-alt,
@@ -39,10 +43,14 @@
       font-family: 'Inter', sans-serif;
     }
 
+    .font-script {
+      font-family: 'Great Vibes', cursive;
+    }
+
     .hero-card {
-      background: rgba(255,255,255,0.72);
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.66));
       backdrop-filter: blur(6px);
-      border: 1px solid rgba(185, 152, 104, 0.22);
+      border: 1px solid rgba(183,154,114,0.20);
       box-shadow: var(--qc-shadow);
       position: relative;
       overflow: hidden;
@@ -53,31 +61,31 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.25), transparent 30%, transparent 70%, rgba(255,255,255,0.18)),
-        radial-gradient(circle at top center, rgba(216,195,165,0.10), transparent 32%);
+        radial-gradient(circle at 15% 15%, rgba(233,220,203,0.25), transparent 20%),
+        radial-gradient(circle at 85% 10%, rgba(183,154,114,0.10), transparent 18%);
       pointer-events: none;
     }
 
     .ornament-line {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(185,152,104,0.35), rgba(185,152,104,0.9), rgba(185,152,104,0.35), transparent);
+      background: linear-gradient(90deg, transparent, rgba(183,154,114,0.35), rgba(183,154,114,0.9), rgba(183,154,114,0.35), transparent);
     }
 
     .section-card {
-      background: rgba(255,255,255,0.88);
+      position: relative;
+      background: var(--qc-card);
       border: 1px solid var(--qc-border);
       box-shadow: var(--qc-soft-shadow);
-      position: relative;
     }
 
     .section-card::before {
       content: "";
       position: absolute;
       top: 0;
-      left: 28px;
-      right: 28px;
+      left: 26px;
+      right: 26px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(185,152,104,0.7), transparent);
+      background: linear-gradient(90deg, transparent, rgba(183,154,114,0.7), transparent);
     }
 
     .section-title {
@@ -87,48 +95,48 @@
       color: var(--qc-text);
     }
 
-    .section-bullet {
-      width: 10px;
-      height: 10px;
+    .section-dot {
+      width: 11px;
+      height: 11px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--qc-champagne), var(--qc-deep-gold));
-      box-shadow: 0 0 0 5px rgba(185, 152, 104, 0.10);
+      background: linear-gradient(135deg, var(--qc-beige), var(--qc-gold-deep));
+      box-shadow: 0 0 0 5px rgba(183,154,114,0.10);
       flex-shrink: 0;
     }
 
     .input-field {
       width: 100%;
-      border: 1px solid rgba(185, 152, 104, 0.32);
-      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(183,154,114,0.32);
+      background: rgba(255,255,255,0.97);
       color: var(--qc-text);
       transition: all 0.25s ease;
     }
 
     .input-field::placeholder {
-      color: #9c938b;
+      color: #9c9188;
     }
 
     .input-field:focus {
       outline: none;
       border-color: var(--qc-gold);
-      box-shadow: 0 0 0 4px rgba(185, 152, 104, 0.12);
+      box-shadow: 0 0 0 4px rgba(183,154,114,0.11);
     }
 
     .soft-box {
-      background: linear-gradient(180deg, rgba(248,245,240,0.9), rgba(255,255,255,0.92));
-      border: 1px solid rgba(185, 152, 104, 0.18);
+      background: linear-gradient(180deg, rgba(248,244,238,0.95), rgba(255,255,255,0.92));
+      border: 1px solid rgba(183,154,114,0.16);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #c8af88 0%, #9f7d4d 100%);
+      background: linear-gradient(135deg, #c2a57d 0%, #9a7951 100%);
       transition: all 0.3s ease;
-      box-shadow: 0 14px 28px rgba(159, 125, 77, 0.16);
+      box-shadow: 0 14px 28px rgba(154,121,81,0.16);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 18px 30px rgba(159, 125, 77, 0.20);
-      background: linear-gradient(135deg, #bea47c 0%, #8e6f45 100%);
+      box-shadow: 0 18px 30px rgba(154,121,81,0.20);
+      background: linear-gradient(135deg, #b99b72 0%, #8c6d47 100%);
     }
 
     .btn-primary:disabled {
@@ -138,7 +146,7 @@
     }
 
     .checkbox-custom {
-      accent-color: #9f7d4d;
+      accent-color: #9a7951;
     }
 
     .loading-spinner {
@@ -169,22 +177,26 @@
 
 <body class="h-full overflow-auto">
   <div id="app" class="min-h-full px-4 py-8">
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-4xl mx-auto">
 
       <header class="hero-card rounded-[32px] px-6 py-10 sm:px-10 sm:py-12 text-center mb-7">
         <p class="font-sans-alt uppercase tracking-[0.28em] text-[11px] text-[#8a7f74] mb-3">
           Quero Convidar
         </p>
 
-        <h1 id="header-title" class="text-[2.2rem] sm:text-[2.9rem] leading-tight font-semibold text-[#2f2924]">
-          Formulário de Contratação
+        <div class="font-script text-[2.8rem] sm:text-[4rem] leading-none text-[#9a7951] mb-3">
+          Briefing do Casamento
+        </div>
+
+        <h1 id="header-title" class="text-[1.8rem] sm:text-[2.4rem] leading-tight font-semibold text-[#2f2924]">
+          Informações para criação do convite
         </h1>
 
         <div class="w-40 mx-auto mt-5 ornament-line"></div>
 
         <p class="font-sans-alt text-[0.98rem] sm:text-[1rem] text-[#756b63] mt-5 leading-relaxed max-w-2xl mx-auto">
-          Obrigada por nos escolher para fazer parte deste momento tão especial em suas vidas.
-          Preencha as informações abaixo para darmos início à criação do seu convite interativo de casamento.
+          Obrigada por nos escolher para fazer parte desse momento tão especial em suas vidas.
+          Preencham as informações abaixo para darmos início à criação do convite com todo o cuidado e a elegância que essa ocasião merece.
         </p>
       </header>
 
@@ -193,156 +205,329 @@
       <form id="contract-form" class="space-y-5">
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Dados principais dos noivos
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            1. Informações essenciais do casal
           </h2>
 
           <div class="space-y-4">
             <div>
-              <label for="nome_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome dos noivos</label>
-              <input type="text" id="nome_noivos" name="nome_noivos" placeholder="Ex: Maria Eduarda & João Pedro" class="input-field rounded-2xl px-4 py-3.5" required>
+              <label for="nome_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome completo dos noivos</label>
+              <input type="text" id="nome_noivos" name="nome_noivos" placeholder="Ex: Maria Eduarda e João Pedro" class="input-field rounded-2xl px-4 py-3.5" required>
+            </div>
+
+            <div>
+              <label for="como_nomes_aparecem" class="block font-sans-alt text-sm text-[#615952] mb-2">Como desejam que os nomes apareçam no convite</label>
+              <input type="text" id="como_nomes_aparecem" name="como_nomes_aparecem" placeholder="Ex: Maria & João | Maria Eduarda e João Pedro" class="input-field rounded-2xl px-4 py-3.5">
             </div>
 
             <div>
               <label for="nome_pais" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome dos pais</label>
-              <textarea id="nome_pais" name="nome_pais" rows="3" placeholder="Caso desejem incluir no convite, informe aqui os nomes dos pais." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+              <textarea id="nome_pais" name="nome_pais" rows="3" placeholder="Caso desejem incluir no convite, informem aqui." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
             </div>
 
             <div>
-              <label for="frase_versiculo" class="block font-sans-alt text-sm text-[#615952] mb-2">Frase ou versículo</label>
-              <textarea id="frase_versiculo" name="frase_versiculo" rows="3" placeholder="Caso desejem incluir uma mensagem especial no convite." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+              <label for="historia_casal" class="block font-sans-alt text-sm text-[#615952] mb-2">História resumida do casal</label>
+              <textarea id="historia_casal" name="historia_casal" rows="4" placeholder="Opcional. Pode ser útil para captar o estilo e a essência do convite." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="tom_comunicacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Tom desejado da comunicação</label>
+              <input type="text" id="tom_comunicacao" name="tom_comunicacao" placeholder="Ex: clássico, romântico, sofisticado, minimalista, tradicional, leve" class="input-field rounded-2xl px-4 py-3.5">
             </div>
           </div>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Informações do evento
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            2. Informações principais do evento
           </h2>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="data_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Data</label>
+              <label for="data_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Data do casamento</label>
               <input type="date" id="data_evento" name="data_evento" class="input-field rounded-2xl px-4 py-3.5" required>
             </div>
 
             <div>
-              <label for="horario_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Horário</label>
+              <label for="horario_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Horário da cerimônia</label>
               <input type="time" id="horario_evento" name="horario_evento" class="input-field rounded-2xl px-4 py-3.5" required>
             </div>
           </div>
 
           <div class="mt-4">
-            <label for="local_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Local</label>
-            <textarea id="local_evento" name="local_evento" rows="3" placeholder="Informe o endereço completo do evento." class="input-field rounded-2xl px-4 py-3.5 resize-none" required></textarea>
+            <label for="horario_recepcao" class="block font-sans-alt text-sm text-[#615952] mb-2">Horário da recepção</label>
+            <input type="text" id="horario_recepcao" name="horario_recepcao" placeholder="Caso seja diferente da cerimônia" class="input-field rounded-2xl px-4 py-3.5">
+          </div>
+
+          <div class="mt-4">
+            <label for="tipo_cerimonia" class="block font-sans-alt text-sm text-[#615952] mb-2">Tipo de cerimônia</label>
+            <input type="text" id="tipo_cerimonia" name="tipo_cerimonia" placeholder="Ex: igreja, campo, praia, mini wedding, civil, destination wedding" class="input-field rounded-2xl px-4 py-3.5">
+          </div>
+
+          <div class="mt-4">
+            <label for="local_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Nome e endereço completo do local</label>
+            <textarea id="local_evento" name="local_evento" rows="3" placeholder="Informe aqui o local completo do evento." class="input-field rounded-2xl px-4 py-3.5 resize-none" required></textarea>
           </div>
 
           <div class="mt-4">
             <label for="link_localizacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Link de localização</label>
-            <input type="text" id="link_localizacao" name="link_localizacao" placeholder="Cole aqui o link do Google Maps ou outro localizador." class="input-field rounded-2xl px-4 py-3.5">
+            <input type="text" id="link_localizacao" name="link_localizacao" placeholder="Cole aqui o link do Google Maps ou localização." class="input-field rounded-2xl px-4 py-3.5">
           </div>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Confirmação de presença e presentes
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            3. Estrutura do evento
           </h2>
 
           <div class="space-y-4">
             <div>
-              <label for="confirmacao_presenca" class="block font-sans-alt text-sm text-[#615952] mb-2">Contato para confirmação de presença</label>
-              <input type="text" id="confirmacao_presenca" name="confirmacao_presenca" placeholder="Ex: WhatsApp, telefone ou nome do responsável pela confirmação." class="input-field rounded-2xl px-4 py-3.5">
+              <label for="estrutura_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Cerimônia e recepção serão no mesmo local?</label>
+              <textarea id="estrutura_evento" name="estrutura_evento" rows="3" placeholder="Descrevam se será tudo no mesmo lugar ou em locais diferentes." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
             </div>
 
             <div>
-              <label for="link_confirmacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Link do site ou confirmação</label>
-              <input type="text" id="link_confirmacao" name="link_confirmacao" placeholder="Caso tenham site dos noivos ou página de RSVP, informe aqui." class="input-field rounded-2xl px-4 py-3.5">
+              <label for="eventos_extras" class="block font-sans-alt text-sm text-[#615952] mb-2">Há pré wedding, jantar, welcome drink ou pós-festa?</label>
+              <textarea id="eventos_extras" name="eventos_extras" rows="3" placeholder="Caso exista algum evento complementar, informe aqui." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
             </div>
 
             <div>
-              <label for="qr_code_presente" class="block font-sans-alt text-sm text-[#615952] mb-2">QR Code para presente</label>
-              <textarea id="qr_code_presente" name="qr_code_presente" rows="3" placeholder="Caso desejem incluir QR Code, descrevam aqui ou informem como ele será enviado." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+              <label for="restricao_convidados" class="block font-sans-alt text-sm text-[#615952] mb-2">Há alguma restrição de convidados ou observação importante sobre convites?</label>
+              <textarea id="restricao_convidados" name="restricao_convidados" rows="3" placeholder="Ex: convite individual, por casal, por família, número limitado de acompanhantes." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            4. Texto do convite
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="frase_versiculo" class="block font-sans-alt text-sm text-[#615952] mb-2">Frase ou versículo</label>
+              <textarea id="frase_versiculo" name="frase_versiculo" rows="3" placeholder="Caso desejem incluir uma frase especial no convite." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="mensagem_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Mensagem dos noivos</label>
+              <textarea id="mensagem_noivos" name="mensagem_noivos" rows="4" placeholder="Caso desejem um texto mais afetivo ou personalizado." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="estilo_texto" class="block font-sans-alt text-sm text-[#615952] mb-2">Estilo do texto</label>
+              <input type="text" id="estilo_texto" name="estilo_texto" placeholder="Ex: formal, clássico, afetivo, elegante, direto, acolhedor" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            5. Identidade visual do casamento
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="estilo_visual" class="block font-sans-alt text-sm text-[#615952] mb-2">Estilo visual desejado</label>
+              <input type="text" id="estilo_visual" name="estilo_visual" placeholder="Ex: clássico, editorial, floral, clean, romântico, sofisticado" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="paleta_cores" class="block font-sans-alt text-sm text-[#615952] mb-2">Paleta de cores</label>
+              <input type="text" id="paleta_cores" name="paleta_cores" placeholder="Ex: branco, verde oliva, champagne, nude, dourado suave" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="elementos_visuais" class="block font-sans-alt text-sm text-[#615952] mb-2">Elementos visuais desejados</label>
+              <textarea id="elementos_visuais" name="elementos_visuais" rows="3" placeholder="Ex: brasão, monograma, flores, ramos, arabescos, renda, laços, aquarela" class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="nao_gostam" class="block font-sans-alt text-sm text-[#615952] mb-2">Elementos ou estilos que não gostam</label>
+              <textarea id="nao_gostam" name="nao_gostam" rows="3" placeholder="Essa informação ajuda muito a evitar caminhos errados na criação." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="referencias" class="block font-sans-alt text-sm text-[#615952] mb-2">Referências visuais</label>
+              <textarea id="referencias" name="referencias" rows="3" placeholder="Podem descrever referências ou colar links aqui." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            6. Convidados e RSVP
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="quantidade_convidados" class="block font-sans-alt text-sm text-[#615952] mb-2">Quantidade aproximada de convidados</label>
+              <input type="text" id="quantidade_convidados" name="quantidade_convidados" placeholder="Ex: 120 convidados" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="contato_confirmacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Contato para confirmação de presença</label>
+              <input type="text" id="contato_confirmacao" name="contato_confirmacao" placeholder="Ex: WhatsApp, telefone ou nome do responsável pelo RSVP" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="prazo_rsvp" class="block font-sans-alt text-sm text-[#615952] mb-2">Prazo final para confirmação</label>
+              <input type="text" id="prazo_rsvp" name="prazo_rsvp" placeholder="Ex: até 10 dias antes do evento" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="forma_confirmacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Forma de confirmação</label>
+              <input type="text" id="forma_confirmacao" name="forma_confirmacao" placeholder="Ex: WhatsApp, formulário, site dos noivos" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="observacoes_rsvp" class="block font-sans-alt text-sm text-[#615952] mb-2">Observações sobre convidados e confirmação</label>
+              <textarea id="observacoes_rsvp" name="observacoes_rsvp" rows="3" placeholder="Ex: acompanhantes, crianças, restrições alimentares, confirmação por família." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            7. Presentes e links extras
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="site_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Site dos noivos</label>
+              <input type="text" id="site_noivos" name="site_noivos" placeholder="Caso possuam, insiram o link aqui." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="lista_presentes" class="block font-sans-alt text-sm text-[#615952] mb-2">Lista de presentes ou link</label>
+              <input type="text" id="lista_presentes" name="lista_presentes" placeholder="Cole o link, caso exista." class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="qr_code" class="block font-sans-alt text-sm text-[#615952] mb-2">QR Code para presente</label>
+              <textarea id="qr_code" name="qr_code" rows="3" placeholder="Descrevam como será enviado ou informem os dados necessários." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
             </div>
 
             <div>
               <label for="chave_pix" class="block font-sans-alt text-sm text-[#615952] mb-2">Chave Pix</label>
-              <input type="text" id="chave_pix" name="chave_pix" placeholder="Informe a chave Pix, caso deseje adicioná-la na sugestão de presente." class="input-field rounded-2xl px-4 py-3.5">
+              <input type="text" id="chave_pix" name="chave_pix" placeholder="Caso desejem inserir na sugestão de presente." class="input-field rounded-2xl px-4 py-3.5">
             </div>
 
             <div>
-              <label for="site_noivos" class="block font-sans-alt text-sm text-[#615952] mb-2">Site dos noivos</label>
-              <input type="text" id="site_noivos" name="site_noivos" placeholder="Caso possuam um site, insiram o link aqui." class="input-field rounded-2xl px-4 py-3.5">
+              <label for="links_extras" class="block font-sans-alt text-sm text-[#615952] mb-2">Outros links importantes</label>
+              <textarea id="links_extras" name="links_extras" rows="3" placeholder="Ex: hospedagem, estacionamento, localização extra, lista especial." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
             </div>
           </div>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Observações adicionais
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            8. Dress code e orientações
           </h2>
 
-          <div class="soft-box rounded-[24px] p-4 mb-4">
-            <p class="font-sans-alt text-sm text-[#70655d] leading-relaxed">
-              Caso tenham alguma preferência estética, orientação de estilo, informações complementares ou detalhes importantes para a criação do convite, escrevam abaixo.
-            </p>
-          </div>
+          <div class="space-y-4">
+            <div>
+              <label for="dress_code" class="block font-sans-alt text-sm text-[#615952] mb-2">Traje sugerido</label>
+              <input type="text" id="dress_code" name="dress_code" placeholder="Ex: social, esporte fino, passeio completo, all black opcional" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
 
-          <div>
-            <label for="observacoes" class="block font-sans-alt text-sm text-[#615952] mb-2">Observações</label>
-            <textarea id="observacoes" name="observacoes" rows="5" placeholder="Ex: estilo clássico, minimalista, floral, sofisticado, com brasão, tons claros, linguagem mais formal, etc." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            <div>
+              <label for="orientacoes_evento" class="block font-sans-alt text-sm text-[#615952] mb-2">Orientações especiais</label>
+              <textarea id="orientacoes_evento" name="orientacoes_evento" rows="3" placeholder="Ex: cerimônia ao ar livre, evitar salto fino, levar agasalho, estacionamento limitado." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
           </div>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Atenção
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            9. Produto contratado e materiais
           </h2>
 
-          <div class="soft-box rounded-[24px] p-5">
-            <p class="font-sans-alt text-[0.96rem] text-[#5f564e] leading-7">
-              Após o recebimento das informações acima, dentro do prazo de produção combinado, a arte será enviada para aprovação.
-            </p>
+          <div class="space-y-4">
+            <div>
+              <label for="tipo_convite" class="block font-sans-alt text-sm text-[#615952] mb-2">Tipo de convite contratado</label>
+              <input type="text" id="tipo_convite" name="tipo_convite" placeholder="Ex: tradicional, interativo, animado, cinematográfico, site convite" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="extras_contratados" class="block font-sans-alt text-sm text-[#615952] mb-2">Extras contratados</label>
+              <textarea id="extras_contratados" name="extras_contratados" rows="3" placeholder="Ex: save the date, RSVP, lista de presentes, música, confirmação, manual dos padrinhos." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label for="materiais_personalizacao" class="block font-sans-alt text-sm text-[#615952] mb-2">Materiais enviados para personalização</label>
+              <textarea id="materiais_personalizacao" name="materiais_personalizacao" rows="3" placeholder="Ex: fotos, monograma, brasão, identidade visual, referências." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
           </div>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
-            Termo de contrato
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            10. Prazos, aprovação e observações finais
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="prazo_envio_info" class="block font-sans-alt text-sm text-[#615952] mb-2">Data limite para envio de todas as informações</label>
+              <input type="text" id="prazo_envio_info" name="prazo_envio_info" placeholder="Caso já tenham uma data definida" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="quem_aprova" class="block font-sans-alt text-sm text-[#615952] mb-2">Quem será responsável pela aprovação da arte</label>
+              <input type="text" id="quem_aprova" name="quem_aprova" placeholder="Informe o nome do responsável final pela aprovação" class="input-field rounded-2xl px-4 py-3.5">
+            </div>
+
+            <div>
+              <label for="observacoes_finais" class="block font-sans-alt text-sm text-[#615952] mb-2">Observações finais</label>
+              <textarea id="observacoes_finais" name="observacoes_finais" rows="5" placeholder="Podem deixar aqui qualquer informação complementar importante para o desenvolvimento do projeto." class="input-field rounded-2xl px-4 py-3.5 resize-none"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card rounded-[28px] p-5 sm:p-7">
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
+            Termos e condições
           </h2>
 
           <div class="space-y-4 font-sans-alt text-[0.95rem] text-[#5f564e]">
             <div class="soft-box rounded-[22px] p-5">
               <h3 class="font-semibold text-[#2f2924] mb-3">Condições gerais</h3>
               <ul class="list-disc pl-5 space-y-2 leading-7">
-                <li>O convite será desenvolvido de forma personalizada, conforme as informações enviadas pelos contratantes.</li>
-                <li>O prazo de produção começa a contar após o envio completo dos dados necessários para a criação.</li>
-                <li>A arte será enviada para aprovação dentro do prazo previamente informado.</li>
-                <li>O projeto contempla ajustes básicos de texto, alinhamento e pequenos refinamentos visuais. Alterações estruturais podem ser consideradas à parte.</li>
-                <li>É responsabilidade dos contratantes conferir atentamente todos os dados antes da aprovação final.</li>
+                <li>O briefing tem como finalidade reunir todas as informações necessárias para a criação personalizada do convite.</li>
+                <li>O prazo de produção começa a contar após o envio completo das informações, referências e materiais necessários.</li>
+                <li>A arte será enviada para aprovação dentro do prazo previamente informado no atendimento.</li>
+                <li>O projeto contempla ajustes simples de texto, alinhamento e pequenos refinamentos. Alterações estruturais ou mudança de direcionamento podem ser cobradas à parte.</li>
               </ul>
             </div>
 
             <div class="soft-box rounded-[22px] p-5">
-              <h3 class="font-semibold text-[#2f2924] mb-3">Responsabilidade sobre informações enviadas</h3>
+              <h3 class="font-semibold text-[#2f2924] mb-3">Responsabilidade pelas informações</h3>
               <ul class="list-disc pl-5 space-y-2 leading-7">
-                <li>Os contratantes declaram que todas as informações fornecidas estão corretas e autorizadas para uso no convite.</li>
-                <li>Links, contatos, chaves Pix, QR Codes e dados de localização serão inseridos conforme enviados, não sendo de responsabilidade da marca eventuais erros nas informações recebidas.</li>
-                <li>Os contratantes se responsabilizam por testar todos os links e informações após a entrega final.</li>
+                <li>Os contratantes declaram que todas as informações fornecidas neste briefing estão corretas e autorizadas para uso no convite.</li>
+                <li>Dados como nomes, datas, horários, endereços, links, contatos, QR Code e chave Pix serão utilizados conforme enviados.</li>
+                <li>É responsabilidade dos contratantes revisar atentamente todos os dados antes da aprovação final.</li>
+                <li>Após a aprovação final, correções posteriores poderão gerar nova cobrança, conforme a natureza da alteração.</li>
               </ul>
             </div>
 
             <div class="soft-box rounded-[22px] p-5">
-              <h3 class="font-semibold text-[#2f2924] mb-3">Direitos e entrega</h3>
+              <h3 class="font-semibold text-[#2f2924] mb-3">Entrega e uso do material</h3>
               <ul class="list-disc pl-5 space-y-2 leading-7">
-                <li>O material será entregue em formato digital finalizado, não incluindo arquivo editável.</li>
-                <li>O design é autoral e desenvolvido exclusivamente para o evento contratado.</li>
-                <li>A marca poderá utilizar trechos do projeto para portfólio e divulgação, preservando dados sensíveis quando necessário.</li>
+                <li>O convite será entregue em formato digital finalizado, não incluindo arquivo editável.</li>
+                <li>O design desenvolvido é autoral e exclusivo para o evento contratado.</li>
+                <li>O funcionamento de links e botões pode variar de acordo com aparelho, sistema, navegador ou plataforma usada pelo convidado.</li>
+                <li>A marca poderá utilizar trechos do projeto em portfólio e divulgação, preservando dados sensíveis quando necessário.</li>
               </ul>
             </div>
           </div>
@@ -350,14 +535,14 @@
           <label class="flex items-start gap-3 mt-5 cursor-pointer">
             <input type="checkbox" id="aceite_termos" name="aceite_termos" class="checkbox-custom w-5 h-5 mt-0.5 rounded" required>
             <span class="font-sans-alt text-sm text-[#5e554d] leading-6">
-              Declaro que li, compreendi e concordo com as condições descritas neste formulário e no termo de contrato.
+              Declaro que li, compreendi e concordo com todas as informações e condições descritas neste briefing e termo.
             </span>
           </label>
         </section>
 
         <section class="section-card rounded-[28px] p-5 sm:p-7">
-          <h2 class="section-title text-[1.5rem] font-semibold mb-5">
-            <span class="section-bullet"></span>
+          <h2 class="section-title text-[1.55rem] font-semibold mb-5">
+            <span class="section-dot"></span>
             Confirmação final
           </h2>
 
@@ -374,14 +559,14 @@
           </div>
         </section>
 
-        <div class="text-center rounded-[26px] px-5 py-6 bg-[rgba(255,255,255,0.82)] border border-[rgba(185,152,104,0.20)] shadow-[0_8px_22px_rgba(70,52,33,0.05)]">
+        <div class="text-center rounded-[26px] px-5 py-6 bg-[rgba(255,255,255,0.82)] border border-[rgba(183,154,114,0.20)] shadow-[0_8px_22px_rgba(70,52,33,0.05)]">
           <p class="font-sans-alt text-[0.98rem] text-[#655b53] leading-relaxed">
             Obrigada por nos escolher para viver esse capítulo com vocês. Será uma alegria transformar esse momento em uma apresentação inesquecível.
           </p>
         </div>
 
         <button type="submit" id="submit-btn" class="btn-primary w-full rounded-[22px] py-4 text-white text-[0.98rem] font-semibold tracking-[0.08em] uppercase">
-          <span id="submit-text">Enviar informações</span>
+          <span id="submit-text">Enviar briefing</span>
           <span id="submit-loading" class="hidden">
             <span class="inline-block w-5 h-5 rounded-full loading-spinner"></span>
           </span>
@@ -396,72 +581,7 @@
   </div>
 
   <script>
-    const defaultConfig = {
-      titulo_empresa: 'Quero Convidar',
-      titulo_documento: 'Formulário de Contratação',
-      subtitulo_documento: 'Convite Interativo de Casamento',
-      background_color: '#fcfaf7',
-      accent_color: '#b99868',
-      text_color: '#2f2924',
-      font_family: 'Cormorant Garamond',
-      font_size: 17
-    };
-
     let currentRecords = [];
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange: async (config) => {
-          const cfg = { ...defaultConfig, ...config };
-          document.body.style.color = cfg.text_color;
-          document.body.style.background =
-            `radial-gradient(circle at top left, rgba(216, 195, 165, 0.16), transparent 26%),
-             radial-gradient(circle at top right, rgba(185, 152, 104, 0.10), transparent 18%),
-             linear-gradient(135deg, ${cfg.background_color} 0%, #f8f5f0 52%, #f4efe8 100%)`;
-
-          const fontStack = `${cfg.font_family}, serif`;
-          document.body.style.fontFamily = fontStack;
-          document.getElementById('header-title').style.fontFamily = fontStack;
-        },
-        mapToCapabilities: (config) => {
-          const cfg = { ...defaultConfig, ...config };
-          return {
-            recolorables: [
-              {
-                get: () => cfg.background_color,
-                set: (value) => window.elementSdk.setConfig({ background_color: value })
-              },
-              {
-                get: () => cfg.accent_color,
-                set: (value) => window.elementSdk.setConfig({ accent_color: value })
-              },
-              {
-                get: () => cfg.text_color,
-                set: (value) => window.elementSdk.setConfig({ text_color: value })
-              }
-            ],
-            borderables: [],
-            fontEditable: {
-              get: () => cfg.font_family,
-              set: (value) => window.elementSdk.setConfig({ font_family: value })
-            },
-            fontSizeable: {
-              get: () => cfg.font_size,
-              set: (value) => window.elementSdk.setConfig({ font_size: value })
-            }
-          };
-        },
-        mapToEditPanelValues: (config) => {
-          const cfg = { ...defaultConfig, ...config };
-          return new Map([
-            ['titulo_empresa', cfg.titulo_empresa],
-            ['titulo_documento', cfg.titulo_documento],
-            ['subtitulo_documento', cfg.subtitulo_documento]
-          ]);
-        }
-      });
-    }
 
     const dataHandler = {
       onDataChanged(data) {
@@ -483,7 +603,7 @@
     function showToast(message, type = 'success') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
-      toast.className = `toast px-4 py-3 rounded-2xl shadow-lg mb-2 font-sans-alt text-sm ${type === 'success' ? 'bg-[#9f7d4d] text-white' : 'bg-red-500 text-white'}`;
+      toast.className = `toast px-4 py-3 rounded-2xl shadow-lg mb-2 font-sans-alt text-sm ${type === 'success' ? 'bg-[#9a7951] text-white' : 'bg-red-500 text-white'}`;
       toast.textContent = message;
       container.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
@@ -502,22 +622,49 @@
 
       const formData = {
         nome_noivos: document.getElementById('nome_noivos').value,
+        como_nomes_aparecem: document.getElementById('como_nomes_aparecem').value,
         nome_pais: document.getElementById('nome_pais').value,
-        frase_versiculo: document.getElementById('frase_versiculo').value,
+        historia_casal: document.getElementById('historia_casal').value,
+        tom_comunicacao: document.getElementById('tom_comunicacao').value,
         data_evento: document.getElementById('data_evento').value,
         horario_evento: document.getElementById('horario_evento').value,
+        horario_recepcao: document.getElementById('horario_recepcao').value,
+        tipo_cerimonia: document.getElementById('tipo_cerimonia').value,
         local_evento: document.getElementById('local_evento').value,
         link_localizacao: document.getElementById('link_localizacao').value,
-        confirmacao_presenca: document.getElementById('confirmacao_presenca').value,
-        link_confirmacao: document.getElementById('link_confirmacao').value,
-        qr_code_presente: document.getElementById('qr_code_presente').value,
-        chave_pix: document.getElementById('chave_pix').value,
+        estrutura_evento: document.getElementById('estrutura_evento').value,
+        eventos_extras: document.getElementById('eventos_extras').value,
+        restricao_convidados: document.getElementById('restricao_convidados').value,
+        frase_versiculo: document.getElementById('frase_versiculo').value,
+        mensagem_noivos: document.getElementById('mensagem_noivos').value,
+        estilo_texto: document.getElementById('estilo_texto').value,
+        estilo_visual: document.getElementById('estilo_visual').value,
+        paleta_cores: document.getElementById('paleta_cores').value,
+        elementos_visuais: document.getElementById('elementos_visuais').value,
+        nao_gostam: document.getElementById('nao_gostam').value,
+        referencias: document.getElementById('referencias').value,
+        quantidade_convidados: document.getElementById('quantidade_convidados').value,
+        contato_confirmacao: document.getElementById('contato_confirmacao').value,
+        prazo_rsvp: document.getElementById('prazo_rsvp').value,
+        forma_confirmacao: document.getElementById('forma_confirmacao').value,
+        observacoes_rsvp: document.getElementById('observacoes_rsvp').value,
         site_noivos: document.getElementById('site_noivos').value,
-        observacoes: document.getElementById('observacoes').value,
+        lista_presentes: document.getElementById('lista_presentes').value,
+        qr_code: document.getElementById('qr_code').value,
+        chave_pix: document.getElementById('chave_pix').value,
+        links_extras: document.getElementById('links_extras').value,
+        dress_code: document.getElementById('dress_code').value,
+        orientacoes_evento: document.getElementById('orientacoes_evento').value,
+        tipo_convite: document.getElementById('tipo_convite').value,
+        extras_contratados: document.getElementById('extras_contratados').value,
+        materiais_personalizacao: document.getElementById('materiais_personalizacao').value,
+        prazo_envio_info: document.getElementById('prazo_envio_info').value,
+        quem_aprova: document.getElementById('quem_aprova').value,
+        observacoes_finais: document.getElementById('observacoes_finais').value,
         aceite_termos: document.getElementById('aceite_termos').checked,
         nome_responsavel: document.getElementById('nome_responsavel').value,
         data_preenchimento: document.getElementById('data_preenchimento').value,
-        data_contratacao: new Date().toISOString()
+        data_registro: new Date().toISOString()
       };
 
       let savedOk = true;
@@ -532,33 +679,72 @@
       submitLoading.classList.add('hidden');
 
       if (savedOk) {
-        showToast('Informações enviadas com sucesso.');
+        showToast('Briefing enviado com sucesso.');
 
         const whatsappPhone = '5521967647527';
 
         const whatsappMessage =
-`Olá! Segue um novo formulário de contratação para convite de casamento:
+`Olá! Segue um novo briefing de casamento preenchido:
 
-💍 DADOS DOS NOIVOS
-Nome dos noivos: ${formData.nome_noivos}
-Nome dos pais: ${formData.nome_pais || 'Não informado'}
-Frase ou versículo: ${formData.frase_versiculo || 'Não informado'}
+💍 INFORMAÇÕES ESSENCIAIS
+Noivos: ${formData.nome_noivos}
+Como os nomes devem aparecer: ${formData.como_nomes_aparecem || 'Não informado'}
+Pais: ${formData.nome_pais || 'Não informado'}
+História do casal: ${formData.historia_casal || 'Não informado'}
+Tom da comunicação: ${formData.tom_comunicacao || 'Não informado'}
 
-📅 INFORMAÇÕES DO EVENTO
+📅 EVENTO
 Data: ${formData.data_evento}
-Horário: ${formData.horario_evento}
+Horário da cerimônia: ${formData.horario_evento}
+Horário da recepção: ${formData.horario_recepcao || 'Não informado'}
+Tipo de cerimônia: ${formData.tipo_cerimonia || 'Não informado'}
 Local: ${formData.local_evento}
 Link de localização: ${formData.link_localizacao || 'Não informado'}
 
-🕊️ CONFIRMAÇÃO E PRESENTES
-Contato para confirmação: ${formData.confirmacao_presenca || 'Não informado'}
-Link do site ou RSVP: ${formData.link_confirmacao || 'Não informado'}
-QR Code para presente: ${formData.qr_code_presente || 'Não informado'}
-Chave Pix: ${formData.chave_pix || 'Não informado'}
-Site dos noivos: ${formData.site_noivos || 'Não informado'}
+🏛️ ESTRUTURA
+Estrutura do evento: ${formData.estrutura_evento || 'Não informado'}
+Eventos extras: ${formData.eventos_extras || 'Não informado'}
+Restrições de convidados: ${formData.restricao_convidados || 'Não informado'}
 
-📝 OBSERVAÇÕES
-${formData.observacoes || 'Não informado'}
+✒️ TEXTO DO CONVITE
+Frase ou versículo: ${formData.frase_versiculo || 'Não informado'}
+Mensagem dos noivos: ${formData.mensagem_noivos || 'Não informado'}
+Estilo do texto: ${formData.estilo_texto || 'Não informado'}
+
+🎨 IDENTIDADE VISUAL
+Estilo visual: ${formData.estilo_visual || 'Não informado'}
+Paleta de cores: ${formData.paleta_cores || 'Não informado'}
+Elementos visuais: ${formData.elementos_visuais || 'Não informado'}
+Não gostam: ${formData.nao_gostam || 'Não informado'}
+Referências: ${formData.referencias || 'Não informado'}
+
+👥 CONVIDADOS E RSVP
+Quantidade de convidados: ${formData.quantidade_convidados || 'Não informado'}
+Contato para confirmação: ${formData.contato_confirmacao || 'Não informado'}
+Prazo RSVP: ${formData.prazo_rsvp || 'Não informado'}
+Forma de confirmação: ${formData.forma_confirmacao || 'Não informado'}
+Observações RSVP: ${formData.observacoes_rsvp || 'Não informado'}
+
+🎁 PRESENTES E LINKS
+Site dos noivos: ${formData.site_noivos || 'Não informado'}
+Lista de presentes: ${formData.lista_presentes || 'Não informado'}
+QR Code: ${formData.qr_code || 'Não informado'}
+Chave Pix: ${formData.chave_pix || 'Não informado'}
+Links extras: ${formData.links_extras || 'Não informado'}
+
+👗 ORIENTAÇÕES
+Dress code: ${formData.dress_code || 'Não informado'}
+Orientações especiais: ${formData.orientacoes_evento || 'Não informado'}
+
+💎 PRODUTO CONTRATADO
+Tipo de convite: ${formData.tipo_convite || 'Não informado'}
+Extras contratados: ${formData.extras_contratados || 'Não informado'}
+Materiais enviados: ${formData.materiais_personalizacao || 'Não informado'}
+
+⏳ PRAZOS E APROVAÇÃO
+Prazo para envio das informações: ${formData.prazo_envio_info || 'Não informado'}
+Responsável pela aprovação: ${formData.quem_aprova || 'Não informado'}
+Observações finais: ${formData.observacoes_finais || 'Não informado'}
 
 ✅ TERMO
 Aceitou os termos: ${formData.aceite_termos ? 'Sim' : 'Não'}
