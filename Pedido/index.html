@@ -1,0 +1,724 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo de Pedidos | Quero Convidar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f3ef;
+      --bg-2: #fdfaf8;
+      --card: rgba(255, 252, 249, 0.92);
+      --ink: #5c4037;
+      --soft: #8f6f66;
+      --line: #ead9d1;
+      --accent: #c79d8a;
+      --accent-2: #e8cfc3;
+      --accent-3: #f3e5de;
+      --ok: #7a9c88;
+      --danger: #b87070;
+      --gold: #d8b98a;
+      --shadow: 0 18px 40px rgba(92, 64, 55, 0.10);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(232, 207, 195, 0.45), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(243, 229, 222, 0.65), transparent 32%),
+    linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.topo {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding: 28px;
+  border: 1px solid rgba(231, 212, 203, 0.9);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(251,244,240,0.92));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.topo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(232, 207, 195, 0.15), transparent 38%, rgba(216, 185, 138, 0.10));
+  pointer-events: none;
+}
+
+.marca {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--accent-2);
+  color: var(--soft);
+  font-size: 0.86rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.marca h1 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+.marca p {
+  margin: 0;
+  max-width: 720px;
+  color: var(--soft);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.ornamento {
+  position: relative;
+  z-index: 1;
+  min-width: 180px;
+  text-align: right;
+  color: var(--accent);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  opacity: 0.95;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(234, 217, 209, 0.95);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.card h2 {
+  margin: 0 0 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.sub {
+  margin: -8px 0 18px;
+  color: var(--soft);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.95);
+  color: var(--ink);
+  outline: none;
+  font-size: 0.96rem;
+  font-family: 'Nunito', Arial, sans-serif;
+  transition: 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(199, 157, 138, 0.12);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+button {
+  border: 0;
+  border-radius: 16px;
+  padding: 13px 18px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: 'Nunito', Arial, sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 10px 20px rgba(92, 64, 55, 0.08);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+}
+
+.btn-main {
+  background: linear-gradient(135deg, var(--accent), #b78673);
+  color: #fff;
+}
+
+.btn-soft {
+  background: linear-gradient(135deg, #f7ece7, #f2dfd6);
+  color: var(--ink);
+}
+
+.btn-ok {
+  background: linear-gradient(135deg, var(--ok), #668a75);
+  color: #fff;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger), #a96262);
+  color: #fff;
+}
+
+.bloco-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.mini-card {
+  padding: 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(249,243,239,0.95));
+  border: 1px solid var(--line);
+}
+
+.mini-card span {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--soft);
+  margin-bottom: 6px;
+}
+
+.mini-card strong {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.lista {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, #fffefd 0%, #fdf8f5 100%);
+}
+
+.item-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.item h3 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.item p {
+  margin: 4px 0;
+  color: var(--soft);
+  line-height: 1.5;
+}
+
+.item p strong {
+  color: var(--ink);
+}
+
+.badge {
+  background: linear-gradient(135deg, var(--accent-3), #f3ddd3);
+  color: var(--ink);
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid var(--accent-2);
+}
+
+.totais {
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.total-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,244,240,0.96));
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.total-card span {
+  color: var(--soft);
+  font-size: 0.95rem;
+}
+
+.total-card strong {
+  font-size: 1.08rem;
+}
+
+.resumo-box {
+  margin-top: 14px;
+  background: linear-gradient(180deg, #fffefd 0%, #fbf6f2 100%);
+  border: 1px dashed var(--accent);
+  border-radius: 20px;
+  padding: 18px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  min-height: 360px;
+  font-size: 0.97rem;
+}
+
+.rodape-info {
+  margin-top: 14px;
+  color: var(--soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.assinatura {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--soft);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bloco-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    padding: 16px;
+  }
+
+  .topo, .card {
+    padding: 18px;
+  }
+
+  .marca h1 {
+    font-size: 2.3rem;
+  }
+
+  .ornamento {
+    min-width: auto;
+    text-align: left;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topo">
+      <div class="marca">
+        <span class="selo">Quero Convidar</span>
+        <h1>Resumo de Pedidos</h1>
+        <p>Uma ferramenta delicada, organizada e prática para calcular seus pedidos, visualizar os valores com clareza e enviar um atendimento bonito pelo WhatsApp.</p>
+      </div>
+      <div class="ornamento">
+        Cada celebração<br>
+        começa no primeiro clique ✨
+      </div>
+    </div><div class="grid">
+  <section class="card">
+    <h2>Montagem do pedido</h2>
+    <p class="sub">Preencha os dados do cliente, adicione os serviços contratados e monte um resumo elegante para enviar em poucos segundos.</p>
+
+    <div class="bloco-info">
+      <div class="mini-card">
+        <span>Estilo</span>
+        <strong>Delicado e profissional</strong>
+      </div>
+      <div class="mini-card">
+        <span>Função</span>
+        <strong>Cálculo + resumo + envio</strong>
+      </div>
+      <div class="mini-card">
+        <span>Ideal para</span>
+        <strong>Atendimento da QC</strong>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="cliente">Nome do cliente</label>
+        <input type="text" id="cliente" placeholder="Ex.: Gabriela Souza" />
+      </div>
+
+      <div class="field">
+        <label for="telefone">WhatsApp do cliente</label>
+        <input type="text" id="telefone" placeholder="Ex.: 5545999999999" />
+      </div>
+
+      <div class="field">
+        <label for="evento">Tipo de evento</label>
+        <input type="text" id="evento" placeholder="Ex.: Aniversário infantil" />
+      </div>
+
+      <div class="field">
+        <label for="tema">Tema</label>
+        <input type="text" id="tema" placeholder="Ex.: Boiadeira" />
+      </div>
+
+      <div class="field">
+        <label for="servico">Serviço</label>
+        <select id="servico">
+          <option value="Convite Digital Tradicional">Convite Digital Tradicional</option>
+          <option value="Convite Interativo">Convite Interativo</option>
+          <option value="Convite Animado">Convite Animado</option>
+          <option value="Convite Estendido">Convite Estendido</option>
+          <option value="Save the Date">Save the Date</option>
+          <option value="Lembrete Digital">Lembrete Digital</option>
+          <option value="Confirmação de Presença">Confirmação de Presença</option>
+          <option value="Retrospectiva">Retrospectiva</option>
+          <option value="Mascote Personalizado">Mascote Personalizado</option>
+          <option value="Álbum por IA">Álbum por IA</option>
+          <option value="Moldura para Instagram">Moldura para Instagram</option>
+          <option value="Identidade Visual da Festa">Identidade Visual da Festa</option>
+          <option value="Outro Serviço">Outro Serviço</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+          <option value="Pedido principal">Pedido principal</option>
+          <option value="Adicional">Adicional</option>
+          <option value="Bônus">Bônus</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" min="1" value="1" />
+      </div>
+
+      <div class="field">
+        <label for="valor">Valor unitário (R$)</label>
+        <input type="number" id="valor" min="0" step="0.01" placeholder="0,00" />
+      </div>
+
+      <div class="field full">
+        <label for="detalhes">Detalhes do item</label>
+        <textarea id="detalhes" placeholder="Ex.: Convite com botão de localização, confirmação de presença e sugestão de presentes."></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-main" onclick="adicionarItem()">Adicionar item</button>
+      <button class="btn-soft" onclick="limparFormularioItem()">Limpar campos</button>
+      <button class="btn-danger" onclick="limparPedido()">Apagar pedido</button>
+    </div>
+
+    <div class="lista" id="listaItens"></div>
+  </section>
+
+  <aside class="card">
+    <h2>Mensagem pronta para o cliente</h2>
+    <p class="sub">O resumo é gerado automaticamente com um tom mais bonito e organizado para facilitar seu atendimento.</p>
+
+    <div class="totais">
+      <div class="total-card">
+        <span>Total de itens</span>
+        <strong id="totalItens">0</strong>
+      </div>
+      <div class="total-card">
+        <span>Valor total</span>
+        <strong id="valorTotal">R$ 0,00</strong>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-soft" onclick="gerarResumo()">Gerar resumo</button>
+      <button class="btn-soft" onclick="copiarResumo()">Copiar texto</button>
+      <button class="btn-ok" onclick="enviarWhatsApp()">Enviar no WhatsApp</button>
+    </div>
+
+    <div class="resumo-box" id="resumoPreview">Seu resumo vai aparecer aqui.</div>
+
+    <p class="rodape-info">Dica: use o número do cliente com DDI e DDD. Exemplo: 5545999999999</p>
+    <div class="assinatura">Quero Convidar</div>
+  </aside>
+</div>
+
+  </div>  <script>
+    const itens = [];
+
+    function formatarMoeda(valor) {
+      return Number(valor || 0).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function escaparHtml(texto) {
+      return String(texto)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function limparFormularioItem() {
+      document.getElementById('servico').value = 'Convite Digital Tradicional';
+      document.getElementById('categoria').value = 'Pedido principal';
+      document.getElementById('quantidade').value = 1;
+      document.getElementById('valor').value = '';
+      document.getElementById('detalhes').value = '';
+    }
+
+    function adicionarItem() {
+      const servico = document.getElementById('servico').value;
+      const categoria = document.getElementById('categoria').value;
+      const quantidade = Number(document.getElementById('quantidade').value || 0);
+      const valor = Number(document.getElementById('valor').value || 0);
+      const detalhes = document.getElementById('detalhes').value.trim();
+
+      if (!servico) {
+        alert('Informe o serviço.');
+        return;
+      }
+
+      if (quantidade <= 0) {
+        alert('A quantidade precisa ser maior que zero.');
+        return;
+      }
+
+      const subtotal = quantidade * valor;
+
+      itens.push({
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        servico,
+        categoria,
+        quantidade,
+        valor,
+        detalhes,
+        subtotal
+      });
+
+      renderizarItens();
+      atualizarTotais();
+      gerarResumo();
+      limparFormularioItem();
+    }
+
+    function removerItem(id) {
+      const index = itens.findIndex(item => item.id === id);
+      if (index !== -1) {
+        itens.splice(index, 1);
+        renderizarItens();
+        atualizarTotais();
+        gerarResumo();
+      }
+    }
+
+    function limparPedido() {
+      if (!confirm('Deseja apagar todos os itens deste pedido?')) return;
+      itens.length = 0;
+      renderizarItens();
+      atualizarTotais();
+      gerarResumo();
+    }
+
+    function renderizarItens() {
+      const lista = document.getElementById('listaItens');
+
+      if (!itens.length) {
+        lista.innerHTML = '<div class="item"><p>Nenhum item adicionado ainda.</p></div>';
+        return;
+      }
+
+      lista.innerHTML = itens.map(item => `
+        <div class="item">
+          <div class="item-topo">
+            <div>
+              <h3>${escaparHtml(item.servico)}</h3>
+              <p>${escaparHtml(item.categoria)}</p>
+            </div>
+            <span class="badge">${formatarMoeda(item.subtotal)}</span>
+          </div>
+          <p><strong>Quantidade:</strong> ${item.quantidade}</p>
+          <p><strong>Valor unitário:</strong> ${formatarMoeda(item.valor)}</p>
+          <p><strong>Detalhes:</strong> ${item.detalhes ? escaparHtml(item.detalhes) : 'Sem observações.'}</p>
+          <div class="actions" style="margin-top:10px;">
+            <button class="btn-danger" onclick="removerItem(${item.id})">Remover</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function atualizarTotais() {
+      const totalItens = itens.reduce((acc, item) => acc + item.quantidade, 0);
+      const valorTotal = itens.reduce((acc, item) => acc + item.subtotal, 0);
+
+      document.getElementById('totalItens').textContent = totalItens;
+      document.getElementById('valorTotal').textContent = formatarMoeda(valorTotal);
+    }
+
+    function gerarResumo() {
+      const cliente = document.getElementById('cliente').value.trim();
+      const evento = document.getElementById('evento').value.trim();
+      const tema = document.getElementById('tema').value.trim();
+      const totalItens = itens.reduce((acc, item) => acc + item.quantidade, 0);
+      const valorTotal = itens.reduce((acc, item) => acc + item.subtotal, 0);
+
+      let texto = '';
+      texto += `Olá${cliente ? ', ' + cliente : ''}! ✨\n`;
+      texto += `Preparei o resumo do seu pedido com todo carinho:\n\n`;
+
+      if (evento) texto += `Evento: ${evento}\n`;
+      if (tema) texto += `Tema: ${tema}\n`;
+      if (evento || tema) texto += `\n`;
+
+      if (!itens.length) {
+        texto += `Nenhum item foi adicionado ainda.\n`;
+      } else {
+        texto += `Serviços selecionados\n`;
+        texto += `────────────────\n`;
+        itens.forEach((item, index) => {
+          texto += `${index + 1}. ${item.servico}\n`;
+          texto += `Categoria: ${item.categoria}\n`;
+          texto += `Quantidade: ${item.quantidade}\n`;
+          texto += `Valor unitário: ${formatarMoeda(item.valor)}\n`;
+          texto += `Subtotal: ${formatarMoeda(item.subtotal)}\n`;
+          if (item.detalhes) texto += `Detalhes: ${item.detalhes}\n`;
+          texto += `\n`;
+        });
+      }
+
+      texto += `Resumo final\n`;
+      texto += `────────────────\n`;
+      texto += `Itens totais: ${totalItens}\n`;
+      texto += `Valor total do pedido: ${formatarMoeda(valorTotal)}\n\n`;
+      texto += `Se estiver tudo certinho, me avise para seguirmos com os próximos passos. 💛\n\n`;
+      texto += `Quero Convidar`;
+
+      document.getElementById('resumoPreview').textContent = texto;
+      return texto;
+    }
+
+    async function copiarResumo() {
+      const texto = gerarResumo();
+      try {
+        await navigator.clipboard.writeText(texto);
+        alert('Resumo copiado com sucesso.');
+      } catch (erro) {
+        alert('Não consegui copiar automaticamente. Copie manualmente no quadro do resumo.');
+      }
+    }
+
+    function enviarWhatsApp() {
+      const telefone = document.getElementById('telefone').value.replace(/\D/g, '');
+      const texto = gerarResumo();
+
+      if (!telefone) {
+        alert('Informe o WhatsApp do cliente com DDI e DDD.');
+        return;
+      }
+
+      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
+      window.open(url, '_blank');
+    }
+
+    renderizarItens();
+    atualizarTotais();
+  </script></body>
+</html>
