@@ -7,12 +7,32 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;400;700&display=swap" rel="stylesheet">
+
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --qc-green: #ABC6BC;
+      --qc-green-deep: #91b2a6;
+      --qc-gold: #D4AF37;
+      --qc-gold-soft: #e8d391;
+      --qc-cream: #fffdf8;
+      --qc-bg: #fbf8f3;
+      --qc-text: #2b2b2b;
+      --qc-muted: #6f6a63;
+      --qc-border: rgba(212, 175, 55, 0.24);
+      --qc-shadow: 0 12px 35px rgba(91, 76, 46, 0.08);
+      --qc-shadow-soft: 0 6px 18px rgba(91, 76, 46, 0.05);
+    }
+
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
+      background:
+        radial-gradient(circle at top left, rgba(171, 198, 188, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.10), transparent 24%),
+        linear-gradient(135deg, #ffffff 0%, #fffdf8 48%, #f7f3ec 100%);
+      color: var(--qc-text);
     }
 
     .font-sans-alt {
@@ -22,26 +42,59 @@
     input, textarea, select {
       font-family: 'Lato', sans-serif;
       font-size: 15px;
+      color: var(--qc-text);
+      background: rgba(255,255,255,0.96);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #9a938a;
     }
 
     input:focus, textarea:focus, select:focus {
-      border-color: #ABC6BC !important;
-      box-shadow: 0 0 0 3px rgba(171, 198, 188, 0.20);
+      border-color: var(--qc-green) !important;
+      box-shadow: 0 0 0 4px rgba(171, 198, 188, 0.16);
     }
 
     .gradient-line {
-      background: linear-gradient(90deg, #ABC6BC, #D4AF37);
+      background: linear-gradient(90deg, rgba(171,198,188,0.15), var(--qc-green), var(--qc-gold), rgba(212,175,55,0.15));
+    }
+
+    .hero-frame {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,253,248,0.92));
+      border: 1px solid rgba(212,175,55,0.18);
+      box-shadow: var(--qc-shadow);
+      overflow: hidden;
+    }
+
+    .hero-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(171,198,188,0.08), transparent 25%),
+        radial-gradient(circle at 90% 10%, rgba(212,175,55,0.10), transparent 20%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--qc-muted);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #ABC6BC 0%, #D4AF37 100%);
+      background: linear-gradient(135deg, var(--qc-green) 0%, var(--qc-gold) 100%);
       transition: all 0.3s ease;
+      box-shadow: 0 10px 24px rgba(171, 198, 188, 0.18);
     }
 
     .btn-primary:hover {
-      background: linear-gradient(135deg, #98B8AD 0%, #C9A227 100%);
+      background: linear-gradient(135deg, var(--qc-green-deep) 0%, #c59f2b 100%);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 14px 28px rgba(212, 175, 55, 0.18);
     }
 
     .btn-primary:disabled {
@@ -51,17 +104,52 @@
     }
 
     .card-section {
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      background: #ffffff;
+      position: relative;
+      border: 1px solid var(--qc-border);
+      background: rgba(255,255,255,0.90);
+      box-shadow: var(--qc-shadow-soft);
+      backdrop-filter: blur(4px);
+    }
+
+    .card-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 22px;
+      right: 22px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.65), transparent);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: #2f2c28;
+    }
+
+    .section-title .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--qc-green), var(--qc-gold));
+      box-shadow: 0 0 0 4px rgba(171,198,188,0.10);
+      flex-shrink: 0;
     }
 
     .input-field {
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      transition: all 0.2s ease;
+      border: 1px solid rgba(212, 175, 55, 0.34);
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.98);
+    }
+
+    .input-field:hover {
+      border-color: rgba(171, 198, 188, 0.70);
     }
 
     .checkbox-custom {
-      accent-color: #ABC6BC;
+      accent-color: var(--qc-green);
     }
 
     .toast {
@@ -78,33 +166,6 @@
       to { opacity: 0; }
     }
 
-    .record-card {
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      transition: all 0.2s ease;
-    }
-
-    .record-card:hover {
-      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.12);
-    }
-
-    .delete-btn {
-      transition: all 0.2s ease;
-    }
-
-    .delete-btn:hover {
-      background: #fee2e2;
-      color: #dc2626;
-    }
-
-    .tab-btn {
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(135deg, #ABC6BC 0%, #D4AF37 100%);
-      color: white;
-    }
-
     .loading-spinner {
       border: 2px solid rgba(255,255,255,0.3);
       border-top-color: white;
@@ -115,29 +176,48 @@
       to { transform: rotate(360deg); }
     }
 
+    .terms-box {
+      background: linear-gradient(180deg, rgba(255,253,248,0.96), rgba(255,255,255,0.96));
+      border: 1px solid rgba(212,175,55,0.20);
+    }
+
+    .mini-note {
+      background: linear-gradient(135deg, rgba(171,198,188,0.08), rgba(212,175,55,0.08));
+      border: 1px solid rgba(171,198,188,0.16);
+    }
+
     h2 {
-      font-size: 1.35rem;
+      font-size: 1.42rem;
     }
 
     label, .font-sans-alt, p, li, input, textarea, select {
       letter-spacing: 0.2px;
     }
   </style>
-  <style>body { box-sizing: border-box; }</style>
 </head>
-<body class="h-full bg-gradient-to-br from-[#ffffff] via-[#fffdf8] to-[#f8f6f1] text-[#2b2b2b] overflow-auto">
-  <div id="app" class="w-full min-h-full py-6 px-4">
-    <div class="max-w-2xl mx-auto">
-      <header class="text-center mb-6">
-        <div class="text-2xl tracking-wide font-bold" id="header-title">
+
+<body class="h-full text-[#2b2b2b] overflow-auto">
+  <div id="app" class="w-full min-h-full py-7 px-4 sm:px-5">
+    <div class="max-w-3xl mx-auto">
+
+      <header class="hero-frame rounded-[28px] px-6 py-8 sm:px-10 sm:py-10 text-center mb-7">
+        <div class="hero-tag mb-3">Experiência personalizada</div>
+
+        <div class="text-[2rem] sm:text-[2.25rem] tracking-wide font-bold leading-tight" id="header-title">
           <span id="empresa-nome">Quero Convidar</span>
           <span class="inline-block mx-2 text-[#D4AF37]">•</span>
           <span class="font-normal" id="empresa-subtitulo">Convites Digitais</span>
         </div>
-        <div class="mt-3 h-0.5 w-36 gradient-line mx-auto rounded"></div>
-        <div class="mt-3 text-base text-[#6a6a6a] font-sans-alt" id="documento-titulo">
+
+        <div class="mt-4 h-[2px] w-40 gradient-line mx-auto rounded-full"></div>
+
+        <div class="mt-4 text-[1.02rem] text-[#6a6a6a] font-sans-alt" id="documento-titulo">
           Termo de contratação
         </div>
+
+        <p class="mt-4 text-[0.98rem] text-[#7b746a] font-sans-alt max-w-xl mx-auto leading-relaxed">
+          Um espaço pensado para reunir as informações do seu pedido com carinho, clareza e organização.
+        </p>
       </header>
 
       <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
@@ -145,58 +225,74 @@
       <div id="form-section">
         <form id="contract-form" class="space-y-5">
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do contratante</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Informações do contratante
+            </h2>
             <div class="space-y-4">
               <div>
                 <label for="nome_completo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome completo</label>
-                <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="text" id="nome_completo" name="nome_completo" placeholder="Digite aqui" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações do aniversariante</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Informações do aniversariante
+            </h2>
             <div class="space-y-4">
               <div>
                 <label for="nome_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
-                <input type="text" id="nome_aniversariante" name="nome_aniversariante" placeholder="Digite aqui" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="text" id="nome_aniversariante" name="nome_aniversariante" placeholder="Digite aqui" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
               <div>
                 <label for="idade_aniversariante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Idade</label>
-                <input type="text" id="idade_aniversariante" name="idade_aniversariante" placeholder="Ex: 5 anos" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="text" id="idade_aniversariante" name="idade_aniversariante" placeholder="Ex: 5 anos" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Detalhes do evento</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Detalhes do evento
+            </h2>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label for="data_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do evento</label>
-                <input type="date" id="data_evento" name="data_evento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="date" id="data_evento" name="data_evento" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
               <div>
                 <label for="horario_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Horário do evento</label>
-                <input type="time" id="horario_evento" name="horario_evento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="time" id="horario_evento" name="horario_evento" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
             </div>
+
             <div class="mt-4">
               <label for="local_evento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Local do evento</label>
-              <input type="text" id="local_evento" name="local_evento" placeholder="Salão, endereço ou ponto de referência" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              <input type="text" id="local_evento" name="local_evento" placeholder="Salão, endereço ou ponto de referência" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
             </div>
+
             <div class="mt-4">
               <label for="tema_festa" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tema da festa</label>
-              <input type="text" id="tema_festa" name="tema_festa" placeholder="Ex: Floresta encantada, Borboletas, Minnie rosa" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+              <input type="text" id="tema_festa" name="tema_festa" placeholder="Ex: Floresta encantada, Borboletas, Minnie rosa" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Experiência contratada</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Experiência contratada
+            </h2>
+
             <div class="space-y-4">
               <div>
                 <label for="tipo_experiencia" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Tipo de experiência</label>
-                <select id="tipo_experiencia" name="tipo_experiencia" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <select id="tipo_experiencia" name="tipo_experiencia" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
                   <option value="">Selecione uma opção</option>
                   <option value="Primeiro Encanto - Convite tradicional">Primeiro Encanto - Convite tradicional</option>
                   <option value="Encanto que Marca - Interativo ou estendido">Encanto que Marca - Interativo ou estendido</option>
@@ -205,57 +301,93 @@
                   <option value="Outros serviços">Outros serviços</option>
                 </select>
               </div>
+
               <div>
-                <label for="adicionais" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Adicionais contratados</label>
-                <textarea id="adicionais" name="adicionais" rows="2" placeholder="Ex: Confimação de Presença, Álbum I.A., Álbum personalizado da festa, Mascotes..." class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+                <label for="adicionais" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Adicionais contratados ou modelo do convite</label>
+                <textarea id="adicionais" name="adicionais" rows="3" placeholder="Ex: Convite interativo, animado, estendido, cinematográfico, confirmação de presença, álbum I.A., mascotes..." class="input-field w-full px-4 py-3.5 rounded-2xl outline-none resize-none"></textarea>
               </div>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Informações adicionais</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Informações adicionais
+            </h2>
+
             <div class="space-y-4">
               <div>
                 <label for="paleta_cores" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Paleta de cores ou estilo</label>
-                <input type="text" id="paleta_cores" name="paleta_cores" placeholder="Ex: Rosa pastel, branco, dourado / Aquarela, GIF, 3D" class="input-field w-full px-4 py-3 rounded-xl outline-none">
+                <input type="text" id="paleta_cores" name="paleta_cores" placeholder="Ex: Rosa pastel, branco, dourado / Aquarela, GIF, 3D" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none">
               </div>
+
               <div>
-                <label for="frases_versiculos" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Frases ou versículos</label>
-                <textarea id="frases_versiculos" name="frase no convite" rows="2" placeholder="Ex: Uma frase especial, versículo bíblico ou citação para o convite" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+                <label for="frases_versiculos" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Frases</label>
+                <textarea id="frases_versiculos" name="frases_versiculos" rows="2" placeholder="Ex: Uma frase especial, versículo bíblico ou citação para o convite" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none resize-none"></textarea>
               </div>
+
               <div>
                 <label for="musica" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Música</label>
-                <textarea id="musica" name="musica" rows="2" placeholder="Ex: Nome da música, artista, link ou observações sobre a trilha sonora" class="input-field w-full px-4 py-3 rounded-xl outline-none resize-none"></textarea>
+                <textarea id="musica" name="musica" rows="2" placeholder="Ex: Nome da música, artista, link ou observações sobre a trilha sonora" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none resize-none"></textarea>
               </div>
+
               <div>
                 <label for="link_externo" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Link externo</label>
-                <input type="text" id="link_externo" name="link_externo" placeholder="Ex: Mapa, listas de presentes, sites" class="input-field w-full px-4 py-3 rounded-xl outline-none">
+                <input type="text" id="link_externo" name="link_externo" placeholder="Ex: mapa, lista de presentes, site do evento" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none">
               </div>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Pagamento</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Observações da cliente
+            </h2>
+
+            <div class="space-y-4">
+              <div class="mini-note rounded-2xl p-4">
+                <p class="font-sans-alt text-sm text-[#6f6a63] leading-relaxed">
+                  Aqui você pode acrescentar detalhes importantes sobre preferências, referências, pedidos especiais ou qualquer informação que deseje reforçar.
+                </p>
+              </div>
+
+              <div>
+                <label for="observacoes_cliente" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Observações</label>
+                <textarea id="observacoes_cliente" name="observacoes_cliente" rows="5" placeholder="Ex: Gostaria de algo mais delicado, com flores suaves, pouco texto, destaque para a foto principal e botões discretos." class="input-field w-full px-4 py-3.5 rounded-2xl outline-none resize-none"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Pagamento
+            </h2>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label for="forma_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Forma de pagamento</label>
-                <input type="text" id="forma_pagamento" name="forma_pagamento" placeholder="Ex: PIX ou cartão" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="text" id="forma_pagamento" name="forma_pagamento" placeholder="Ex: PIX ou cartão" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
               <div>
                 <label for="data_pagamento" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data do pagamento</label>
-                <input type="date" id="data_pagamento" name="data_pagamento" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="date" id="data_pagamento" name="data_pagamento" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
             </div>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Termos e condições</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Termos e condições
+            </h2>
+
             <div class="space-y-4 text-base font-sans-alt mb-5">
-              <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
+              <div class="terms-box p-4 rounded-2xl">
                 <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade da marca</h3>
                 <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
                   <li>O design desenvolvido é autoral, exclusivo para o evento e não será reutilizado ou comercializado para terceiros no mesmo formato personalizado.</li>
-                  <li>O projeto inclui 2 rodadas de alterações gratuitas. Após esse limite: R$10 por alteração de imagem e R$30 por alteração de vídeo</li>
+                  <li>O projeto inclui 2 rodadas de alterações gratuitas. Após esse limite: R$10 por alteração de imagem e R$30 por alteração de vídeo.</li>
                   <li>O convite será entregue em formato digital finalizado, não sendo enviado arquivo editável.</li>
                   <li>O funcionamento de botões, links e interações pode variar conforme aparelho, sistema operacional, navegador e velocidade da internet.</li>
                   <li>O prazo de produção inicia após confirmação de 100% do pagamento e envio completo do material necessário.</li>
@@ -263,7 +395,8 @@
                   <li>O arquivo final ficará armazenado por até 7 dias após a data do evento.</li>
                 </ul>
               </div>
-              <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
+
+              <div class="terms-box p-4 rounded-2xl">
                 <h3 class="font-bold text-[#2b2b2b] mb-3">Reembolso e cancelamento</h3>
                 <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
                   <li>Após o início da produção, não há devolução de valores pagos.</li>
@@ -271,7 +404,8 @@
                   <li>Alterações estruturais como mudança de tema, paleta ou identidade visual após aprovação inicial poderão ser consideradas novo projeto.</li>
                 </ul>
               </div>
-              <div class="p-4 rounded-xl bg-[#fffdf8] border border-[rgba(212,175,55,0.25)]">
+
+              <div class="terms-box p-4 rounded-2xl">
                 <h3 class="font-bold text-[#2b2b2b] mb-3">Imagens por I.A.</h3>
                 <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
                   <li>Imagens geradas por inteligência artificial são interpretações artísticas baseadas no material enviado.</li>
@@ -280,7 +414,8 @@
                   <li>Pequenas variações estéticas são inerentes ao processo criativo com I.A.</li>
                 </ul>
               </div>
-              <div class="p-4 rounded-xl bg-white border border-[rgba(212,175,55,0.25)]">
+
+              <div class="terms-box p-4 rounded-2xl">
                 <h3 class="font-bold text-[#2b2b2b] mb-3">Responsabilidade do cliente</h3>
                 <ul class="list-disc pl-5 space-y-2 text-[#2f2f2f]">
                   <li>Garantir que todas as fotos, textos e informações enviadas possuem autorização de uso.</li>
@@ -291,6 +426,7 @@
                 </ul>
               </div>
             </div>
+
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" id="aceite_termos" name="aceite_termos" class="checkbox-custom w-5 h-5 mt-0.5 rounded" required>
               <span class="text-base text-[#4b4b4b] font-sans-alt">
@@ -299,25 +435,29 @@
             </label>
           </div>
 
-          <div class="card-section rounded-2xl p-5">
-            <h2 class="font-bold mb-4 text-[#2b2b2b]">Confirmação e assinatura</h2>
+          <div class="card-section rounded-[26px] p-5 sm:p-6">
+            <h2 class="section-title font-bold">
+              <span class="dot"></span>
+              Confirmação e assinatura
+            </h2>
+
             <div class="space-y-4">
               <div>
                 <label for="nome_assinante" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Nome</label>
-                <input type="text" id="nome_assinante" name="nome_assinante" placeholder="Digite seu nome" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="text" id="nome_assinante" name="nome_assinante" placeholder="Digite seu nome" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
               <div>
                 <label for="data_assinatura" class="block text-base mb-1.5 text-[#4b4b4b] font-sans-alt">Data</label>
-                <input type="date" id="data_assinatura" name="data_assinatura" class="input-field w-full px-4 py-3 rounded-xl outline-none" required>
+                <input type="date" id="data_assinatura" name="data_assinatura" class="input-field w-full px-4 py-3.5 rounded-2xl outline-none" required>
               </div>
             </div>
           </div>
 
-          <div class="text-center p-4 rounded-2xl border border-[rgba(212,175,55,0.35)] bg-white">
-            <p class="text-base font-sans-alt text-[#2b2b2b]" id="closing-phrase">"Será um prazer criar esse momento com você 💕 "</p>
+          <div class="text-center p-5 rounded-[24px] border border-[rgba(212,175,55,0.24)] bg-[rgba(255,255,255,0.92)] shadow-[0_6px_18px_rgba(91,76,46,0.05)]">
+            <p class="text-base font-sans-alt text-[#2b2b2b]" id="closing-phrase">"Será um prazer criar esse momento com você 🤍"</p>
           </div>
 
-          <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-2xl text-white font-bold text-lg tracking-wide shadow-md">
+          <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-[22px] text-white font-bold text-lg tracking-wide">
             <span id="submit-text">✨ LI E CONCORDO COM OS TERMOS ✨</span>
             <span id="submit-loading" class="hidden">
               <span class="inline-block w-5 h-5 rounded-full loading-spinner"></span>
@@ -327,7 +467,7 @@
       </div>
 
       <footer class="text-center mt-8 pb-4">
-        <div class="h-0.5 w-24 gradient-line mx-auto rounded mb-4"></div>
+        <div class="h-[2px] w-24 gradient-line mx-auto rounded-full mb-4"></div>
         <p class="text-sm text-[#9a9a9a] font-sans-alt">Quero Convidar © 2025 • Todos os direitos reservados</p>
       </footer>
     </div>
@@ -360,7 +500,15 @@
           document.getElementById('documento-titulo').textContent = cfg.titulo_documento;
           document.getElementById('closing-phrase').textContent = cfg.closing_phrase;
 
-          document.body.style.background = `linear-gradient(135deg, ${cfg.background_color} 0%, #fffdf8 50%, #f8f6f1 100%)`;
+          document.body.style.color = cfg.text_color;
+          document.documentElement.style.setProperty('--qc-green', cfg.accent_color);
+          document.documentElement.style.setProperty('--qc-gold', cfg.secondary_accent);
+          document.documentElement.style.setProperty('--qc-text', cfg.text_color);
+
+          document.body.style.background =
+            `radial-gradient(circle at top left, rgba(171, 198, 188, 0.10), transparent 28%),
+             radial-gradient(circle at top right, rgba(212, 175, 55, 0.10), transparent 24%),
+             linear-gradient(135deg, ${cfg.background_color} 0%, #fffdf8 48%, #f7f3ec 100%)`;
 
           const fontStack = `${cfg.font_family}, Georgia, serif`;
           document.body.style.fontFamily = fontStack;
@@ -434,7 +582,7 @@
     function showToast(message, type = 'success') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
-      toast.className = `toast px-4 py-3 rounded-xl shadow-lg mb-2 font-sans-alt text-sm ${
+      toast.className = `toast px-4 py-3 rounded-2xl shadow-lg mb-2 font-sans-alt text-sm ${
         type === 'success' ? 'bg-[#ABC6BC] text-white' : 'bg-red-500 text-white'
       }`;
       toast.textContent = message;
@@ -476,6 +624,7 @@
         frases_versiculos: document.getElementById('frases_versiculos').value,
         musica: document.getElementById('musica').value,
         link_externo: document.getElementById('link_externo').value,
+        observacoes_cliente: document.getElementById('observacoes_cliente').value,
         forma_pagamento: document.getElementById('forma_pagamento').value,
         data_pagamento: document.getElementById('data_pagamento').value,
         nome_assinante: document.getElementById('nome_assinante').value,
@@ -522,9 +671,12 @@ Adicionais contratados: ${formData.adicionais || 'Não informado'}
 
 🎨 INFORMAÇÕES ADICIONAIS
 Paleta de cores ou estilo: ${formData.paleta_cores || 'Não informado'}
-Frases ou versículos: ${formData.frases_versiculos || 'Não informado'}
+Frases: ${formData.frases_versiculos || 'Não informado'}
 Música: ${formData.musica || 'Não informado'}
 Link externo: ${formData.link_externo || 'Não informado'}
+
+📝 OBSERVAÇÕES DA CLIENTE
+Observações: ${formData.observacoes_cliente || 'Não informado'}
 
 💳 PAGAMENTO
 Forma de pagamento: ${formData.forma_pagamento}
@@ -551,3 +703,4 @@ Aceitou os termos: ${formData.aceite_termos ? 'Sim' : 'Não'}`;
   </script>
 </body>
 </html>
+
