@@ -1,183 +1,873 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Briefing Premium | 15 Anos | Quero Convidar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briefing Premium | 15 Anos | Quero Convidar</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-body {font-family: 'Montserrat', sans-serif; background:#f8f4ef; margin:0;}
-.container {max-width:900px;margin:auto;padding:20px;}
-.section-card {background:#fff;padding:20px;border-radius:20px;margin-bottom:20px;}
-h1,h2 {font-family:'Cormorant Garamond', serif;}
-input,textarea,select {width:100%;padding:12px;margin-top:5px;border-radius:10px;border:1px solid #ccc;}
-button {padding:14px;border:none;border-radius:50px;cursor:pointer;}
-.btn-primary {background:#a68a74;color:#fff;}
-.btn-secondary {background:#eee;}
-</style>
+  <style>
+    :root {
+      --bg: #f8f4ef;
+      --bg-2: #efe5da;
+      --card: rgba(255,255,255,0.78);
+      --white: #ffffff;
+      --text: #4e4138;
+      --text-soft: #7f7065;
+      --primary: #a68a74;
+      --primary-dark: #7f6552;
+      --primary-light: #d8c6b5;
+      --line: rgba(166, 138, 116, 0.20);
+      --shadow: 0 18px 40px rgba(92, 67, 48, 0.10);
+      --shadow-soft: 0 10px 24px rgba(92, 67, 48, 0.07);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --success: #6f8b68;
+      --danger: #b56f67;
+      --gold: #c7aa84;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216,198,181,0.45), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.7), transparent 24%),
+        linear-gradient(180deg, #fbf8f4 0%, #f8f4ef 35%, #f5efe8 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06)),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.45) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,0.35) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 60% 80%, rgba(255,255,255,0.30) 0 1px, transparent 1.5px);
+      background-size: auto, 180px 180px, 220px 220px, 240px 240px;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 70px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 42px 28px 34px;
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62)),
+        linear-gradient(180deg, rgba(216,198,181,0.16), rgba(255,255,255,0.12));
+      border: 1px solid rgba(255,255,255,0.55);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      margin-bottom: 22px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      right: -80px;
+      top: -100px;
+      background: radial-gradient(circle, rgba(199,170,132,0.18), transparent 65%);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .brand-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      color: var(--primary-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .brand-sub {
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      margin: 18px 0 12px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hero p {
+      max-width: 790px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 1.9;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+    }
+
+    .progress-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.58);
+      box-shadow: var(--shadow-soft);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-top span {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: #ece2d8;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+      transition: width 0.35s ease;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .section-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.58);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-title-wrap h2 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .section-title-wrap p {
+      margin: 8px 0 0;
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      max-width: 720px;
+    }
+
+    .section-number {
+      min-width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(216,198,181,0.5));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.92rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .field small {
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(166, 138, 116, 0.18);
+      background: rgba(255,255,255,0.88);
+      color: var(--text);
+      padding: 15px 16px;
+      border-radius: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.22s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #a49689;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(166, 138, 116, 0.52);
+      box-shadow: 0 0 0 4px rgba(216,198,181,0.24);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .check-area {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .check-title {
+      margin: 0 0 12px;
+      font-size: 0.94rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 16px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .check-item input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--primary-dark);
+      box-shadow: none;
+    }
+
+    .contract-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(248,244,239,0.88));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      color: var(--text);
+      line-height: 1.85;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contract-box h3 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .contract-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .contract-box li {
+      margin-bottom: 8px;
+    }
+
+    .accept-box {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .accept-box input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--primary-dark);
+      box-shadow: none;
+    }
+
+    .accept-box span {
+      line-height: 1.7;
+      font-size: 0.94rem;
+      color: var(--text);
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 16px 26px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      box-shadow: 0 16px 28px rgba(127, 101, 82, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--line);
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.95);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 14px;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .signature {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    @media (max-width: 860px) {
+      .grid.two,
+      .grid.three,
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .section-card {
+        padding: 22px 16px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+      }
+
+      .section-number {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="container">
+  <div class="container">
 
-<h1>Briefing Premium 15 Anos</h1>
+    <section class="hero">
+      <div class="brand">
+        <div class="brand-script">Quero Convidar</div>
+        <div class="brand-sub">briefing premium para 15 anos</div>
+      </div>
 
-<form id="briefingForm">
+      <h1>Vamos criar um convite à altura desse momento inesquecível</h1>
+      <p>
+        Este briefing foi pensado para reunir não só as informações do evento, mas também a alma da comemoração.
+        Quanto mais completo estiver, mais estratégica, emocionante e refinada será a criação do seu convite.
+      </p>
+    </section>
 
-<!-- SEÇÃO 1 -->
-<div class="section-card">
-<h2>Informações principais</h2>
+    <section class="progress-card">
+      <div class="progress-top">
+        <span>Preenchimento do briefing</span>
+        <span id="progressText">0% concluído</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
 
-<label>Nome da debutante</label>
-<input id="nomeDebutante" required>
+    <form id="briefingForm">
 
-<label>Nome do responsável</label>
-<input id="nomeResponsavel" required>
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Informações principais</h2>
+            <p>Os dados essenciais para dar início à criação e garantir que nada importante fique de fora.</p>
+          </div>
+          <div class="section-number">01</div>
+        </div>
 
-<label>WhatsApp</label>
-<input id="whatsCliente" required>
+        <div class="grid two">
+          <div class="field">
+            <label for="nomeDebutante">Nome da debutante <span class="required">*</span></label>
+            <input type="text" id="nomeDebutante" required>
+          </div>
 
-<label>Instagram</label>
-<input id="instagramCliente">
+          <div class="field">
+            <label for="nomeResponsavel">Nome do responsável <span class="required">*</span></label>
+            <input type="text" id="nomeResponsavel" required>
+          </div>
+        </div>
 
-<label>Data do evento</label>
-<input type="date" id="dataEvento" required>
+        <div class="grid two">
+          <div class="field">
+            <label for="whatsCliente">WhatsApp do cliente <span class="required">*</span></label>
+            <input type="text" id="whatsCliente" placeholder="(00) 00000-0000" required>
+          </div>
 
-<label>Horário</label>
-<input type="time" id="horarioEvento" required>
+          <div class="field">
+            <label for="instagramCliente">Instagram do cliente ou da debutante</label>
+            <input type="text" id="instagramCliente" placeholder="@perfil">
+          </div>
+        </div>
 
-<label>Nome do local</label>
-<input id="nomeEspaco" required>
+        <div class="grid three">
+          <div class="field">
+            <label for="dataEvento">Data do evento <span class="required">*</span></label>
+            <input type="date" id="dataEvento" required>
+          </div>
 
-<label>Cidade</label>
-<input id="cidadeEvento">
+          <div class="field">
+            <label for="horarioEvento">Horário <span class="required">*</span></label>
+            <input type="time" id="horarioEvento" required>
+          </div>
 
-<label>Endereço</label>
-<textarea id="enderecoCompleto"></textarea>
+          <div class="field">
+            <label for="idade">Idade celebrada</label>
+            <input type="text" id="idade" value="15 anos">
+          </div>
+        </div>
 
-<label>Link localização</label>
-<input id="linkLocalizacao">
-</div>
+        <div class="grid two">
+          <div class="field">
+            <label for="nomeEspaco">Nome do local <span class="required">*</span></label>
+            <input type="text" id="nomeEspaco" placeholder="Salão, casa de festas, espaço, hotel..." required>
+          </div>
 
-<!-- SEÇÃO 2 -->
-<div class="section-card">
-<h2>Conceito visual</h2>
+          <div class="field">
+            <label for="cidadeEvento">Cidade / bairro do evento</label>
+            <input type="text" id="cidadeEvento" placeholder="Ex.: Foz do Iguaçu - PR">
+          </div>
+        </div>
 
-<label>Tema</label>
-<input id="temaEvento">
+        <div class="field">
+          <label for="enderecoCompleto">Endereço completo</label>
+          <textarea id="enderecoCompleto" placeholder="Rua, número, bairro, complemento e referência"></textarea>
+        </div>
 
-<label>Estilo</label>
-<select id="estiloVisual">
-<option></option>
-<option>Clássico</option>
-<option>Romântico</option>
-<option>Luxuoso</option>
-</select>
+        <div class="field">
+          <label for="linkLocalizacao">Link da localização</label>
+          <input type="url" id="linkLocalizacao" placeholder="Cole aqui o link do Google Maps">
+        </div>
+      </section>
 
-<label>Paleta</label>
-<input id="paletaCores">
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Conceito visual da festa</h2>
+            <p>Aqui entra o coração estético do projeto. É essa parte que faz o convite ter presença, personalidade e assinatura visual.</p>
+          </div>
+          <div class="section-number">02</div>
+        </div>
 
-<label>Elementos</label>
-<input id="elementosVisuais">
+        <div class="grid two">
+          <div class="field">
+            <label for="temaEvento">Tema ou conceito da festa <span class="required">*</span></label>
+            <input type="text" id="temaEvento" placeholder="Ex.: Baile de inverno, princesa moderna, jardim europeu..." required>
+          </div>
 
-<label>Referências</label>
-<textarea id="referenciasVisuais"></textarea>
+          <div class="field">
+            <label for="estiloVisual">Estilo visual desejado</label>
+            <select id="estiloVisual">
+              <option value="">Selecione</option>
+              <option>Clássico e elegante</option>
+              <option>Romântico e delicado</option>
+              <option>Luxuoso e sofisticado</option>
+              <option>Moderno e minimalista</option>
+              <option>Cinematográfico</option>
+              <option>Princesa / conto de fadas</option>
+              <option>Editorial fashion</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
 
-<label>O que não quer</label>
-<textarea id="naoQuer"></textarea>
-</div>
+        <div class="grid two">
+          <div class="field">
+            <label for="paletaCores">Paleta de cores desejada</label>
+            <input type="text" id="paletaCores" placeholder="Ex.: nude, dourado, pérola, rosé, azul marinho, prata">
+          </div>
 
-<!-- SEÇÃO 4 -->
-<div class="section-card">
-<h2>Informações do convite</h2>
+          <div class="field">
+            <label for="elementosVisuais">Elementos que combinam com a proposta</label>
+            <input type="text" id="elementosVisuais" placeholder="Ex.: laços, brilho, cristais, flores, estrelas, pérolas, neve">
+          </div>
+        </div>
 
-<label>Frase</label>
-<textarea id="fraseVersiculo"></textarea>
+        <div class="field">
+          <label for="referenciasVisuais">Referências, inspirações e observações de estilo</label>
+          <textarea id="referenciasVisuais" placeholder="Descreva tudo o que você imagina para esse convite. O que quer transmitir, o que ama e o que prefere evitar."></textarea>
+          <small>Essa resposta ajuda demais a evitar retrabalho e deixa a criação muito mais certeira.</small>
+        </div>
 
-<label>Pais</label>
-<input id="nomesPais">
+        <div class="field">
+          <label for="naoQuer">O que você não quer ver no convite?</label>
+          <textarea id="naoQuer" placeholder="Ex.: cores fortes demais, excesso de brilho, visual infantil, elementos muito caricatos, poluição visual..."></textarea>
+        </div>
+      </section>
 
-<label>Traje</label>
-<input id="dressCode">
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Informações do convite</h2>
+            <p>Tudo o que precisa entrar na estrutura final para o convite ficar funcional e completo.</p>
+          </div>
+          <div class="section-number">03</div>
+        </div>
 
-<label>Informações obrigatórias</label>
-<textarea id="infoObrigatorias"></textarea>
+        <div class="field">
+          <label for="fraseVersiculo">Frase, versículo ou mensagem especial</label>
+          <textarea id="fraseVersiculo" placeholder="Caso queira incluir um texto de abertura, trecho bíblico, dedicatória ou frase marcante."></textarea>
+        </div>
 
-<label>Confirmação</label>
-<input id="confirmacaoLink">
+        <div class="field">
+          <label for="nomesPais">Nome dos pais ou familiares que devem aparecer</label>
+          <input type="text" id="nomesPais" placeholder="Opcional">
+        </div>
 
-<label>Site</label>
-<input id="siteEvento">
+        <div class="field">
+          <label for="dressCode">Traje ou observação importante aos convidados</label>
+          <input type="text" id="dressCode" placeholder="Ex.: passeio completo, esporte fino, evitar salto fino, traje social...">
+        </div>
 
-<label>Presentes</label>
-<textarea id="presentesInfo"></textarea>
-</div>
+        <div class="field">
+          <label for="infoObrigatorias">Informações que não podem faltar de jeito nenhum</label>
+          <textarea id="infoObrigatorias" placeholder="Ex.: pontualidade, estacionamento, restrição para crianças, recepção, acesso ao local, etc."></textarea>
+        </div>
 
-<!-- TERMO -->
-<div class="section-card">
-<h2>Termo</h2>
+        <div class="check-area">
+          <div class="check-title">Quais recursos deseja incluir no convite?</div>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox" name="recursos" value="Localização"> Localização</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Confirmação de presença"> Confirmação de presença</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Sugestão de presentes"> Sugestão de presentes</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Save the date"> Save the date</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Contagem regressiva"> Contagem regressiva</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Página extra"> Página extra</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Animação"> Animação</label>
+            <label class="check-item"><input type="checkbox" name="recursos" value="Galeria ou memória"> Galeria ou memória</label>
+          </div>
+        </div>
 
-<label>
-<input type="checkbox" id="aceiteContrato" required>
-Li e concordo
-</label>
+        <div class="grid two">
+          <div class="field">
+            <label for="confirmacaoLink">WhatsApp ou link para confirmação de presença</label>
+            <input type="text" id="confirmacaoLink" placeholder="Número, nome da pessoa responsável ou link">
+          </div>
 
-<br><br>
+          <div class="field">
+            <label for="siteEvento">Site, lista ou link adicional</label>
+            <input type="text" id="siteEvento" placeholder="Opcional">
+          </div>
+        </div>
 
-<button type="submit" class="btn-primary">Enviar</button>
-<button type="reset" class="btn-secondary">Limpar</button>
+        <div class="field">
+          <label for="presentesInfo">Informações para sugestão de presentes</label>
+          <textarea id="presentesInfo" placeholder="Ex.: chave Pix, nome do favorecido, viagem, lista simbólica, loja, presente em dinheiro..."></textarea>
+        </div>
+      </section>
 
-</div>
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Termo de contrato</h2>
+            <p>Transparência deixa o processo mais profissional, mais leve e mais seguro para todos os lados.</p>
+          </div>
+          <div class="section-number">04</div>
+        </div>
 
-</form>
-</div>
+        <div class="contract-box">
+          <h3>Condições de criação e entrega</h3>
+          <ul>
+            <li>O convite será desenvolvido de forma personalizada, com base nas respostas enviadas neste briefing.</li>
+            <li>O prazo de produção começa após o recebimento completo das informações e a confirmação do pagamento.</li>
+            <li>O projeto inclui até 2 rodadas de ajustes, salvo condições específicas previamente combinadas.</li>
+            <li>Alterações estruturais após aprovação inicial, como mudança de tema, estilo, paleta ou proposta criativa, poderão gerar cobrança adicional.</li>
+            <li>O material final será entregue em formato digital pronto para uso, não incluindo arquivo editável.</li>
+            <li>O funcionamento de links, botões e recursos interativos pode variar conforme aparelho, navegador, sistema e conexão de internet.</li>
+            <li>É de responsabilidade do cliente revisar com atenção nomes, datas, horários, links e demais informações antes da aprovação final.</li>
+            <li>Após a aprovação final, correções por erro de informação enviada pelo cliente poderão ser cobradas à parte.</li>
+            <li>A Quero Convidar poderá utilizar partes do projeto em portfólio e divulgação, sempre preservando dados sensíveis quando necessário.</li>
+            <li>Ao enviar este formulário, o cliente declara estar ciente e de acordo com os termos acima.</li>
+          </ul>
+        </div>
 
-<script>
-function v(id){
-let el=document.getElementById(id);
-return el&&el.value?el.value:"Não informado";
-}
+        <div class="accept-box" style="margin-top:16px;">
+          <input type="checkbox" id="aceiteContrato" required>
+          <span>Li e concordo com os termos apresentados neste briefing e autorizo o início do processo criativo conforme as informações enviadas.</span>
+        </div>
 
-document.getElementById("briefingForm").addEventListener("submit",function(e){
-e.preventDefault();
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Enviar briefing pelo WhatsApp</button>
+          <button type="reset" class="btn btn-secondary">Limpar formulário</button>
+        </div>
 
-if(!document.getElementById("aceiteContrato").checked){
-alert("Aceite o contrato");
-return;
-}
+        <div class="footer-note">
+          Ao clicar em enviar, o WhatsApp será aberto com a mensagem pronta para encaminhamento.
+        </div>
+      </section>
+    </form>
 
-let msg=`Olá! 💌
+    <div class="signature">
+      Quero Convidar • Briefing Premium de 15 Anos
+    </div>
+  </div>
 
-✨ INFORMAÇÕES
-Nome: ${v('nomeDebutante')}
-Responsável: ${v('nomeResponsavel')}
-Whats: ${v('whatsCliente')}
-Instagram: ${v('instagramCliente')}
-Data: ${v('dataEvento')}
-Hora: ${v('horarioEvento')}
-Local: ${v('nomeEspaco')}
-Cidade: ${v('cidadeEvento')}
+  <script>
+    const form = document.getElementById('briefingForm');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
 
-🎨 CONCEITO
-Tema: ${v('temaEvento')}
-Estilo: ${v('estiloVisual')}
-Paleta: ${v('paletaCores')}
-Elementos: ${v('elementosVisuais')}
+    const fieldsToTrack = [
+      'nomeDebutante',
+      'nomeResponsavel',
+      'whatsCliente',
+      'dataEvento',
+      'horarioEvento',
+      'nomeEspaco',
+      'temaEvento',
+      'estiloVisual',
+      'paletaCores',
+      'fraseVersiculo',
+      'confirmacaoLink',
+      'aceiteContrato'
+    ];
 
-📌 CONVITE
-Frase: ${v('fraseVersiculo')}
-Pais: ${v('nomesPais')}
-Traje: ${v('dressCode')}
-Confirmação: ${v('confirmacaoLink')}
+    function valueOrDefault(id) {
+      const el = document.getElementById(id);
+      if (!el) return 'Não informado';
 
+      if (el.type === 'checkbox') {
+        return el.checked ? 'Sim' : 'Não';
+      }
+
+      return el.value && el.value.trim() ? el.value.trim() : 'Não informado';
+    }
+
+    function checkedValues(name) {
+      const items = [...document.querySelectorAll(`input[name="${name}"]:checked`)];
+      return items.length ? items.map(item => item.value).join(', ') : 'Não informado';
+    }
+
+    function updateProgress() {
+      let filled = 0;
+
+      fieldsToTrack.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        if (el.type === 'checkbox') {
+          if (el.checked) filled++;
+        } else if (el.value.trim() !== '') {
+          filled++;
+        }
+      });
+
+      const percent = Math.round((filled / fieldsToTrack.length) * 100);
+      progressFill.style.width = percent + '%';
+      progressText.textContent = percent + '% concluído';
+    }
+
+    document.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', updateProgress);
+      el.addEventListener('change', updateProgress);
+    });
+
+    form.addEventListener('reset', () => {
+      setTimeout(updateProgress, 50);
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const aceite = document.getElementById('aceiteContrato').checked;
+      if (!aceite) {
+        alert('Você precisa concordar com o termo de contrato antes de enviar.');
+        return;
+      }
+
+      const mensagem =
+`Olá, Aline! 💌
+Segue o preenchimento do briefing premium de 15 anos:
+
+━━━━━━━━━━━━━━━
+✨ INFORMAÇÕES PRINCIPAIS
+• Nome da debutante: ${valueOrDefault('nomeDebutante')}
+• Nome do responsável: ${valueOrDefault('nomeResponsavel')}
+• WhatsApp do cliente: ${valueOrDefault('whatsCliente')}
+• Instagram: ${valueOrDefault('instagramCliente')}
+• Data do evento: ${valueOrDefault('dataEvento')}
+• Horário: ${valueOrDefault('horarioEvento')}
+• Idade celebrada: ${valueOrDefault('idade')}
+• Nome do local: ${valueOrDefault('nomeEspaco')}
+• Cidade / bairro: ${valueOrDefault('cidadeEvento')}
+• Endereço completo: ${valueOrDefault('enderecoCompleto')}
+• Link da localização: ${valueOrDefault('linkLocalizacao')}
+
+━━━━━━━━━━━━━━━
+🎨 CONCEITO VISUAL
+• Tema ou conceito: ${valueOrDefault('temaEvento')}
+• Estilo visual desejado: ${valueOrDefault('estiloVisual')}
+• Paleta de cores: ${valueOrDefault('paletaCores')}
+• Elementos visuais: ${valueOrDefault('elementosVisuais')}
+• Referências e inspirações: ${valueOrDefault('referenciasVisuais')}
+• O que não quer no convite: ${valueOrDefault('naoQuer')}
+
+━━━━━━━━━━━━━━━
+📌 INFORMAÇÕES DO CONVITE
+• Frase, versículo ou mensagem: ${valueOrDefault('fraseVersiculo')}
+• Nome dos pais ou familiares: ${valueOrDefault('nomesPais')}
+• Traje / observação aos convidados: ${valueOrDefault('dressCode')}
+• Informações obrigatórias: ${valueOrDefault('infoObrigatorias')}
+• Recursos desejados: ${checkedValues('recursos')}
+• Confirmação de presença: ${valueOrDefault('confirmacaoLink')}
+• Site ou link adicional: ${valueOrDefault('siteEvento')}
+• Informações para presentes: ${valueOrDefault('presentesInfo')}
+
+━━━━━━━━━━━━━━━
 📄 TERMO
-Aceito`;
+• Aceite do contrato: Sim, li e concordo com os termos.`;
 
-window.open(`https://wa.me/5521967647527?text=${encodeURIComponent(msg)}`);
-});
-</script>
+      const numero = "5521967647527";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    });
 
+    updateProgress();
+  </script>
 </body>
 </html>
