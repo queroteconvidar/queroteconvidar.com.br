@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QC • Atendimento WhatsApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde: #b4d1c0;
+      --rosa: #dca599;
+      --rosa-escuro: #c98c7f;
+      --dourado: #c6a86a;
+      --creme: #faf7f3;
+      --branco: #ffffff;
+      --texto: #3d3a37;
+      --texto-suave: #7c746d;
+      --linha: #ece4dd;
+      --sombra: 0 12px 32px rgba(60, 42, 32, 0.10);
+      --whats: #25D366;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8f3ef 0%, #fdfcfb 35%, #eef5f1 100%);
+      color: var(--texto);
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+    }
+
+    .sidebar {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid var(--linha);
+      padding: 24px;
+    }
+
+    .brand {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--linha);
+      margin-bottom: 22px;
+    }
+
+    .brand small {
+      display: inline-block;
+      color: var(--dourado);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .brand h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .brand p {
+      margin: 10px 0 0;
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--texto-suave);
+      margin: 18px 0 12px;
+      font-weight: 700;
+    }
+
+    .quick-actions,
+    .lead-cards {
+      display: grid;
+      gap: 10px;
+    }
+
+    .card,
+    .action-btn {
+      background: var(--branco);
+      border: 1px solid var(--linha);
+      border-radius: 18px;
+      box-shadow: var(--sombra);
+    }
+
+    .action-btn {
+      padding: 14px 15px;
+      text-align: left;
+      font-size: 14px;
+      color: var(--texto);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--rosa);
+    }
+
+    .lead {
+      padding: 14px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .lead.active {
+      border-color: var(--verde);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fcf9 100%);
+    }
+
+    .lead strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .lead span {
+      display: block;
+      font-size: 12px;
+      color: var(--texto-suave);
+      line-height: 1.5;
+    }
+
+    .main {
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 600;
+    }
+
+    .topbar p {
+      margin: 4px 0 0;
+      color: var(--texto-suave);
+      font-size: 14px;
+    }
+
+    .badge {
+      background: #fff;
+      border: 1px solid var(--linha);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rosa-escuro);
+      box-shadow: var(--sombra);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+    }
+
+    .phone,
+    .panel {
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--linha);
+      border-radius: 28px;
+      box-shadow: var(--sombra);
+      overflow: hidden;
+    }
+
+    .phone-header {
+      background: linear-gradient(135deg, var(--verde), #d7ebe1);
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #355647;
+    }
+
+    .contact-name {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .contact-status {
+      font-size: 12px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .chat {
+      background:
+        radial-gradient(circle at top right, rgba(220,165,153,.12), transparent 20%),
+        radial-gradient(circle at bottom left, rgba(180,209,192,.18), transparent 25%),
+        #f8f5f1;
+      min-height: 560px;
+      max-height: 65vh;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      line-height: 1.55;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid #eee5df;
+      border-top-left-radius: 6px;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #dcf8e7;
+      border: 1px solid #ccefd9;
+      border-top-right-radius: 6px;
+    }
+
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .choice-btn {
+      border: 1px solid #d9ccc3;
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--rosa);
+      color: var(--rosa-escuro);
+    }
+
+    .composer {
+      padding: 14px;
+      border-top: 1px solid var(--linha);
+      background: #fff;
+      display: flex;
+      gap: 10px;
+    }
+
+    .composer input {
+      flex: 1;
+      border: 1px solid var(--linha);
+      border-radius: 999px;
+      padding: 13px 16px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .composer input:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 4px rgba(180,209,192,.18);
+    }
+
+    .composer button,
+    .panel button {
+      border: none;
+      background: linear-gradient(135deg, var(--rosa), var(--rosa-escuro));
+      color: white;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .panel h3 {
+      margin: 0 0 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texto-suave);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--linha);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: #fff;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 4px rgba(180,209,192,.16);
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .note {
+      background: linear-gradient(135deg, #fffaf5, #fff);
+      border: 1px solid #f0e5d7;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #7b6957;
+      line-height: 1.6;
+    }
+
+    .mini-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .mini-actions button.secondary {
+      background: #fff;
+      color: var(--texto);
+      border: 1px solid var(--linha);
+    }
+
+    .footer-tip {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--texto-suave);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--linha);
+      }
+
+      .main {
+        padding: 16px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .chat {
+        min-height: 430px;
+      }
+
+      .two {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <small>Atendimento Inteligente</small>
+        <h1>Quero Convidar</h1>
+        <p>Simulador em HTML para organizar seu atendimento com jeitinho acolhedor, respostas rápidas e coleta de dados do cliente.</p>
+      </div>
+
+      <div class="section-title">Ações rápidas</div>
+      <div class="quick-actions">
+        <button class="action-btn" onclick="startFlow()">✨ Iniciar atendimento</button>
+        <button class="action-btn" onclick="sendShortcut('Quero um orçamento')">💬 Simular pedido de orçamento</button>
+        <button class="action-btn" onclick="sendShortcut('Quero ver os serviços')">📋 Simular pedido de serviços</button>
+        <button class="action-btn" onclick="sendShortcut('Quero fechar meu pedido')">🤍 Simular intenção de fechamento</button>
+      </div>
+
+      <div class="section-title">Leads simulados</div>
+      <div class="lead-cards">
+        <div class="card lead active" onclick="loadLead('Mariana', 'Aniversário infantil', '18/07/2026', this)">
+          <strong>Mariana</strong>
+          <span>Quer convite safari • evento em 18/07/2026</span>
+        </div>
+        <div class="card lead" onclick="loadLead('Juliana', 'Casamento', '12/09/2026', this)">
+          <strong>Juliana</strong>
+          <span>Quer convite de casamento • evento em 12/09/2026</span>
+        </div>
+        <div class="card lead" onclick="loadLead('Fernanda', '15 anos', '02/11/2026', this)">
+          <strong>Fernanda</strong>
+          <span>Quer convite debutante • evento em 02/11/2026</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h2>Bot de Atendimento QC</h2>
+          <p>Esse modelo funciona como um atendimento guiado. Depois, ele pode ser ligado a uma API real do WhatsApp.</p>
+        </div>
+        <div class="badge">Modo demonstração em HTML</div>
+      </div>
+
+      <div class="content">
+        <section class="phone">
+          <div class="phone-header">
+            <div>
+              <div class="contact-name" id="contactName">Mariana</div>
+              <div class="contact-status">Atendimento em andamento no WhatsApp</div>
+            </div>
+            <div style="font-size:13px;font-weight:700;">QC</div>
+          </div>
+
+          <div class="chat" id="chat"></div>
+
+          <div class="composer">
+            <input type="text" id="userInput" placeholder="Digite uma mensagem para testar o fluxo" />
+            <button onclick="handleUserMessage()">Enviar</button>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <h3>Dados captados</h3>
+          <div class="grid">
+            <div class="field">
+              <label>Nome do cliente</label>
+              <input id="clientName" placeholder="Ex.: Mariana" />
+            </div>
+
+            <div class="two">
+              <div class="field">
+                <label>Tipo de evento</label>
+                <select id="eventType">
+                  <option value="">Selecione</option>
+                  <option>Aniversário infantil</option>
+                  <option>Casamento</option>
+                  <option>15 anos</option>
+                  <option>Chá revelação</option>
+                  <option>Batizado</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Data do evento</label>
+                <input id="eventDate" type="text" placeholder="Ex.: 18/07/2026" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Serviço de interesse</label>
+              <select id="serviceType">
+                <option value="">Selecione</option>
+                <option>Convite digital tradicional</option>
+                <option>Convite interativo</option>
+                <option>Convite animado</option>
+                <option>Identidade visual da festa</option>
+                <option>Combo convite + identidade visual</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Observações</label>
+              <textarea id="notes" placeholder="Tema, referências, urgência, quantidade de informações, estilo desejado..."></textarea>
+            </div>
+
+            <div class="note">
+              <strong>Como usar na vida real:</strong><br>
+              esse HTML pode virar seu painel interno para organizar atendimentos, gerar respostas rápidas e estruturar o fluxo. Para enviar e receber mensagens reais no WhatsApp, depois você integra com backend + API oficial.
+            </div>
+
+            <div class="mini-actions">
+              <button onclick="generateSummary()">Gerar resumo</button>
+              <button class="secondary" onclick="fillFromForm()">Atualizar estado</button>
+              <button class="secondary" onclick="resetFlow()">Reiniciar</button>
+            </div>
+
+            <div class="field">
+              <label>Resumo do atendimento</label>
+              <textarea id="summary" placeholder="O resumo aparecerá aqui"></textarea>
+            </div>
+          </div>
+
+          <div class="footer-tip">
+            Dica de ouro: o melhor bot não é o que responde tudo sozinho. É o que acolhe, filtra, organiza e te entrega o lead quase pronto para fechar.
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const userInput = document.getElementById('userInput');
+
+    const state = {
+      started: false,
+      step: 'idle',
+      clientName: '',
+      eventType: '',
+      eventDate: '',
+      serviceType: '',
+      notes: ''
+    };
+
+    const serviceMenuText = `Trabalho com algumas opções lindas por aqui:
+
+1. Convite digital tradicional
+2. Convite interativo
+3. Convite animado
+4. Identidade visual da festa
+5. Combo convite + identidade visual
+
+Me diga o número ou escreva o que você deseja 💌`;
+
+    function addMessage(text, type = 'bot', withChoices = []) {
+      const wrapper = document.createElement('div');
+      wrapper.className = `msg ${type}`;
+      wrapper.textContent = text;
+
+      if (withChoices.length) {
+        const choices = document.createElement('div');
+        choices.className = 'choices';
+
+        withChoices.forEach(item => {
+          const btn = document.createElement('button');
+          btn.className = 'choice-btn';
+          btn.textContent = item.label;
+          btn.onclick = () => {
+            addMessage(item.label, 'user');
+            processMessage(item.value);
+          };
+          choices.appendChild(btn);
+        });
+
+        wrapper.appendChild(choices);
+      }
+
+      chat.appendChild(wrapper);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function clearChat() {
+      chat.innerHTML = '';
+    }
+
+    function startFlow() {
+      clearChat();
+      state.started = true;
+      state.step = 'welcome';
+
+      addMessage(`Olá, seja muito bem-vinda à Quero Convidar 🤍
+Eu vou te ajudar com carinho a entender qual serviço combina melhor com o seu evento.
+
+Para começar, me conta seu nome.`, 'bot');
+    }
+
+    function sendShortcut(text) {
+      if (!state.started) {
+        startFlow();
+      }
+      addMessage(text, 'user');
+      processMessage(text);
+    }
+
+    function handleUserMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      if (!state.started) {
+        startFlow();
+      }
+
+      addMessage(text, 'user');
+      userInput.value = '';
+      processMessage(text);
+    }
+
+    function processMessage(text) {
+      const msg = text.toLowerCase();
+
+      if (state.step === 'welcome') {
+        state.clientName = text;
+        document.getElementById('clientName').value = text;
+        document.getElementById('contactName').textContent = text;
+        state.step = 'event';
+        addMessage(`Prazer, ${text} ✨
+Agora me diga qual é o tipo do seu evento.`, 'bot', [
+          { label: 'Aniversário infantil', value: 'Aniversário infantil' },
+          { label: 'Casamento', value: 'Casamento' },
+          { label: '15 anos', value: '15 anos' },
+          { label: 'Outro', value: 'Outro' }
+        ]);
+        return;
+      }
+
+      if (state.step === 'event') {
+        state.eventType = text;
+        document.getElementById('eventType').value = matchSelect('eventType', text);
+        state.step = 'date';
+        addMessage(`Perfeito. E qual é a data do evento?`, 'bot');
+        return;
+      }
+
+      if (state.step === 'date') {
+        state.eventDate = text;
+        document.getElementById('eventDate').value = text;
+        state.step = 'service';
+        addMessage(serviceMenuText, 'bot', [
+          { label: '1. Tradicional', value: 'Convite digital tradicional' },
+          { label: '2. Interativo', value: 'Convite interativo' },
+          { label: '3. Animado', value: 'Convite animado' },
+          { label: '4. Identidade visual', value: 'Identidade visual da festa' },
+          { label: '5. Combo completo', value: 'Combo convite + identidade visual' }
+        ]);
+        return;
+      }
+
+      if (state.step === 'service') {
+        const service = normalizeService(text);
+        state.serviceType = service;
+        document.getElementById('serviceType').value = matchSelect('serviceType', service);
+        state.step = 'notes';
+
+        addMessage(`Ótima escolha 🤍
+Agora me conte um pouco sobre o que você imagina.
+Pode me falar o tema, estilo, cores ou qualquer detalhe que seja importante para você.`, 'bot');
+        return;
+      }
+
+      if (state.step === 'notes') {
+        state.notes = text;
+        document.getElementById('notes').value = text;
+        state.step = 'done';
+
+        addMessage(`Perfeito, já anotei tudo por aqui ✨
+
+Agora seu atendimento está muito mais organizado e pronto para seguir com apresentação de proposta, envio de orçamento ou fechamento.
+
+Se quiser, posso te mostrar um resumo do pedido.`, 'bot', [
+          { label: 'Gerar resumo', value: '__summary__' },
+          { label: 'Ver serviços novamente', value: '__services__' }
+        ]);
+        return;
+      }
+
+      if (msg === '__summary__') {
+        generateSummary();
+        addMessage(`Resumo gerado com sucesso no painel ao lado 💌`, 'bot');
+        return;
+      }
+
+      if (msg === '__services__' || msg.includes('serviço') || msg.includes('servicos')) {
+        addMessage(serviceMenuText, 'bot', [
+          { label: '1. Tradicional', value: 'Convite digital tradicional' },
+          { label: '2. Interativo', value: 'Convite interativo' },
+          { label: '3. Animado', value: 'Convite animado' },
+          { label: '4. Identidade visual', value: 'Identidade visual da festa' },
+          { label: '5. Combo completo', value: 'Combo convite + identidade visual' }
+        ]);
+        state.step = 'service';
+        return;
+      }
+
+      if (msg.includes('orçamento') || msg.includes('orcamento')) {
+        addMessage(`Claro. Para te passar um orçamento mais certinho, eu preciso de 3 pontos:
+
+• tipo de evento
+• data
+• serviço desejado
+
+Se quiser, podemos preencher isso agora mesmo 🤍`, 'bot');
+        return;
+      }
+
+      if (msg.includes('fechar') || msg.includes('pedido')) {
+        addMessage(`Que alegria saber disso ✨
+Vou deixar seu atendimento bem alinhado para seguir com segurança. Antes de fechar, me confirme nome, data e serviço desejado.`, 'bot');
+        return;
+      }
+
+      addMessage(`Recebi sua mensagem 🤍
+Se quiser, podemos continuar o fluxo de atendimento e organizar seus dados para facilitar seu fechamento.`, 'bot');
+    }
+
+    function normalizeService(text) {
+      const msg = text.toLowerCase();
+
+      if (msg.includes('1') || msg.includes('tradicional')) return 'Convite digital tradicional';
+      if (msg.includes('2') || msg.includes('interativo')) return 'Convite interativo';
+      if (msg.includes('3') || msg.includes('animado')) return 'Convite animado';
+      if (msg.includes('4') || msg.includes('identidade')) return 'Identidade visual da festa';
+      if (msg.includes('5') || msg.includes('combo')) return 'Combo convite + identidade visual';
+
+      return text;
+    }
+
+    function matchSelect(selectId, value) {
+      const select = document.getElementById(selectId);
+      const options = Array.from(select.options);
+
+      const match = options.find(opt => opt.value.toLowerCase() === value.toLowerCase());
+      return match ? match.value : '';
+    }
+
+    function generateSummary() {
+      fillFromForm();
+
+      const summary = `Resumo do atendimento QC
+
+Nome do cliente: ${state.clientName || '-'}
+Tipo de evento: ${state.eventType || '-'}
+Data do evento: ${state.eventDate || '-'}
+Serviço desejado: ${state.serviceType || '-'}
+Observações: ${state.notes || '-'}
+
+Status: lead qualificado para continuidade no atendimento.`;
+
+      document.getElementById('summary').value = summary;
+    }
+
+    function fillFromForm() {
+      state.clientName = document.getElementById('clientName').value.trim();
+      state.eventType = document.getElementById('eventType').value.trim();
+      state.eventDate = document.getElementById('eventDate').value.trim();
+      state.serviceType = document.getElementById('serviceType').value.trim();
+      state.notes = document.getElementById('notes').value.trim();
+
+      document.getElementById('contactName').textContent = state.clientName || 'Cliente';
+    }
+
+    function resetFlow() {
+      state.started = false;
+      state.step = 'idle';
+      state.clientName = '';
+      state.eventType = '';
+      state.eventDate = '';
+      state.serviceType = '';
+      state.notes = '';
+
+      document.getElementById('clientName').value = '';
+      document.getElementById('eventType').value = '';
+      document.getElementById('eventDate').value = '';
+      document.getElementById('serviceType').value = '';
+      document.getElementById('notes').value = '';
+      document.getElementById('summary').value = '';
+      document.getElementById('contactName').textContent = 'Mariana';
+
+      clearChat();
+      startFlow();
+    }
+
+    function loadLead(name, eventType, eventDate, element) {
+      document.querySelectorAll('.lead').forEach(card => card.classList.remove('active'));
+      if (element) element.classList.add('active');
+
+      document.getElementById('clientName').value = name;
+      document.getElementById('eventType').value = matchSelect('eventType', eventType);
+      document.getElementById('eventDate').value = eventDate;
+      document.getElementById('contactName').textContent = name;
+      document.getElementById('serviceType').value = '';
+      document.getElementById('notes').value = '';
+
+      state.clientName = name;
+      state.eventType = eventType;
+      state.eventDate = eventDate;
+      state.serviceType = '';
+      state.notes = '';
+      state.started = true;
+      state.step = 'service';
+
+      clearChat();
+      addMessage(`Olá, ${name} 🤍
+Vi aqui que seu evento é ${eventType} e está previsto para ${eventDate}.
+
+Agora me diga qual serviço você deseja.`, 'bot', [
+        { label: 'Convite tradicional', value: 'Convite digital tradicional' },
+        { label: 'Convite interativo', value: 'Convite interativo' },
+        { label: 'Convite animado', value: 'Convite animado' },
+        { label: 'Identidade visual', value: 'Identidade visual da festa' }
+      ]);
+    }
+
+    userInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        handleUserMessage();
+      }
+    });
+
+    startFlow();
+  </script>
+</body>
+</html>
