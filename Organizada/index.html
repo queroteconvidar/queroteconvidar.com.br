@@ -3,446 +3,663 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Organizador de Cursos e Packs</title>
+  <title>Organizador Premium com Acesso | Quero Convidar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f6f3;
-      --card: #ffffff;
-      --line: #e7dfd8;
-      --text: #3f342d;
-      --muted: #8c7a70;
-      --primary: #bfa18f;
-      --primary-dark: #a48674;
-      --accent: #d8c2b3;
-      --soft: #f2ebe6;
-      --danger: #b25b5b;
-      --success: #6b8b6e;
-      --shadow: 0 10px 30px rgba(80, 55, 40, 0.08);
-      --radius: 18px;
+    :root{
+      --bg:#f8f6f3;
+      --bg2:#f2ece7;
+      --card:rgba(255,255,255,.9);
+      --line:#e8dfd8;
+      --text:#4b3c35;
+      --muted:#8d7d73;
+      --rose:#dca599;
+      --green:#abc6bc;
+      --gold:#d4af37;
+      --danger:#ba6b6b;
+      --shadow:0 18px 45px rgba(96,72,58,.12);
+      --radius-xl:28px;
+      --radius-lg:20px;
+      --radius-md:14px;
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      font-family:'Lato',sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(220,165,153,.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(171,198,188,.18), transparent 24%),
+        linear-gradient(180deg,#fbf9f7 0%,#f4efea 100%);
+      color:var(--text);
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #faf8f6 0%, #f4efeb 100%);
-      color: var(--text);
+    body{padding:24px}
+
+    .hidden{display:none !important}
+
+    .screen{
+      width:min(1380px,100%);
+      margin:0 auto;
     }
 
-    .container {
-      width: min(1200px, 92%);
-      margin: 30px auto 60px;
+    .login-wrap{
+      min-height:calc(100vh - 48px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .topo {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+    .login-card{
+      width:min(460px,100%);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:32px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
-    .topo h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
+    .brand-mini{
+      font-size:.78rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:10px;
     }
 
-    .topo p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
+    .login-card h1{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.4rem;
+      line-height:1;
     }
 
-    .painel {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 18px;
-      margin: 20px 0;
+    .login-card p{
+      margin:12px 0 22px;
+      color:var(--muted);
+      line-height:1.6;
     }
 
-    .box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
+    .app{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:22px;
     }
 
-    .box h2 {
-      margin-top: 0;
-      font-size: 1.05rem;
+    .sidebar,.main{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.7);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius-xl);
     }
 
-    .linha {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .sidebar{
+      padding:22px;
+      position:sticky;
+      top:24px;
+      align-self:start;
     }
 
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      outline: none;
-      background: #fff;
-      color: var(--text);
+    .brand{
+      padding-bottom:18px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:18px;
     }
 
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(191, 161, 143, 0.15);
+    .brand h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      line-height:1;
+      margin:0;
     }
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
+    .brand p{
+      color:var(--muted);
+      margin:10px 0 0;
+      font-size:.95rem;
+      line-height:1.55;
     }
 
-    .campo {
-      margin-bottom: 12px;
+    .menu-title{
+      font-size:.82rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin:18px 0 10px;
     }
 
-    .btn {
-      border: 0;
-      border-radius: 12px;
-      padding: 11px 16px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s ease;
+    .nav-btn{
+      width:100%;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 14px;
+      text-align:left;
+      font-weight:700;
+      cursor:pointer;
+      margin-bottom:10px;
+      transition:.2s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
+    .nav-btn:hover,.nav-btn.active{
+      background:linear-gradient(135deg, rgba(220,165,153,.18), rgba(171,198,188,.18));
+      border-color:rgba(212,175,55,.35);
+      transform:translateY(-1px);
     }
 
-    .btn-primary {
-      background: var(--primary);
-      color: white;
+    .counter-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
     }
 
-    .btn-primary:hover {
-      background: var(--primary-dark);
+    .counter-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px;
     }
 
-    .btn-soft {
-      background: var(--soft);
-      color: var(--text);
+    .counter-card span{
+      display:block;
+      color:var(--muted);
+      font-size:.8rem;
+      margin-bottom:6px;
     }
 
-    .btn-danger {
-      background: #f8e7e7;
-      color: var(--danger);
+    .counter-card strong{
+      font-size:1.35rem;
+      font-family:'Cormorant Garamond',serif;
     }
 
-    .btn-success {
-      background: #e8f3e9;
-      color: var(--success);
+    .main{padding:24px}
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:18px;
     }
 
-    .acoes-topo {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
+    .topbar-left h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      margin:0;
     }
 
-    .busca-box {
-      margin-top: 16px;
+    .topbar-left p{
+      margin:6px 0 0;
+      color:var(--muted);
     }
 
-    .secao-titulo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin: 28px 0 14px;
+    .topbar-right{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .secao-titulo h3 {
-      margin: 0;
-      font-size: 1.1rem;
+    .btn{
+      border:0;
+      border-radius:14px;
+      padding:12px 16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+      font-family:'Lato',sans-serif;
     }
 
-    .arvore {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--rose), #cf8f80);
+      color:#fff;
+      box-shadow:0 10px 22px rgba(220,165,153,.28);
     }
 
-    .pasta {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+    .btn-soft{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
     }
 
-    .pasta-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 16px 18px;
-      background: #fffaf7;
-      border-bottom: 1px solid var(--line);
-      flex-wrap: wrap;
+    .btn-green{
+      background:linear-gradient(135deg, var(--green), #95b8ad);
+      color:#294338;
     }
 
-    .pasta-nome {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: bold;
-      font-size: 1rem;
+    .btn-danger{
+      background:#fff1f1;
+      color:var(--danger);
+      border:1px solid #edd0d0;
     }
 
-    .tag {
-      background: #f4ece7;
-      color: var(--muted);
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      font-weight: normal;
+    .btn-gold{
+      background:linear-gradient(135deg, #f3e7b9, #e7d17b);
+      color:#705708;
     }
 
-    .pasta-acoes,
-    .subpasta-acoes,
-    .item-acoes {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    input,textarea,select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.92);
+      padding:13px 14px;
+      font-size:.95rem;
+      color:var(--text);
+      outline:none;
+      font-family:'Lato',sans-serif;
     }
 
-    .pasta-body {
-      padding: 16px;
-      background: #fff;
+    textarea{min-height:96px;resize:vertical}
+
+    input:focus,textarea:focus,select:focus{
+      border-color:rgba(212,175,55,.55);
+      box-shadow:0 0 0 4px rgba(212,175,55,.12);
     }
 
-    .subpastas {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .field{margin-bottom:12px}
+    .field small{
+      display:block;
+      color:var(--muted);
+      margin-top:6px;
+      font-size:.82rem;
+      line-height:1.4;
     }
 
-    .subpasta {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      background: #fcfbfa;
+    .search-wrap{
+      display:grid;
+      grid-template-columns:1fr 220px;
+      gap:12px;
+      margin-bottom:18px;
     }
 
-    .subpasta-header {
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      background: #fdf9f7;
-      border-bottom: 1px solid var(--line);
+    .forms{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-bottom:24px;
     }
 
-    .subpasta-nome {
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .panel{
+      background:rgba(255,255,255,.84);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
     }
 
-    .itens {
-      padding: 14px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
+    .panel h3{
+      margin:0 0 14px;
+      font-size:1.05rem;
     }
 
-    .item {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
+    .workspace{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
     }
 
-    .item h4 {
-      margin: 0 0 8px;
-      font-size: 0.97rem;
+    .folder{
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      background:rgba(255,255,255,.84);
     }
 
-    .item p {
-      margin: 6px 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 0.92rem;
-      word-break: break-word;
+    .folder-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:18px 20px;
+      background:linear-gradient(135deg, rgba(220,165,153,.12), rgba(171,198,188,.12));
+      border-bottom:1px solid var(--line);
     }
 
-    .item a {
-      color: var(--primary-dark);
-      text-decoration: none;
-      font-weight: bold;
+    .folder-name{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:1.04rem;
+      font-weight:700;
     }
 
-    .item a:hover {
-      text-decoration: underline;
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:700;
     }
 
-    .vazio {
-      text-align: center;
-      padding: 25px;
-      color: var(--muted);
-      background: #fff;
-      border: 1px dashed var(--line);
-      border-radius: 16px;
+    .folder-actions,.subfolder-actions,.item-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
 
-    .mini {
-      font-size: 0.82rem;
-      color: var(--muted);
+    .icon-btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.95);
+      color:var(--text);
+      border-radius:12px;
+      padding:9px 12px;
+      cursor:pointer;
+      font-weight:700;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    .folder-body{padding:18px;display:block}
+    .folder.collapsed .folder-body{display:none}
+
+    .subfolders{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
-    .rodape {
-      text-align: center;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.88rem;
+    .subfolder{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fefdfc;
     }
 
-    @media (max-width: 900px) {
-      .painel {
-        grid-template-columns: 1fr;
-      }
+    .subfolder-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:14px 16px;
+      background:#fffaf8;
+      border-bottom:1px solid var(--line);
     }
 
-    @media (max-width: 600px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
+    .subfolder-name{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      flex-wrap:wrap;
+    }
 
-      .topo h1 {
-        font-size: 1.5rem;
-      }
+    .items{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:12px;
+      padding:14px;
+    }
+
+    .item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .thumb{
+      width:100%;
+      height:145px;
+      border-radius:14px;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(220,165,153,.18), rgba(171,198,188,.18));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-size:.92rem;
+      border:1px solid var(--line);
+    }
+
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .item h4{
+      margin:0 0 8px;
+      font-size:.98rem;
+    }
+
+    .item p{
+      margin:5px 0;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:.92rem;
+      word-break:break-word;
+    }
+
+    .item a{
+      color:#9a7b16;
+      text-decoration:none;
+      font-weight:700;
+      word-break:break-all;
+    }
+
+    .item a:hover{text-decoration:underline}
+
+    .empty{
+      border:1px dashed var(--line);
+      border-radius:16px;
+      padding:24px;
+      text-align:center;
+      color:var(--muted);
+      background:#fff;
+    }
+
+    .footer-note{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:.88rem;
+      text-align:center;
+    }
+
+    .status{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:8px;
+      line-height:1.4;
+    }
+
+    @media (max-width:1100px){
+      .app{grid-template-columns:1fr}
+      .sidebar{position:relative;top:0}
+      .forms{grid-template-columns:1fr}
+    }
+
+    @media (max-width:760px){
+      body{padding:14px}
+      .search-wrap{grid-template-columns:1fr}
+      .topbar-left h2{font-size:1.6rem}
+      .login-card{padding:24px}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="topo">
-      <h1>Organizador de Cursos, Packs e Materiais</h1>
-      <p>
-        Aqui você pode separar tudo por cliente, pack, curso ou categoria, criando pastas, subpastas e itens.
-        Tudo fica salvo automaticamente no seu navegador.
-      </p>
+  <div id="loginScreen" class="screen login-wrap">
+    <div class="login-card">
+      <div class="brand-mini">Quero Convidar</div>
+      <h1>Organizador com acesso</h1>
+      <p>Coloque uma senha para abrir seu acervo. Na primeira vez, você cria. Depois, ela vira a chave da sua casinha digital.</p>
 
-      <div class="acoes-topo">
-        <button class="btn btn-success" onclick="exportarDados()">Exportar backup</button>
-        <label class="btn btn-soft" for="importarArquivo" style="display:inline-flex;align-items:center;">
-          Importar backup
-        </label>
-        <input id="importarArquivo" type="file" accept=".json" style="display:none" onchange="importarDados(event)">
-        <button class="btn btn-danger" onclick="resetarTudo()">Apagar tudo</button>
+      <div class="field">
+        <input type="password" id="accessPassword" placeholder="Digite sua senha">
+        <small id="loginHint">Se for o primeiro acesso, essa senha será salva como a senha principal.</small>
       </div>
 
-      <div class="busca-box">
-        <input type="text" id="busca" placeholder="Buscar por nome, estilo, curso, cliente..." oninput="renderizar()">
-      </div>
+      <button class="btn btn-primary" onclick="entrarSistema()">Entrar</button>
+      <div class="status" id="loginStatus"></div>
     </div>
+  </div>
 
-    <div class="painel">
-      <div class="box">
-        <h2>Criar nova pasta</h2>
-        <div class="campo">
-          <input type="text" id="novaPastaNome" placeholder="Ex: Convites da Pâmela">
+  <div id="appScreen" class="screen hidden">
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mini">Quero Convidar</div>
+          <h2>Organizador Premium</h2>
+          <p>Seu acervo de cursos, packs, clientes e referências bem alinhado, sem sumiço de arquivo no meio do caminho.</p>
         </div>
-        <div class="campo">
-          <select id="novaPastaTipo">
-            <option value="Pack">Pack</option>
-            <option value="Curso">Curso</option>
-            <option value="Cliente">Cliente</option>
-            <option value="Referência">Referência</option>
-            <option value="Arquivo">Arquivo</option>
+
+        <div class="menu-title">Visualização</div>
+        <button class="nav-btn active" onclick="setFiltro('todos', this)">🪄 Todos</button>
+        <button class="nav-btn" onclick="setFiltro('Cliente', this)">👤 Clientes</button>
+        <button class="nav-btn" onclick="setFiltro('Pack', this)">📦 Packs</button>
+        <button class="nav-btn" onclick="setFiltro('Curso', this)">🎓 Cursos</button>
+        <button class="nav-btn" onclick="setFiltro('Referência', this)">💡 Referências</button>
+
+        <div class="menu-title">Resumo</div>
+        <div class="counter-grid">
+          <div class="counter-card">
+            <span>Pastas</span>
+            <strong id="countPastas">0</strong>
+          </div>
+          <div class="counter-card">
+            <span>Subpastas</span>
+            <strong id="countSubpastas">0</strong>
+          </div>
+          <div class="counter-card">
+            <span>Itens</span>
+            <strong id="countItens">0</strong>
+          </div>
+          <div class="counter-card">
+            <span>Tipo ativo</span>
+            <strong id="tipoAtivoLabel">Todos</strong>
+          </div>
+        </div>
+
+        <div class="menu-title">Segurança</div>
+        <button class="nav-btn" onclick="trocarSenha()">🔐 Trocar senha</button>
+        <button class="nav-btn" onclick="sairSistema()">🚪 Sair</button>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h2>Seu arquivo digital</h2>
+            <p>Agora com miniatura de capa, senha de acesso e ícones mais bonitos para navegar sem tropeçar no caos.</p>
+          </div>
+
+          <div class="topbar-right">
+            <button class="btn btn-green" onclick="exportarDados()">Exportar backup</button>
+            <label class="btn btn-soft" for="importFile">Importar backup</label>
+            <input id="importFile" type="file" accept=".json" style="display:none" onchange="importarDados(event)">
+            <button class="btn btn-gold" onclick="exportarHtmlCompleto()">Exportar HTML com seus dados</button>
+            <button class="btn btn-danger" onclick="resetarTudo()">Apagar tudo</button>
+          </div>
+        </div>
+
+        <div class="search-wrap">
+          <input type="text" id="busca" placeholder="Buscar por cliente, pack, estilo, aula, tema..." oninput="renderizar()">
+          <select id="ordenacao" onchange="renderizar()">
+            <option value="az">Ordenar de A a Z</option>
+            <option value="za">Ordenar de Z a A</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="criarPasta()">Criar pasta</button>
-      </div>
 
-      <div class="box">
-        <h2>Criar subpasta</h2>
-        <div class="campo">
-          <select id="selectPastaSubpasta"></select>
-        </div>
-        <div class="campo">
-          <input type="text" id="novaSubpastaNome" placeholder="Ex: Animado, Interativo, Cinematográfico">
-        </div>
-        <button class="btn btn-primary" onclick="criarSubpasta()">Criar subpasta</button>
-      </div>
-    </div>
+        <section class="forms">
+          <div class="panel">
+            <h3>📁 Criar nova pasta</h3>
+            <div class="field">
+              <input type="text" id="novaPastaNome" placeholder="Ex: Convites da Pâmela">
+            </div>
+            <div class="field">
+              <select id="novaPastaTipo">
+                <option value="Cliente">Cliente</option>
+                <option value="Pack">Pack</option>
+                <option value="Curso">Curso</option>
+                <option value="Referência">Referência</option>
+                <option value="Arquivo">Arquivo</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="criarPasta()">Criar pasta</button>
+          </div>
 
-    <div class="box" style="margin-bottom: 22px;">
-      <h2>Adicionar item</h2>
-      <div class="grid-2">
-        <div class="campo">
-          <select id="selectPastaItem"></select>
-        </div>
-        <div class="campo">
-          <select id="selectSubpastaItem"></select>
-        </div>
-      </div>
+          <div class="panel">
+            <h3>🗂️ Criar subpasta</h3>
+            <div class="field">
+              <select id="selectPastaSubpasta"></select>
+            </div>
+            <div class="field">
+              <input type="text" id="novaSubpastaNome" placeholder="Ex: Animado, Interativo, Cinematográfico">
+            </div>
+            <button class="btn btn-primary" onclick="criarSubpasta()">Criar subpasta</button>
+          </div>
 
-      <div class="campo">
-        <input type="text" id="itemTitulo" placeholder="Título do item. Ex: Convite Safari Premium">
-      </div>
+          <div class="panel">
+            <h3>✨ Adicionar item</h3>
+            <div class="field">
+              <select id="selectPastaItem"></select>
+            </div>
+            <div class="field">
+              <select id="selectSubpastaItem"></select>
+            </div>
+            <div class="field">
+              <input type="text" id="itemTitulo" placeholder="Título do item">
+            </div>
+            <div class="field">
+              <input type="text" id="itemTipo" placeholder="Tipo. Ex: HTML, PDF, Aula, Vídeo">
+            </div>
+            <div class="field">
+              <input type="text" id="itemLink" placeholder="Link opcional">
+            </div>
+            <div class="field">
+              <input type="text" id="itemThumb" placeholder="Link da imagem de capa ou miniatura">
+              <small>Você pode colar a URL de uma imagem para virar a capa do item.</small>
+            </div>
+            <div class="field">
+              <textarea id="itemDescricao" placeholder="Descrição ou observações"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="adicionarItem()">Adicionar item</button>
+          </div>
+        </section>
 
-      <div class="grid-2">
-        <div class="campo">
-          <input type="text" id="itemTipo" placeholder="Tipo. Ex: HTML, PDF, Vídeo, Aula">
-        </div>
-        <div class="campo">
-          <input type="text" id="itemLink" placeholder="Link opcional">
-        </div>
-      </div>
-
-      <div class="campo">
-        <textarea id="itemDescricao" placeholder="Descrição, observações, o que tem dentro, detalhes importantes..."></textarea>
-      </div>
-
-      <button class="btn btn-primary" onclick="adicionarItem()">Adicionar item</button>
-    </div>
-
-    <div class="secao-titulo">
-      <h3>Seu arquivo organizado</h3>
-      <span class="mini">Clique nos botões para editar, excluir e manter tudo no lugar</span>
-    </div>
-
-    <div id="arvore" class="arvore"></div>
-
-    <div class="rodape">
-      Seu conteúdo fica salvo localmente no navegador. Para não perder nada, exporte backup de vez em quando.
+        <section id="workspace" class="workspace"></section>
+        <div class="footer-note">Dica boa de mãe precavida: exporte backup de vez em quando e, se quiser blindar mesmo, exporte também o HTML completo.</div>
+      </main>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "organizadorCursosPacksQC";
+    const STORAGE_KEY = "qc_organizador_premium_secure";
+    const PASSWORD_KEY = "qc_organizador_password";
+    const SESSION_KEY = "qc_organizador_unlocked";
 
+    let filtroTipo = "todos";
     let dados = carregarDados();
 
-    function dadosIniciais() {
+    function seedInicial() {
       return [
         {
           id: gerarId(),
           nome: "Convites da Pâmela",
           tipo: "Cliente",
+          collapsed: false,
           subpastas: [
             {
               id: gerarId(),
@@ -450,10 +667,11 @@
               itens: [
                 {
                   id: gerarId(),
-                  titulo: "Convite Animado Safari",
+                  titulo: "Convite Safari Animado",
                   tipo: "HTML",
                   link: "",
-                  descricao: "Versão com animação suave, ideal para festa infantil."
+                  thumb: "",
+                  descricao: "Modelo animado infantil com clima delicado e lúdico."
                 }
               ]
             },
@@ -466,7 +684,8 @@
                   titulo: "Convite Interativo com botões",
                   tipo: "HTML",
                   link: "",
-                  descricao: "Com localização, confirmação e sugestão de presente."
+                  thumb: "",
+                  descricao: "Com localização, confirmação e sugestão de presentes."
                 }
               ]
             },
@@ -486,34 +705,34 @@
           id: gerarId(),
           nome: "Pack da Talita",
           tipo: "Pack",
+          collapsed: false,
           subpastas: [
-            {
-              id: gerarId(),
-              nome: "Animado",
-              itens: []
-            },
-            {
-              id: gerarId(),
-              nome: "Interativo",
-              itens: []
-            }
+            { id: gerarId(), nome: "Animado", itens: [] },
+            { id: gerarId(), nome: "Interativo", itens: [] },
+            { id: gerarId(), nome: "Cinematográfico", itens: [] }
           ]
         },
         {
           id: gerarId(),
           nome: "Cursos",
           tipo: "Curso",
+          collapsed: false,
           subpastas: [
             {
               id: gerarId(),
               nome: "Canva",
-              itens: []
+              itens: [
+                {
+                  id: gerarId(),
+                  titulo: "Curso de Canva",
+                  tipo: "Aula",
+                  link: "",
+                  thumb: "",
+                  descricao: "Conteúdos de design, organização e apresentações."
+                }
+              ]
             },
-            {
-              id: gerarId(),
-              nome: "Identidade Visual",
-              itens: []
-            }
+            { id: gerarId(), nome: "Identidade Visual", itens: [] }
           ]
         }
       ];
@@ -529,15 +748,172 @@
 
     function carregarDados() {
       const salvo = localStorage.getItem(STORAGE_KEY);
-      if (salvo) {
-        try {
-          return JSON.parse(salvo);
-        } catch {
-          return dadosIniciais();
-        }
+      if (!salvo) return seedInicial();
+      try {
+        return JSON.parse(salvo);
+      } catch {
+        return seedInicial();
       }
-      return dadosIniciais();
     }
+
+    function escapeHtml(texto) {
+      return String(texto || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeAttr(texto) {
+      return String(texto || "").replace(/"/g, "&quot;");
+    }
+
+    function normalizar(texto) {
+      return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function initSistema() {
+      const senha = localStorage.getItem(PASSWORD_KEY);
+      const unlocked = sessionStorage.getItem(SESSION_KEY) === "true";
+
+      if (senha) {
+        document.getElementById("loginHint").textContent = "Digite sua senha para entrar.";
+      } else {
+        document.getElementById("loginHint").textContent = "Primeiro acesso: digite uma senha para criar sua proteção.";
+      }
+
+      if (senha && unlocked) {
+        mostrarApp();
+      } else {
+        mostrarLogin();
+      }
+
+      atualizarSelects();
+      renderizar();
+    }
+
+    function mostrarLogin() {
+      document.getElementById("loginScreen").classList.remove("hidden");
+      document.getElementById("appScreen").classList.add("hidden");
+    }
+
+    function mostrarApp() {
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("appScreen").classList.remove("hidden");
+    }
+
+    function entrarSistema() {
+      const input = document.getElementById("accessPassword");
+      const status = document.getElementById("loginStatus");
+      const valor = input.value.trim();
+      const senhaSalva = localStorage.getItem(PASSWORD_KEY);
+
+      if (!valor) {
+        status.textContent = "Digite uma senha.";
+        return;
+      }
+
+      if (!senhaSalva) {
+        localStorage.setItem(PASSWORD_KEY, valor);
+        sessionStorage.setItem(SESSION_KEY, "true");
+        status.textContent = "Senha criada com sucesso.";
+        input.value = "";
+        mostrarApp();
+        return;
+      }
+
+      if (valor === senhaSalva) {
+        sessionStorage.setItem(SESSION_KEY, "true");
+        status.textContent = "";
+        input.value = "";
+        mostrarApp();
+      } else {
+        status.textContent = "Senha incorreta.";
+      }
+    }
+
+    function sairSistema() {
+      sessionStorage.removeItem(SESSION_KEY);
+      document.getElementById("accessPassword").value = "";
+      document.getElementById("loginStatus").textContent = "";
+      mostrarLogin();
+    }
+
+    function trocarSenha() {
+      const atual = prompt("Digite a senha atual:");
+      if (atual === null) return;
+
+      const senhaSalva = localStorage.getItem(PASSWORD_KEY) || "";
+      if (atual !== senhaSalva) {
+        alert("Senha atual incorreta.");
+        return;
+      }
+
+      const nova = prompt("Digite a nova senha:");
+      if (nova === null) return;
+
+      if (!nova.trim()) {
+        alert("A nova senha não pode ficar vazia.");
+        return;
+      }
+
+      localStorage.setItem(PASSWORD_KEY, nova.trim());
+      alert("Senha alterada com sucesso.");
+    }
+
+    function setFiltro(tipo, el) {
+      filtroTipo = tipo;
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+      if (el) el.classList.add("active");
+      renderizar();
+    }
+
+    function atualizarSelects() {
+      const sp = document.getElementById("selectPastaSubpasta");
+      const pi = document.getElementById("selectPastaItem");
+      const si = document.getElementById("selectSubpastaItem");
+
+      const opcoesPastas = dados
+        .map(p => `<option value="${p.id}">${escapeHtml(p.nome)} (${escapeHtml(p.tipo)})</option>`)
+        .join("");
+
+      sp.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
+      pi.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
+      atualizarSubpastasItem();
+
+      if (!dados.length) {
+        si.innerHTML = `<option value="">Selecione uma subpasta</option>`;
+      }
+    }
+
+    function atualizarSubpastasItem() {
+      const pastaId = document.getElementById("selectPastaItem").value;
+      const si = document.getElementById("selectSubpastaItem");
+
+      if (!pastaId) {
+        si.innerHTML = `<option value="">Selecione uma subpasta</option>`;
+        return;
+      }
+
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta || !pasta.subpastas.length) {
+        si.innerHTML = `<option value="">Nenhuma subpasta</option>`;
+        return;
+      }
+
+      si.innerHTML = `<option value="">Selecione uma subpasta</option>` +
+        pasta.subpastas.map(s => `<option value="${s.id}">${escapeHtml(s.nome)}</option>`).join("");
+    }
+
+    document.addEventListener("change", function(e) {
+      if (e.target && e.target.id === "selectPastaItem") {
+        atualizarSubpastasItem();
+      }
+    });
 
     function criarPasta() {
       const nome = document.getElementById("novaPastaNome").value.trim();
@@ -552,6 +928,7 @@
         id: gerarId(),
         nome,
         tipo,
+        collapsed: false,
         subpastas: []
       });
 
@@ -594,12 +971,13 @@
       const pastaId = document.getElementById("selectPastaItem").value;
       const subpastaId = document.getElementById("selectSubpastaItem").value;
       const titulo = document.getElementById("itemTitulo").value.trim();
-      const tipo = document.getElementById("itemTipo").value.trim();
+      const tipo = document.getElementById("itemTipo").value.trim() || "Arquivo";
       const link = document.getElementById("itemLink").value.trim();
+      const thumb = document.getElementById("itemThumb").value.trim();
       const descricao = document.getElementById("itemDescricao").value.trim();
 
       if (!pastaId || !subpastaId) {
-        alert("Selecione a pasta e a subpasta.");
+        alert("Selecione uma pasta e uma subpasta.");
         return;
       }
 
@@ -617,54 +995,34 @@
       subpasta.itens.push({
         id: gerarId(),
         titulo,
-        tipo: tipo || "Arquivo",
+        tipo,
         link,
+        thumb,
         descricao
       });
 
       document.getElementById("itemTitulo").value = "";
       document.getElementById("itemTipo").value = "";
       document.getElementById("itemLink").value = "";
+      document.getElementById("itemThumb").value = "";
       document.getElementById("itemDescricao").value = "";
 
       salvarDados();
       renderizar();
     }
 
-    function atualizarSelects() {
-      const selectPastaSubpasta = document.getElementById("selectPastaSubpasta");
-      const selectPastaItem = document.getElementById("selectPastaItem");
-      const selectSubpastaItem = document.getElementById("selectSubpastaItem");
+    function editarPasta(id) {
+      const pasta = dados.find(p => p.id === id);
+      if (!pasta) return;
 
-      const opcoesPastas = dados.map(p => `<option value="${p.id}">${p.nome} (${p.tipo})</option>`).join("");
+      const novoNome = prompt("Novo nome da pasta:", pasta.nome);
+      if (novoNome === null) return;
 
-      selectPastaSubpasta.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
-      selectPastaItem.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
-
-      atualizarSubpastasItem();
+      pasta.nome = novoNome.trim() || pasta.nome;
+      salvarDados();
+      atualizarSelects();
+      renderizar();
     }
-
-    function atualizarSubpastasItem() {
-      const pastaId = document.getElementById("selectPastaItem").value;
-      const selectSubpastaItem = document.getElementById("selectSubpastaItem");
-
-      if (!pastaId) {
-        selectSubpastaItem.innerHTML = `<option value="">Selecione uma subpasta</option>`;
-        return;
-      }
-
-      const pasta = dados.find(p => p.id === pastaId);
-      if (!pasta || !pasta.subpastas.length) {
-        selectSubpastaItem.innerHTML = `<option value="">Nenhuma subpasta</option>`;
-        return;
-      }
-
-      selectSubpastaItem.innerHTML =
-        `<option value="">Selecione uma subpasta</option>` +
-        pasta.subpastas.map(s => `<option value="${s.id}">${s.nome}</option>`).join("");
-    }
-
-    document.getElementById("selectPastaItem").addEventListener("change", atualizarSubpastasItem);
 
     function excluirPasta(id) {
       if (!confirm("Deseja excluir esta pasta inteira?")) return;
@@ -674,46 +1032,36 @@
       renderizar();
     }
 
-    function excluirSubpasta(pastaId, subpastaId) {
-      if (!confirm("Deseja excluir esta subpasta?")) return;
-      const pasta = dados.find(p => p.id === pastaId);
-      if (!pasta) return;
-      pasta.subpastas = pasta.subpastas.filter(s => s.id !== subpastaId);
-      salvarDados();
-      atualizarSelects();
-      renderizar();
-    }
-
-    function excluirItem(pastaId, subpastaId, itemId) {
-      if (!confirm("Deseja excluir este item?")) return;
-      const pasta = dados.find(p => p.id === pastaId);
-      if (!pasta) return;
-      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
-      if (!subpasta) return;
-      subpasta.itens = subpasta.itens.filter(i => i.id !== itemId);
-      salvarDados();
-      renderizar();
-    }
-
-    function editarPasta(id) {
+    function togglePasta(id) {
       const pasta = dados.find(p => p.id === id);
       if (!pasta) return;
-      const novoNome = prompt("Novo nome da pasta:", pasta.nome);
-      if (novoNome === null) return;
-      pasta.nome = novoNome.trim() || pasta.nome;
+      pasta.collapsed = !pasta.collapsed;
       salvarDados();
-      atualizarSelects();
       renderizar();
     }
 
     function editarSubpasta(pastaId, subpastaId) {
       const pasta = dados.find(p => p.id === pastaId);
       if (!pasta) return;
+
       const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
       if (!subpasta) return;
+
       const novoNome = prompt("Novo nome da subpasta:", subpasta.nome);
       if (novoNome === null) return;
+
       subpasta.nome = novoNome.trim() || subpasta.nome;
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function excluirSubpasta(pastaId, subpastaId) {
+      if (!confirm("Deseja excluir esta subpasta?")) return;
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+
+      pasta.subpastas = pasta.subpastas.filter(s => s.id !== subpastaId);
       salvarDados();
       atualizarSelects();
       renderizar();
@@ -722,19 +1070,24 @@
     function editarItem(pastaId, subpastaId, itemId) {
       const pasta = dados.find(p => p.id === pastaId);
       if (!pasta) return;
+
       const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
       if (!subpasta) return;
+
       const item = subpasta.itens.find(i => i.id === itemId);
       if (!item) return;
 
       const novoTitulo = prompt("Título do item:", item.titulo);
       if (novoTitulo === null) return;
 
-      const novoTipo = prompt("Tipo do item:", item.tipo);
+      const novoTipo = prompt("Tipo do item:", item.tipo || "");
       if (novoTipo === null) return;
 
       const novoLink = prompt("Link do item:", item.link || "");
       if (novoLink === null) return;
+
+      const novaThumb = prompt("Link da miniatura:", item.thumb || "");
+      if (novaThumb === null) return;
 
       const novaDescricao = prompt("Descrição do item:", item.descricao || "");
       if (novaDescricao === null) return;
@@ -742,8 +1095,23 @@
       item.titulo = novoTitulo.trim() || item.titulo;
       item.tipo = novoTipo.trim() || item.tipo;
       item.link = novoLink.trim();
+      item.thumb = novaThumb.trim();
       item.descricao = novaDescricao.trim();
 
+      salvarDados();
+      renderizar();
+    }
+
+    function excluirItem(pastaId, subpastaId, itemId) {
+      if (!confirm("Deseja excluir este item?")) return;
+
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+
+      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
+      if (!subpasta) return;
+
+      subpasta.itens = subpasta.itens.filter(i => i.id !== itemId);
       salvarDados();
       renderizar();
     }
@@ -753,7 +1121,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "backup-organizador.json";
+      a.download = "backup-organizador-premium.json";
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -762,11 +1130,11 @@
       const arquivo = event.target.files[0];
       if (!arquivo) return;
 
-      const leitor = new FileReader();
-      leitor.onload = function(e) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
         try {
           const conteudo = JSON.parse(e.target.result);
-          if (!Array.isArray(conteudo)) throw new Error("Formato inválido");
+          if (!Array.isArray(conteudo)) throw new Error("inválido");
           dados = conteudo;
           salvarDados();
           atualizarSelects();
@@ -776,7 +1144,7 @@
           alert("Arquivo inválido.");
         }
       };
-      leitor.readAsText(arquivo);
+      reader.readAsText(arquivo);
     }
 
     function resetarTudo() {
@@ -787,75 +1155,116 @@
       renderizar();
     }
 
-    function normalizar(texto) {
-      return (texto || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+    function ordenarLista(lista) {
+      const ordem = document.getElementById("ordenacao").value;
+      return [...lista].sort((a,b) => {
+        const av = normalizar(a.nome || a.titulo);
+        const bv = normalizar(b.nome || b.titulo);
+        return ordem === "az" ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+    }
+
+    function atualizarResumo(lista) {
+      const pastas = lista.length;
+      let subpastas = 0;
+      let itens = 0;
+
+      lista.forEach(p => {
+        subpastas += (p.subpastas || []).length;
+        (p.subpastas || []).forEach(s => {
+          itens += (s.itens || []).length;
+        });
+      });
+
+      document.getElementById("countPastas").textContent = pastas;
+      document.getElementById("countSubpastas").textContent = subpastas;
+      document.getElementById("countItens").textContent = itens;
+      document.getElementById("tipoAtivoLabel").textContent = filtroTipo === "todos" ? "Todos" : filtroTipo;
     }
 
     function renderizar() {
-      const arvore = document.getElementById("arvore");
-      const termo = normalizar(document.getElementById("busca").value);
+      const busca = normalizar(document.getElementById("busca").value);
+      const workspace = document.getElementById("workspace");
 
-      if (!dados.length) {
-        arvore.innerHTML = `<div class="vazio">Nenhuma pasta criada ainda.</div>`;
+      let base = dados.filter(p => filtroTipo === "todos" ? true : p.tipo === filtroTipo);
+      base = ordenarLista(base);
+      atualizarResumo(base);
+
+      if (!base.length) {
+        workspace.innerHTML = `<div class="empty">Nenhuma pasta encontrada nessa categoria.</div>`;
         return;
       }
 
       let html = "";
 
-      dados.forEach(pasta => {
-        let pastaVisivel = !termo || normalizar(pasta.nome).includes(termo) || normalizar(pasta.tipo).includes(termo);
+      base.forEach(pasta => {
+        let pastaVisivel = !busca || normalizar(pasta.nome).includes(busca) || normalizar(pasta.tipo).includes(busca);
         let subpastasHtml = "";
 
-        pasta.subpastas.forEach(subpasta => {
-          let subpastaVisivel = !termo || normalizar(subpasta.nome).includes(termo);
+        const subpastasOrdenadas = ordenarLista(pasta.subpastas || []);
+
+        subpastasOrdenadas.forEach(sub => {
+          let subVisivel = !busca || normalizar(sub.nome).includes(busca);
           let itensHtml = "";
 
-          subpasta.itens.forEach(item => {
+          const itensOrdenados = ordenarLista(sub.itens || []);
+
+          itensOrdenados.forEach(item => {
             const itemVisivel =
-              !termo ||
-              normalizar(item.titulo).includes(termo) ||
-              normalizar(item.tipo).includes(termo) ||
-              normalizar(item.descricao).includes(termo) ||
-              normalizar(item.link).includes(termo);
+              !busca ||
+              normalizar(item.titulo).includes(busca) ||
+              normalizar(item.tipo).includes(busca) ||
+              normalizar(item.descricao).includes(busca) ||
+              normalizar(item.link).includes(busca);
 
             if (itemVisivel) {
               pastaVisivel = true;
-              subpastaVisivel = true;
+              subVisivel = true;
 
               itensHtml += `
                 <div class="item">
-                  <h4>${escapeHtml(item.titulo)}</h4>
-                  <p><strong>Tipo:</strong> ${escapeHtml(item.tipo || "-")}</p>
-                  ${item.link ? `<p><strong>Link:</strong> <a href="${escapeAttr(item.link)}" target="_blank">${escapeHtml(item.link)}</a></p>` : ""}
-                  ${item.descricao ? `<p>${escapeHtml(item.descricao)}</p>` : ""}
-                  <div class="item-acoes">
-                    <button class="btn btn-soft" onclick="editarItem('${pasta.id}','${subpasta.id}','${item.id}')">Editar</button>
-                    <button class="btn btn-danger" onclick="excluirItem('${pasta.id}','${subpasta.id}','${item.id}')">Excluir</button>
+                  <div>
+                    <div class="thumb">
+                      ${
+                        item.thumb
+                          ? `<img src="${escapeAttr(item.thumb)}" alt="${escapeAttr(item.titulo)}" onerror="this.parentElement.innerHTML='🖼️ Miniatura indisponível';">`
+                          : `🖼️ Sem miniatura`
+                      }
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4>${escapeHtml(item.titulo)}</h4>
+                    <p><strong>Tipo:</strong> ${escapeHtml(item.tipo || "-")}</p>
+                    ${item.link ? `<p><strong>Link:</strong> <a href="${escapeAttr(item.link)}" target="_blank">${escapeHtml(item.link)}</a></p>` : ""}
+                    ${item.descricao ? `<p>${escapeHtml(item.descricao)}</p>` : ""}
+                  </div>
+
+                  <div class="item-actions">
+                    <button class="icon-btn" onclick="editarItem('${pasta.id}','${sub.id}','${item.id}')">✏️ Editar</button>
+                    <button class="icon-btn" onclick="excluirItem('${pasta.id}','${sub.id}','${item.id}')">🗑️ Excluir</button>
                   </div>
                 </div>
               `;
             }
           });
 
-          if (subpastaVisivel) {
+          if (subVisivel) {
             pastaVisivel = true;
             subpastasHtml += `
-              <div class="subpasta">
-                <div class="subpasta-header">
-                  <div class="subpasta-nome">
-                    📁 ${escapeHtml(subpasta.nome)}
-                    <span class="tag">${subpasta.itens.length} item(ns)</span>
+              <div class="subfolder">
+                <div class="subfolder-header">
+                  <div class="subfolder-name">
+                    📁 ${escapeHtml(sub.nome)}
+                    <span class="badge">${(sub.itens || []).length} item(ns)</span>
                   </div>
-                  <div class="subpasta-acoes">
-                    <button class="btn btn-soft" onclick="editarSubpasta('${pasta.id}','${subpasta.id}')">Editar</button>
-                    <button class="btn btn-danger" onclick="excluirSubpasta('${pasta.id}','${subpasta.id}')">Excluir</button>
+                  <div class="subfolder-actions">
+                    <button class="icon-btn" onclick="editarSubpasta('${pasta.id}','${sub.id}')">✏️ Editar</button>
+                    <button class="icon-btn" onclick="excluirSubpasta('${pasta.id}','${sub.id}')">🗑️ Excluir</button>
                   </div>
                 </div>
-                <div class="itens">
-                  ${itensHtml || `<div class="vazio">Nenhum item nesta subpasta.</div>`}
+                <div class="items">
+                  ${itensHtml || `<div class="empty">Nenhum item nesta subpasta.</div>`}
                 </div>
               </div>
             `;
@@ -863,21 +1272,33 @@
         });
 
         if (pastaVisivel) {
+          const iconePasta = pasta.tipo === "Cliente"
+            ? "👤"
+            : pasta.tipo === "Pack"
+            ? "📦"
+            : pasta.tipo === "Curso"
+            ? "🎓"
+            : pasta.tipo === "Referência"
+            ? "💡"
+            : "🗃️";
+
           html += `
-            <div class="pasta">
-              <div class="pasta-header">
-                <div class="pasta-nome">
-                  🗂️ ${escapeHtml(pasta.nome)}
-                  <span class="tag">${escapeHtml(pasta.tipo)}</span>
+            <div class="folder ${pasta.collapsed ? "collapsed" : ""}">
+              <div class="folder-header">
+                <div class="folder-name">
+                  ${iconePasta} ${escapeHtml(pasta.nome)}
+                  <span class="badge">${escapeHtml(pasta.tipo)}</span>
+                  <span class="badge">${(pasta.subpastas || []).length} subpasta(s)</span>
                 </div>
-                <div class="pasta-acoes">
-                  <button class="btn btn-soft" onclick="editarPasta('${pasta.id}')">Editar</button>
-                  <button class="btn btn-danger" onclick="excluirPasta('${pasta.id}')">Excluir</button>
+                <div class="folder-actions">
+                  <button class="icon-btn" onclick="togglePasta('${pasta.id}')">${pasta.collapsed ? "📂 Abrir" : "📁 Fechar"}</button>
+                  <button class="icon-btn" onclick="editarPasta('${pasta.id}')">✏️ Editar</button>
+                  <button class="icon-btn" onclick="excluirPasta('${pasta.id}')">🗑️ Excluir</button>
                 </div>
               </div>
-              <div class="pasta-body">
-                <div class="subpastas">
-                  ${subpastasHtml || `<div class="vazio">Esta pasta ainda não tem subpastas.</div>`}
+              <div class="folder-body">
+                <div class="subfolders">
+                  ${subpastasHtml || `<div class="empty">Esta pasta ainda não tem subpastas.</div>`}
                 </div>
               </div>
             </div>
@@ -885,24 +1306,21 @@
         }
       });
 
-      arvore.innerHTML = html || `<div class="vazio">Nenhum resultado encontrado na busca.</div>`;
+      workspace.innerHTML = html || `<div class="empty">Nenhum resultado encontrado na busca.</div>`;
     }
 
-    function escapeHtml(text) {
-      return String(text || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    function exportarHtmlCompleto() {
+      const currentHtml = document.documentElement.outerHTML;
+      const blob = new Blob([currentHtml], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "organizador-premium-completo.html";
+      a.click();
+      URL.revokeObjectURL(url);
     }
 
-    function escapeAttr(text) {
-      return String(text || "").replace(/"/g, "&quot;");
-    }
-
-    atualizarSelects();
-    renderizar();
+    initSistema();
   </script>
 </body>
 </html>
