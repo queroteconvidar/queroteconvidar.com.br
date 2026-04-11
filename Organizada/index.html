@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizador de Cursos e Packs</title>
+  <style>
+    :root {
+      --bg: #f8f6f3;
+      --card: #ffffff;
+      --line: #e7dfd8;
+      --text: #3f342d;
+      --muted: #8c7a70;
+      --primary: #bfa18f;
+      --primary-dark: #a48674;
+      --accent: #d8c2b3;
+      --soft: #f2ebe6;
+      --danger: #b25b5b;
+      --success: #6b8b6e;
+      --shadow: 0 10px 30px rgba(80, 55, 40, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #faf8f6 0%, #f4efeb 100%);
+      color: var(--text);
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 30px auto 60px;
+    }
+
+    .topo {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .topo h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .topo p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .painel {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .box h2 {
+      margin-top: 0;
+      font-size: 1.05rem;
+    }
+
+    .linha {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(191, 161, 143, 0.15);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .campo {
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-soft {
+      background: var(--soft);
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: #f8e7e7;
+      color: var(--danger);
+    }
+
+    .btn-success {
+      background: #e8f3e9;
+      color: var(--success);
+    }
+
+    .acoes-topo {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .busca-box {
+      margin-top: 16px;
+    }
+
+    .secao-titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0 14px;
+    }
+
+    .secao-titulo h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .arvore {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pasta {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .pasta-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 16px 18px;
+      background: #fffaf7;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .pasta-nome {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .tag {
+      background: #f4ece7;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    .pasta-acoes,
+    .subpasta-acoes,
+    .item-acoes {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pasta-body {
+      padding: 16px;
+      background: #fff;
+    }
+
+    .subpastas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .subpasta {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fcfbfa;
+    }
+
+    .subpasta-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #fdf9f7;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .subpasta-nome {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .itens {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .item h4 {
+      margin: 0 0 8px;
+      font-size: 0.97rem;
+    }
+
+    .item p {
+      margin: 6px 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+
+    .item a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .item a:hover {
+      text-decoration: underline;
+    }
+
+    .vazio {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      background: #fff;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+    }
+
+    .mini {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .rodape {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 900px) {
+      .painel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .topo h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topo">
+      <h1>Organizador de Cursos, Packs e Materiais</h1>
+      <p>
+        Aqui você pode separar tudo por cliente, pack, curso ou categoria, criando pastas, subpastas e itens.
+        Tudo fica salvo automaticamente no seu navegador.
+      </p>
+
+      <div class="acoes-topo">
+        <button class="btn btn-success" onclick="exportarDados()">Exportar backup</button>
+        <label class="btn btn-soft" for="importarArquivo" style="display:inline-flex;align-items:center;">
+          Importar backup
+        </label>
+        <input id="importarArquivo" type="file" accept=".json" style="display:none" onchange="importarDados(event)">
+        <button class="btn btn-danger" onclick="resetarTudo()">Apagar tudo</button>
+      </div>
+
+      <div class="busca-box">
+        <input type="text" id="busca" placeholder="Buscar por nome, estilo, curso, cliente..." oninput="renderizar()">
+      </div>
+    </div>
+
+    <div class="painel">
+      <div class="box">
+        <h2>Criar nova pasta</h2>
+        <div class="campo">
+          <input type="text" id="novaPastaNome" placeholder="Ex: Convites da Pâmela">
+        </div>
+        <div class="campo">
+          <select id="novaPastaTipo">
+            <option value="Pack">Pack</option>
+            <option value="Curso">Curso</option>
+            <option value="Cliente">Cliente</option>
+            <option value="Referência">Referência</option>
+            <option value="Arquivo">Arquivo</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="criarPasta()">Criar pasta</button>
+      </div>
+
+      <div class="box">
+        <h2>Criar subpasta</h2>
+        <div class="campo">
+          <select id="selectPastaSubpasta"></select>
+        </div>
+        <div class="campo">
+          <input type="text" id="novaSubpastaNome" placeholder="Ex: Animado, Interativo, Cinematográfico">
+        </div>
+        <button class="btn btn-primary" onclick="criarSubpasta()">Criar subpasta</button>
+      </div>
+    </div>
+
+    <div class="box" style="margin-bottom: 22px;">
+      <h2>Adicionar item</h2>
+      <div class="grid-2">
+        <div class="campo">
+          <select id="selectPastaItem"></select>
+        </div>
+        <div class="campo">
+          <select id="selectSubpastaItem"></select>
+        </div>
+      </div>
+
+      <div class="campo">
+        <input type="text" id="itemTitulo" placeholder="Título do item. Ex: Convite Safari Premium">
+      </div>
+
+      <div class="grid-2">
+        <div class="campo">
+          <input type="text" id="itemTipo" placeholder="Tipo. Ex: HTML, PDF, Vídeo, Aula">
+        </div>
+        <div class="campo">
+          <input type="text" id="itemLink" placeholder="Link opcional">
+        </div>
+      </div>
+
+      <div class="campo">
+        <textarea id="itemDescricao" placeholder="Descrição, observações, o que tem dentro, detalhes importantes..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" onclick="adicionarItem()">Adicionar item</button>
+    </div>
+
+    <div class="secao-titulo">
+      <h3>Seu arquivo organizado</h3>
+      <span class="mini">Clique nos botões para editar, excluir e manter tudo no lugar</span>
+    </div>
+
+    <div id="arvore" class="arvore"></div>
+
+    <div class="rodape">
+      Seu conteúdo fica salvo localmente no navegador. Para não perder nada, exporte backup de vez em quando.
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "organizadorCursosPacksQC";
+
+    let dados = carregarDados();
+
+    function dadosIniciais() {
+      return [
+        {
+          id: gerarId(),
+          nome: "Convites da Pâmela",
+          tipo: "Cliente",
+          subpastas: [
+            {
+              id: gerarId(),
+              nome: "Animado",
+              itens: [
+                {
+                  id: gerarId(),
+                  titulo: "Convite Animado Safari",
+                  tipo: "HTML",
+                  link: "",
+                  descricao: "Versão com animação suave, ideal para festa infantil."
+                }
+              ]
+            },
+            {
+              id: gerarId(),
+              nome: "Interativo",
+              itens: [
+                {
+                  id: gerarId(),
+                  titulo: "Convite Interativo com botões",
+                  tipo: "HTML",
+                  link: "",
+                  descricao: "Com localização, confirmação e sugestão de presente."
+                }
+              ]
+            },
+            {
+              id: gerarId(),
+              nome: "Cinematográfico",
+              itens: []
+            },
+            {
+              id: gerarId(),
+              nome: "Infinito",
+              itens: []
+            }
+          ]
+        },
+        {
+          id: gerarId(),
+          nome: "Pack da Talita",
+          tipo: "Pack",
+          subpastas: [
+            {
+              id: gerarId(),
+              nome: "Animado",
+              itens: []
+            },
+            {
+              id: gerarId(),
+              nome: "Interativo",
+              itens: []
+            }
+          ]
+        },
+        {
+          id: gerarId(),
+          nome: "Cursos",
+          tipo: "Curso",
+          subpastas: [
+            {
+              id: gerarId(),
+              nome: "Canva",
+              itens: []
+            },
+            {
+              id: gerarId(),
+              nome: "Identidade Visual",
+              itens: []
+            }
+          ]
+        }
+      ];
+    }
+
+    function gerarId() {
+      return "_" + Math.random().toString(36).slice(2, 11);
+    }
+
+    function salvarDados() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+    }
+
+    function carregarDados() {
+      const salvo = localStorage.getItem(STORAGE_KEY);
+      if (salvo) {
+        try {
+          return JSON.parse(salvo);
+        } catch {
+          return dadosIniciais();
+        }
+      }
+      return dadosIniciais();
+    }
+
+    function criarPasta() {
+      const nome = document.getElementById("novaPastaNome").value.trim();
+      const tipo = document.getElementById("novaPastaTipo").value;
+
+      if (!nome) {
+        alert("Digite o nome da pasta.");
+        return;
+      }
+
+      dados.push({
+        id: gerarId(),
+        nome,
+        tipo,
+        subpastas: []
+      });
+
+      document.getElementById("novaPastaNome").value = "";
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function criarSubpasta() {
+      const pastaId = document.getElementById("selectPastaSubpasta").value;
+      const nome = document.getElementById("novaSubpastaNome").value.trim();
+
+      if (!pastaId) {
+        alert("Selecione uma pasta.");
+        return;
+      }
+
+      if (!nome) {
+        alert("Digite o nome da subpasta.");
+        return;
+      }
+
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+
+      pasta.subpastas.push({
+        id: gerarId(),
+        nome,
+        itens: []
+      });
+
+      document.getElementById("novaSubpastaNome").value = "";
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function adicionarItem() {
+      const pastaId = document.getElementById("selectPastaItem").value;
+      const subpastaId = document.getElementById("selectSubpastaItem").value;
+      const titulo = document.getElementById("itemTitulo").value.trim();
+      const tipo = document.getElementById("itemTipo").value.trim();
+      const link = document.getElementById("itemLink").value.trim();
+      const descricao = document.getElementById("itemDescricao").value.trim();
+
+      if (!pastaId || !subpastaId) {
+        alert("Selecione a pasta e a subpasta.");
+        return;
+      }
+
+      if (!titulo) {
+        alert("Digite o título do item.");
+        return;
+      }
+
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+
+      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
+      if (!subpasta) return;
+
+      subpasta.itens.push({
+        id: gerarId(),
+        titulo,
+        tipo: tipo || "Arquivo",
+        link,
+        descricao
+      });
+
+      document.getElementById("itemTitulo").value = "";
+      document.getElementById("itemTipo").value = "";
+      document.getElementById("itemLink").value = "";
+      document.getElementById("itemDescricao").value = "";
+
+      salvarDados();
+      renderizar();
+    }
+
+    function atualizarSelects() {
+      const selectPastaSubpasta = document.getElementById("selectPastaSubpasta");
+      const selectPastaItem = document.getElementById("selectPastaItem");
+      const selectSubpastaItem = document.getElementById("selectSubpastaItem");
+
+      const opcoesPastas = dados.map(p => `<option value="${p.id}">${p.nome} (${p.tipo})</option>`).join("");
+
+      selectPastaSubpasta.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
+      selectPastaItem.innerHTML = `<option value="">Selecione uma pasta</option>${opcoesPastas}`;
+
+      atualizarSubpastasItem();
+    }
+
+    function atualizarSubpastasItem() {
+      const pastaId = document.getElementById("selectPastaItem").value;
+      const selectSubpastaItem = document.getElementById("selectSubpastaItem");
+
+      if (!pastaId) {
+        selectSubpastaItem.innerHTML = `<option value="">Selecione uma subpasta</option>`;
+        return;
+      }
+
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta || !pasta.subpastas.length) {
+        selectSubpastaItem.innerHTML = `<option value="">Nenhuma subpasta</option>`;
+        return;
+      }
+
+      selectSubpastaItem.innerHTML =
+        `<option value="">Selecione uma subpasta</option>` +
+        pasta.subpastas.map(s => `<option value="${s.id}">${s.nome}</option>`).join("");
+    }
+
+    document.getElementById("selectPastaItem").addEventListener("change", atualizarSubpastasItem);
+
+    function excluirPasta(id) {
+      if (!confirm("Deseja excluir esta pasta inteira?")) return;
+      dados = dados.filter(p => p.id !== id);
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function excluirSubpasta(pastaId, subpastaId) {
+      if (!confirm("Deseja excluir esta subpasta?")) return;
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+      pasta.subpastas = pasta.subpastas.filter(s => s.id !== subpastaId);
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function excluirItem(pastaId, subpastaId, itemId) {
+      if (!confirm("Deseja excluir este item?")) return;
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
+      if (!subpasta) return;
+      subpasta.itens = subpasta.itens.filter(i => i.id !== itemId);
+      salvarDados();
+      renderizar();
+    }
+
+    function editarPasta(id) {
+      const pasta = dados.find(p => p.id === id);
+      if (!pasta) return;
+      const novoNome = prompt("Novo nome da pasta:", pasta.nome);
+      if (novoNome === null) return;
+      pasta.nome = novoNome.trim() || pasta.nome;
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function editarSubpasta(pastaId, subpastaId) {
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
+      if (!subpasta) return;
+      const novoNome = prompt("Novo nome da subpasta:", subpasta.nome);
+      if (novoNome === null) return;
+      subpasta.nome = novoNome.trim() || subpasta.nome;
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function editarItem(pastaId, subpastaId, itemId) {
+      const pasta = dados.find(p => p.id === pastaId);
+      if (!pasta) return;
+      const subpasta = pasta.subpastas.find(s => s.id === subpastaId);
+      if (!subpasta) return;
+      const item = subpasta.itens.find(i => i.id === itemId);
+      if (!item) return;
+
+      const novoTitulo = prompt("Título do item:", item.titulo);
+      if (novoTitulo === null) return;
+
+      const novoTipo = prompt("Tipo do item:", item.tipo);
+      if (novoTipo === null) return;
+
+      const novoLink = prompt("Link do item:", item.link || "");
+      if (novoLink === null) return;
+
+      const novaDescricao = prompt("Descrição do item:", item.descricao || "");
+      if (novaDescricao === null) return;
+
+      item.titulo = novoTitulo.trim() || item.titulo;
+      item.tipo = novoTipo.trim() || item.tipo;
+      item.link = novoLink.trim();
+      item.descricao = novaDescricao.trim();
+
+      salvarDados();
+      renderizar();
+    }
+
+    function exportarDados() {
+      const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "backup-organizador.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importarDados(event) {
+      const arquivo = event.target.files[0];
+      if (!arquivo) return;
+
+      const leitor = new FileReader();
+      leitor.onload = function(e) {
+        try {
+          const conteudo = JSON.parse(e.target.result);
+          if (!Array.isArray(conteudo)) throw new Error("Formato inválido");
+          dados = conteudo;
+          salvarDados();
+          atualizarSelects();
+          renderizar();
+          alert("Backup importado com sucesso.");
+        } catch {
+          alert("Arquivo inválido.");
+        }
+      };
+      leitor.readAsText(arquivo);
+    }
+
+    function resetarTudo() {
+      if (!confirm("Tem certeza que deseja apagar tudo?")) return;
+      dados = [];
+      salvarDados();
+      atualizarSelects();
+      renderizar();
+    }
+
+    function normalizar(texto) {
+      return (texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function renderizar() {
+      const arvore = document.getElementById("arvore");
+      const termo = normalizar(document.getElementById("busca").value);
+
+      if (!dados.length) {
+        arvore.innerHTML = `<div class="vazio">Nenhuma pasta criada ainda.</div>`;
+        return;
+      }
+
+      let html = "";
+
+      dados.forEach(pasta => {
+        let pastaVisivel = !termo || normalizar(pasta.nome).includes(termo) || normalizar(pasta.tipo).includes(termo);
+        let subpastasHtml = "";
+
+        pasta.subpastas.forEach(subpasta => {
+          let subpastaVisivel = !termo || normalizar(subpasta.nome).includes(termo);
+          let itensHtml = "";
+
+          subpasta.itens.forEach(item => {
+            const itemVisivel =
+              !termo ||
+              normalizar(item.titulo).includes(termo) ||
+              normalizar(item.tipo).includes(termo) ||
+              normalizar(item.descricao).includes(termo) ||
+              normalizar(item.link).includes(termo);
+
+            if (itemVisivel) {
+              pastaVisivel = true;
+              subpastaVisivel = true;
+
+              itensHtml += `
+                <div class="item">
+                  <h4>${escapeHtml(item.titulo)}</h4>
+                  <p><strong>Tipo:</strong> ${escapeHtml(item.tipo || "-")}</p>
+                  ${item.link ? `<p><strong>Link:</strong> <a href="${escapeAttr(item.link)}" target="_blank">${escapeHtml(item.link)}</a></p>` : ""}
+                  ${item.descricao ? `<p>${escapeHtml(item.descricao)}</p>` : ""}
+                  <div class="item-acoes">
+                    <button class="btn btn-soft" onclick="editarItem('${pasta.id}','${subpasta.id}','${item.id}')">Editar</button>
+                    <button class="btn btn-danger" onclick="excluirItem('${pasta.id}','${subpasta.id}','${item.id}')">Excluir</button>
+                  </div>
+                </div>
+              `;
+            }
+          });
+
+          if (subpastaVisivel) {
+            pastaVisivel = true;
+            subpastasHtml += `
+              <div class="subpasta">
+                <div class="subpasta-header">
+                  <div class="subpasta-nome">
+                    📁 ${escapeHtml(subpasta.nome)}
+                    <span class="tag">${subpasta.itens.length} item(ns)</span>
+                  </div>
+                  <div class="subpasta-acoes">
+                    <button class="btn btn-soft" onclick="editarSubpasta('${pasta.id}','${subpasta.id}')">Editar</button>
+                    <button class="btn btn-danger" onclick="excluirSubpasta('${pasta.id}','${subpasta.id}')">Excluir</button>
+                  </div>
+                </div>
+                <div class="itens">
+                  ${itensHtml || `<div class="vazio">Nenhum item nesta subpasta.</div>`}
+                </div>
+              </div>
+            `;
+          }
+        });
+
+        if (pastaVisivel) {
+          html += `
+            <div class="pasta">
+              <div class="pasta-header">
+                <div class="pasta-nome">
+                  🗂️ ${escapeHtml(pasta.nome)}
+                  <span class="tag">${escapeHtml(pasta.tipo)}</span>
+                </div>
+                <div class="pasta-acoes">
+                  <button class="btn btn-soft" onclick="editarPasta('${pasta.id}')">Editar</button>
+                  <button class="btn btn-danger" onclick="excluirPasta('${pasta.id}')">Excluir</button>
+                </div>
+              </div>
+              <div class="pasta-body">
+                <div class="subpastas">
+                  ${subpastasHtml || `<div class="vazio">Esta pasta ainda não tem subpastas.</div>`}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      arvore.innerHTML = html || `<div class="vazio">Nenhum resultado encontrado na busca.</div>`;
+    }
+
+    function escapeHtml(text) {
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeAttr(text) {
+      return String(text || "").replace(/"/g, "&quot;");
+    }
+
+    atualizarSelects();
+    renderizar();
+  </script>
+</body>
+</html>
