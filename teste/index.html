@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,22 +9,9 @@
   <style>
     :root {
       --bg: #fcfaf7;
-      --card: rgba(255,255,255,0<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QC Hub | Quero Convidar</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #fcfaf7;
-      --card: rgba(255,255,255,0.88);
+      --card: rgba(255,255,255,0.92);
       --card-strong: #ffffff;
-      --line: #eadf d3;
-      --line2: #eadfd3;
+      --line: #eadfd3;
       --text: #4a3b35;
       --muted: #8f7d74;
       --green: #abc6bc;
@@ -38,636 +24,518 @@
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      background:
-        radial-gradient(circle at top right, rgba(220,165,153,0.18), transparent 20%),
-        radial-gradient(circle at left bottom, rgba(171,198,188,0.16), transparent 18%),
-        var(--bg);
-      color: var(--text);
-      font-family: 'Lato', sans-serif;
-    }
-
-    body {
-      padding: 20px;
-    }
-
-    .app {
-      min-height: calc(100vh - 40px);
-      display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 20px;
-    }
-
-    .sidebar {
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(212,175,55,0.15);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      padding: 24px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      position: sticky;
-      top: 20px;
-      max-height: calc(100vh - 40px);
-      overflow: auto;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 8px 8px 18px;
-      border-bottom: 1px solid rgba(212,175,55,0.16);
-    }
-
-    .brand-badge {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--green), var(--rose), var(--gold-soft));
-      display: grid;
-      place-items: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(212,175,55,0.18);
-    }
-
-    .brand h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .brand p {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    .nav-group-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      margin: 4px 10px 8px;
-    }
-
-    .nav {
-      display: grid;
-      gap: 8px;
-    }
-
-    .nav button {
-      border: none;
-      background: transparent;
-      width: 100%;
-      text-align: left;
-      padding: 14px 16px;
-      border-radius: 16px;
-      font-size: 15px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      transition: 0.25s ease;
-    }
-
-    .nav button:hover,
-    .nav button.active {
-      background: linear-gradient(90deg, rgba(220,165,153,0.16), rgba(171,198,188,0.18));
-      color: #5c4038;
-      transform: translateX(3px);
-    }
-
-    .nav .icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: rgba(212,175,55,0.10);
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      background: linear-gradient(135deg, rgba(171,198,188,0.24), rgba(220,165,153,0.24));
-      border-radius: 20px;
-      padding: 18px;
-      text-align: center;
-      font-size: 14px;
-      color: #6a564d;
-    }
-
-    .sidebar-footer strong {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      display: block;
-      margin-bottom: 6px;
-      color: #5a4338;
-    }
-
-    .content {
-      display: grid;
-      gap: 20px;
-    }
-
-    .topbar {
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(212,175,55,0.12);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      padding: 24px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .headline small {
-      color: var(--rose-deep);
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .headline h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 48px;
-      line-height: 0.95;
-      font-weight: 700;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .pill,
-    .action-btn,
-    .mini-btn {
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .pill {
-      background: rgba(220,165,153,0.18);
-      color: #a56a5d;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-    }
-
-    .action-btn {
-      background: linear-gradient(135deg, var(--rose), var(--gold));
-      color: white;
-      padding: 13px 18px;
-      border-radius: 16px;
-      font-weight: 700;
-      box-shadow: 0 10px 24px rgba(212,175,55,0.18);
-    }
-
-    .action-btn.secondary {
-      background: linear-gradient(135deg, var(--green), var(--green-deep));
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #dca599 0%, #cf9eb3 40%, #b695d0 100%);
-      border-radius: var(--radius-xl);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      color: white;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.10);
-      filter: blur(2px);
-    }
-
-    .hero::before {
-      width: 220px;
-      height: 220px;
-      right: -40px;
-      top: -60px;
-    }
-
-    .hero::after {
-      width: 170px;
-      height: 170px;
-      right: 60px;
-      bottom: -60px;
-    }
-
-    .hero h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      opacity: 0.95;
-    }
-
-    .hero .money {
-      font-size: 56px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero p {
-      font-size: 16px;
-      opacity: 0.95;
-    }
-
-    .hero-stats {
-      display: grid;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .glass-card {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 22px;
-      padding: 18px 20px;
-      backdrop-filter: blur(8px);
-    }
-
-    .glass-card span,
-    .metric-card .label,
-    .section-subtitle,
-    .list small,
-    .client-card small,
-    .item-note,
-    .empty-state p {
-      color: var(--muted);
-    }
-
-    .glass-card span {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.84);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .glass-card strong {
-      font-size: 36px;
-      display: block;
-    }
-
-    .grid-4,
-    .grid-3,
-    .grid-2 {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card {
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(212,175,55,0.10);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .metric-card {
-      min-height: 145px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .metric-card .emoji {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(171,198,188,0.26), rgba(220,165,153,0.20));
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-
-    .metric-card .label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-    }
-
-    .metric-card strong {
-      font-size: 34px;
-      font-weight: 700;
-      color: #4a342d;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px;
-      line-height: 1;
-      color: #4b372f;
-    }
-
-    .section-subtitle {
-      margin-top: 4px;
-      font-size: 14px;
-    }
-
-    .mini-btn {
-      background: rgba(212,175,55,0.12);
-      color: #8b6b23;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-weight: 700;
-    }
-
-    .quick-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .quick-actions button,
-    .tag {
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: none;
-      font-weight: 700;
-    }
-
-    .quick-actions button {
-      background: white;
-      border: 1px solid rgba(212,175,55,0.14);
-      cursor: pointer;
-      color: #5a453d;
-    }
-
-    .layout-main {
-      display: grid;
-      grid-template-columns: 1.3fr 0.95fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .list-item,
-    .client-card,
-    .material-card {
-      background: var(--card-strong);
-      border: 1px solid rgba(212,175,55,0.10);
-      border-radius: 18px;
-      padding: 16px 18px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .list-item h4,
-    .client-card h4,
-    .material-card h4 {
-      font-size: 17px;
-      margin-bottom: 5px;
-      color: #4a352e;
-    }
-
-    .list-item small,
-    .client-card small,
-    .material-card small {
-      display: block;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .tag {
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .tag.aprovado { background: rgba(171,198,188,0.22); color: #55796d; }
-    .tag.criacao { background: rgba(220,165,153,0.18); color: #9c6558; }
-    .tag.aguardando { background: rgba(212,175,55,0.16); color: #8a6a1f; }
-    .tag.entregue { background: rgba(183,160,212,0.18); color: #70558f; }
-    .tag.pack { background: rgba(171,198,188,0.16); color: #54756a; }
-    .tag.curso { background: rgba(220,165,153,0.14); color: #8f6156; }
-    .tag.template { background: rgba(212,175,55,0.14); color: #8d6c20; }
-
-    .aside-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .progress-box {
-      display: grid;
-      gap: 14px;
-    }
-
-    .progress-item {
-      display: grid;
-      gap: 8px;
-    }
-
-    .progress-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .progress {
-      width: 100%;
-      height: 10px;
-      border-radius: 999px;
-      background: #f3ede7;
-      overflow: hidden;
-    }
-
-    .progress > div {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--green), var(--rose), var(--gold));
-    }
-
-    .materials-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .material-card {
-      align-items: start;
-      flex-direction: column;
-      min-height: 132px;
-    }
-
-    .material-top {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: start;
-    }
-
-    .material-count {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px;
-      color: #533f38;
-      line-height: 1;
-    }
-
-    .finance-summary {
-      display: grid;
-      gap: 12px;
-    }
-
-    .finance-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px dashed rgba(212,175,55,0.18);
-      gap: 12px;
-    }
-
-    .finance-row:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .finance-row strong {
-      font-size: 18px;
-      color: #49352d;
-    }
-
-    .floating-note {
-      margin-top: 14px;
-      background: linear-gradient(135deg, rgba(171,198,188,0.22), rgba(220,165,153,0.20));
-      border-radius: 18px;
-      padding: 16px;
-      color: #604941;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 28px 20px;
-      border: 1px dashed rgba(212,175,55,0.24);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.5);
-    }
-
-    .empty-state strong {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      margin-bottom: 8px;
-      color: #5a443b;
-    }
-
-    @media (max-width: 1180px) {
-      .app,
-      .layout-main,
-      .hero,
-      .grid-4,
-      .grid-3,
-      .grid-2,
-      .materials-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-        max-height: none;
-      }
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding: 14px;
-      }
-
-      .app {
-        gap: 14px;
-      }
-
-      .headline h2 {
-        font-size: 36px;
-      }
-
-      .hero .money {
-        font-size: 42px;
-      }
-
-      .topbar,
-      .hero,
-      .card,
-      .sidebar {
-        padding: 18px;
-      }
-
-      .nav button {
-        padding: 12px 14px;
-      }
-    }
+    }* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top right, rgba(220,165,153,0.18), transparent 20%),
+    radial-gradient(circle at left bottom, rgba(171,198,188,0.16), transparent 18%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+}
+
+body { padding: 20px; }
+
+.app {
+  min-height: calc(100vh - 40px);
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 20px;
+}
+
+.sidebar {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 8px 18px;
+  border-bottom: 1px solid rgba(212,175,55,0.16);
+}
+
+.brand-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--green), var(--rose), var(--gold-soft));
+  display: grid;
+  place-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(212,175,55,0.18);
+}
+
+.brand h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.brand p {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.nav-group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin: 4px 10px 8px;
+}
+
+.nav { display: grid; gap: 8px; }
+
+.nav button {
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 15px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.nav button:hover,
+.nav button.active {
+  background: linear-gradient(90deg, rgba(220,165,153,0.16), rgba(171,198,188,0.18));
+  color: #5c4038;
+  transform: translateX(3px);
+}
+
+.nav .icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(212,175,55,0.10);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  background: linear-gradient(135deg, rgba(171,198,188,0.24), rgba(220,165,153,0.24));
+  border-radius: 20px;
+  padding: 18px;
+  text-align: center;
+  font-size: 14px;
+  color: #6a564d;
+}
+
+.sidebar-footer strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  display: block;
+  margin-bottom: 6px;
+  color: #5a4338;
+}
+
+.content { display: grid; gap: 20px; }
+
+.topbar,
+.card {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212,175,55,0.12);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.headline small {
+  color: var(--rose-deep);
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.headline h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  line-height: 0.95;
+  font-weight: 700;
+}
+
+.top-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.pill, .action-btn, .mini-btn, .btn-danger {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pill {
+  background: rgba(220,165,153,0.18);
+  color: #a56a5d;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.action-btn {
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  color: white;
+  padding: 13px 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(212,175,55,0.18);
+}
+
+.action-btn.secondary { background: linear-gradient(135deg, var(--green), var(--green-deep)); }
+.btn-danger {
+  background: #fff1ef;
+  color: #b35f50;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.mini-btn {
+  background: rgba(212,175,55,0.12);
+  color: #8b6b23;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #dca599 0%, #cf9eb3 40%, #b695d0 100%);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  color: white;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+  filter: blur(2px);
+}
+
+.hero::before { width: 220px; height: 220px; right: -40px; top: -60px; }
+.hero::after { width: 170px; height: 170px; right: 60px; bottom: -60px; }
+
+.hero h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; opacity: 0.95; }
+.hero .money { font-size: 56px; font-weight: 700; margin-bottom: 8px; }
+.hero p { font-size: 16px; opacity: 0.95; }
+.hero-stats { display: grid; gap: 14px; position: relative; z-index: 1; }
+
+.glass-card {
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 22px;
+  padding: 18px 20px;
+  backdrop-filter: blur(8px);
+}
+
+.glass-card span {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.84);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.glass-card strong { font-size: 36px; display: block; }
+
+.grid-4, .grid-2, .forms-grid { display: grid; gap: 18px; }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-2, .forms-grid { grid-template-columns: repeat(2, 1fr); }
+
+.metric-card {
+  padding: 22px;
+  min-height: 145px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metric-card .emoji {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(171,198,188,0.26), rgba(220,165,153,0.20));
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.metric-card .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.metric-card strong {
+  font-size: 34px;
+  font-weight: 700;
+  color: #4a342d;
+}
+
+.section {
+  display: none;
+  gap: 20px;
+}
+
+.section.active { display: grid; }
+
+.card {
+  padding: 22px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  line-height: 1;
+  color: #4b372f;
+}
+
+.section-subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.quick-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.quick-actions button {
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(212,175,55,0.14);
+  font-weight: 700;
+  background: white;
+  cursor: pointer;
+  color: #5a453d;
+}
+
+.list, .cards-list { display: grid; gap: 14px; }
+
+.data-card {
+  background: var(--card-strong);
+  border: 1px solid rgba(212,175,55,0.10);
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.data-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+}
+
+.data-card h4 {
+  font-size: 17px;
+  color: #4a352e;
+  margin-bottom: 6px;
+}
+
+.data-card .small {
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.tag {
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.tag.aprovado { background: rgba(171,198,188,0.22); color: #55796d; }
+.tag.criacao { background: rgba(220,165,153,0.18); color: #9c6558; }
+.tag.aguardando { background: rgba(212,175,55,0.16); color: #8a6a1f; }
+.tag.entregue { background: rgba(183,160,212,0.18); color: #70558f; }
+.tag.pack { background: rgba(171,198,188,0.16); color: #54756a; }
+.tag.curso { background: rgba(220,165,153,0.14); color: #8f6156; }
+.tag.video { background: rgba(212,175,55,0.14); color: #8d6c20; }
+
+.actions-line {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.field-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b5b52;
+}
+
+input, select, textarea {
+  width: 100%;
+  border: 1px solid rgba(212,175,55,0.16);
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 14px 14px;
+  font: inherit;
+  color: var(--text);
+  outline: none;
+}
+
+textarea { min-height: 110px; resize: vertical; }
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 28px 20px;
+  border: 1px dashed rgba(212,175,55,0.24);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.5);
+}
+
+.empty-state strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #5a443b;
+}
+
+.empty-state p { color: var(--muted); }
+
+.embed-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f7f2ec;
+  border: 1px solid rgba(212,175,55,0.10);
+}
+
+.embed-wrap iframe,
+.embed-wrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.note-box {
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(171,198,188,0.22), rgba(220,165,153,0.20));
+  border-radius: 18px;
+  padding: 16px;
+  color: #604941;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.content-editable {
+  padding: 8px 10px;
+  border-radius: 10px;
+  outline: none;
+  transition: background .2s ease;
+}
+
+.content-editable:hover,
+.content-editable:focus {
+  background: rgba(212,175,55,0.08);
+}
+
+.muted { color: var(--muted); }
+
+@media (max-width: 1180px) {
+  .app, .hero, .grid-4, .grid-2, .forms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .app { gap: 14px; }
+  .headline h2 { font-size: 36px; }
+  .hero .money { font-size: 42px; }
+  .topbar, .hero, .card, .sidebar { padding: 18px; }
+  .nav button { padding: 12px 14px; }
+}
+
   </style>
 </head>
 <body>
@@ -679,339 +547,637 @@
           <h1>QC Hub</h1>
           <p>Quero Convidar</p>
         </div>
-      </div>
-
-      <div>
-        <div class="nav-group-title">Painel</div>
-        <nav class="nav">
-          <button class="active"><span class="icon">🏠</span> Visão geral</button>
-          <button><span class="icon">💌</span> Pedidos e clientes</button>
-          <button><span class="icon">🎨</span> Materiais e packs</button>
-          <button><span class="icon">📁</span> Cursos e referências</button>
-          <button><span class="icon">💰</span> Financeiro</button>
-          <button><span class="icon">📆</span> Agenda</button>
-          <button><span class="icon">⚙️</span> Configurações</button>
-        </nav>
-      </div>
-
-      <div>
-        <div class="nav-group-title">Atalhos</div>
-        <nav class="nav">
-          <button><span class="icon">➕</span> Novo pedido</button>
-          <button><span class="icon">🧾</span> Novo orçamento</button>
-          <button><span class="icon">🖼️</span> Adicionar material</button>
-          <button><span class="icon">📲</span> Enviar no WhatsApp</button>
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <strong>Organiza. Cria. Brilha. ✨</strong>
-        Um único cantinho para clientes, materiais, packs, cursos e números do seu negócio.
-      </div>
-    </aside>
-
-    <main class="content">
-      <header class="topbar">
-        <div class="headline">
-          <small>Boa noite, Aline ✨</small>
-          <h2>Seu painel de hoje</h2>
-        </div>
-        <div class="top-actions">
-          <button class="pill">sábado, 11 de abril</button>
-          <button class="action-btn">+ Novo pedido</button>
-          <button class="action-btn secondary">+ Novo material</button>
-        </div>
-      </header>
-
-      <section class="hero">
-        <div>
-          <h3>💸 A receber agora</h3>
-          <div class="money">R$ 1.480,00</div>
-          <p>Você tem 4 pedidos em andamento, 2 aguardando aprovação e 1 pagamento pendente. O painel está pronto para juntar atendimento + acervo no mesmo lugar.</p>
-        </div>
-        <div class="hero-stats">
-          <div class="glass-card">
-            <span>faturamento do mês</span>
-            <strong>R$ 3.290</strong>
-          </div>
-          <div class="glass-card">
-            <span>lucro estimado</span>
-            <strong>R$ 2.140</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="grid-4">
-        <article class="card metric-card">
-          <div>
-            <div class="emoji">💌</div>
-            <div class="label">Pedidos ativos</div>
-          </div>
-          <strong>7</strong>
-        </article>
-        <article class="card metric-card">
-          <div>
-            <div class="emoji">👩‍💼</div>
-            <div class="label">Clientes do mês</div>
-          </div>
-          <strong>11</strong>
-        </article>
-        <article class="card metric-card">
-          <div>
-            <div class="emoji">🗂️</div>
-            <div class="label">Materiais salvos</div>
-          </div>
-          <strong>128</strong>
-        </article>
-        <article class="card metric-card">
-          <div>
-            <div class="emoji">🎓</div>
-            <div class="label">Cursos e packs</div>
-          </div>
-          <strong>34</strong>
-        </article>
-      </section>
-
-      <section class="card">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Ações rápidas</div>
-            <div class="section-subtitle">Tudo o que você mais usa, sem caça ao tesouro no computador.</div>
-          </div>
-          <button class="mini-btn">Personalizar atalhos</button>
-        </div>
-        <div class="quick-actions">
-          <button>Adicionar cliente</button>
-          <button>Criar checklist do pedido</button>
-          <button>Salvar novo pack</button>
-          <button>Separar por estilo</button>
-          <button>Atualizar pagamento</button>
-          <button>Gerar resumo no WhatsApp</button>
-        </div>
-      </section>
-
-      <section class="layout-main">
-        <div class="card">
-          <div class="section-header">
-            <div>
-              <div class="section-title">Pedidos e clientes</div>
-              <div class="section-subtitle">Seu atendimento num olhar só, sem planilha pedindo socorro.</div>
-            </div>
-            <button class="mini-btn">Ver todos</button>
-          </div>
-
-          <div class="list">
-            <div class="list-item">
-              <div>
-                <h4>Maria Eduarda • Convite Interativo</h4>
-                <small>Tema Jardim Encantado • Evento em 20/04 • Falta aprovação final</small>
-              </div>
-              <div class="tag aguardando">Aguardando</div>
-            </div>
-
-            <div class="list-item">
-              <div>
-                <h4>Helena • Álbum por IA</h4>
-                <small>9 fotos • 2 cenários • Material recebido hoje</small>
-              </div>
-              <div class="tag criacao">Em criação</div>
-            </div>
-
-            <div class="list-item">
-              <div>
-                <h4>Sofia • Identidade Visual</h4>
-                <small>Tema Bailarina • Paleta aprovada • Etiquetas pendentes</small>
-              </div>
-              <div class="tag aprovado">Aprovado</div>
-            </div>
-
-            <div class="list-item">
-              <div>
-                <h4>Laura • Convite Cinematográfico</h4>
-                <small>Vídeo final exportado • Aguardando envio para a cliente</small>
-              </div>
-              <div class="tag entregue">Pronto</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="aside-stack">
-          <div class="card">
-            <div class="section-header">
-              <div>
-                <div class="section-title">Fluxo do mês</div>
-                <div class="section-subtitle">Um termômetro elegante do caos sob controle.</div>
-              </div>
-            </div>
-            <div class="progress-box">
-              <div class="progress-item">
-                <div class="progress-head"><span>Pedidos concluídos</span><strong>68%</strong></div>
-                <div class="progress"><div style="width: 68%"></div></div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-head"><span>Materiais organizados</span><strong>83%</strong></div>
-                <div class="progress"><div style="width: 83%"></div></div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-head"><span>Pagamentos recebidos</span><strong>74%</strong></div>
-                <div class="progress"><div style="width: 74%"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="section-header">
-              <div>
-                <div class="section-title">Agenda relâmpago</div>
-                <div class="section-subtitle">O que precisa da sua atenção primeiro.</div>
-              </div>
-            </div>
-            <div class="list">
-              <div class="client-card">
-                <div>
-                  <h4>Hoje, 10:00</h4>
-                  <small>Enviar prévia do convite da Maria Eduarda</small>
-                </div>
-              </div>
-              <div class="client-card">
-                <div>
-                  <h4>Hoje, 14:00</h4>
-                  <small>Separar referências do pack animado da Pâmela</small>
-                </div>
-              </div>
-              <div class="client-card">
-                <div>
-                  <h4>Amanhã, 09:30</h4>
-                  <small>Cobrar sinal pendente da cliente Helena</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Materiais, packs e cursos</div>
-            <div class="section-subtitle">Seu acervo criativo separado por tipo, sem virar gaveta de cozinha digital.</div>
-          </div>
-          <button class="mini-btn">Abrir biblioteca</button>
-        </div>
-
-        <div class="materials-grid">
-          <div class="material-card">
-            <div class="material-top">
-              <div>
-                <h4>Convites da Pâmela</h4>
-                <small>Animado, interativo, cinematográfico, infinito</small>
-              </div>
-              <div class="tag pack">Pack</div>
-            </div>
-            <div class="material-count">24</div>
-            <small class="item-note">Arquivos organizados por estilo</small>
-          </div>
-
-          <div class="material-card">
-            <div class="material-top">
-              <div>
-                <h4>Pack da Talita</h4>
-                <small>Subpastas por categoria e acabamento</small>
-              </div>
-              <div class="tag pack">Pack</div>
-            </div>
-            <div class="material-count">18</div>
-            <small class="item-note">Separado por animado e interativo</small>
-          </div>
-
-          <div class="material-card">
-            <div class="material-top">
-              <div>
-                <h4>Cursos de design</h4>
-                <small>Aulas, PDFs, bônus e referências</small>
-              </div>
-              <div class="tag curso">Curso</div>
-            </div>
-            <div class="material-count">11</div>
-            <small class="item-note">Com status de concluído ou pendente</small>
-          </div>
-
-          <div class="material-card">
-            <div class="material-top">
-              <div>
-                <h4>Templates QC</h4>
-                <small>Artes-base, legendas, estruturas e mockups</small>
-              </div>
-              <div class="tag template">Template</div>
-            </div>
-            <div class="material-count">39</div>
-            <small class="item-note">Material pronto para acelerar produção</small>
-          </div>
-        </div>
-      </section>
-
-      <section class="grid-2">
-        <div class="card">
-          <div class="section-header">
-            <div>
-              <div class="section-title">Financeiro simplificado</div>
-              <div class="section-subtitle">O dinheiro precisa aparecer bonito e claro. Drama só no cinema.</div>
-            </div>
-          </div>
-
-          <div class="finance-summary">
-            <div class="finance-row">
-              <div>
-                <h4>Entradas da semana</h4>
-                <small>Pagamentos confirmados</small>
-              </div>
-              <strong>R$ 890,00</strong>
-            </div>
-            <div class="finance-row">
-              <div>
-                <h4>Pendentes</h4>
-                <small>Sinais e saldos aguardando</small>
-              </div>
-              <strong>R$ 1.480,00</strong>
-            </div>
-            <div class="finance-row">
-              <div>
-                <h4>Ticket médio</h4>
-                <small>Baseado nos pedidos do mês</small>
-              </div>
-              <strong>R$ 299,00</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="section-header">
-            <div>
-              <div class="section-title">Observações estratégicas</div>
-              <div class="section-subtitle">Aquele empurrão certeiro para você sair na frente.</div>
-            </div>
-          </div>
-
-          <div class="floating-note">
-            Seus packs e cursos estão no mesmo painel dos pedidos por um motivo simples: tempo é luxo. Quanto menos você caça arquivo, mais rápido atende, mais profissional parece e mais espaço sobra para criar com calma. Esse tipo de organização não é detalhe. É posicionamento disfarçado de praticidade. ✨
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Espaço pronto para crescer</div>
-            <div class="section-subtitle">Quando você quiser, dá para plugar busca, filtros, cadastro, upload e integração com WhatsApp.</div>
-          </div>
-          <button class="mini-btn">Evoluir painel</button>
-        </div>
-        <div class="empty-state">
-          <strong>Seu QG digital está montado 💻✨</strong>
-          <p>Esse HTML une em um só lugar o controle de clientes e pedidos com a organização dos seus materiais, packs, cursos e referências. Agora é só a gente decidir a próxima fase: deixar visual apenas ou transformar em sistema funcional com cadastro, edição e salvamento.</p>
-        </div>
-      </section>
-    </main>
+      </div><div>
+    <div class="nav-group-title">Painel</div>
+    <nav class="nav" id="mainNav">
+      <button class="active" data-section="visao-geral"><span class="icon">🏠</span> Visão geral</button>
+      <button data-section="clientes"><span class="icon">💌</span> Pedidos e clientes</button>
+      <button data-section="materiais"><span class="icon">🎨</span> Materiais e packs</button>
+      <button data-section="videos"><span class="icon">🎬</span> Vídeos e referências</button>
+      <button data-section="anotacoes"><span class="icon">📝</span> Anotações rápidas</button>
+    </nav>
   </div>
-</body>
+
+  <div>
+    <div class="nav-group-title">Atalhos</div>
+    <nav class="nav">
+      <button type="button" onclick="goSection('clientes')"><span class="icon">➕</span> Novo pedido</button>
+      <button type="button" onclick="goSection('materiais')"><span class="icon">🖼️</span> Adicionar material</button>
+      <button type="button" onclick="goSection('videos')"><span class="icon">📲</span> Adicionar vídeo</button>
+      <button type="button" onclick="exportarDados()"><span class="icon">💾</span> Exportar dados</button>
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <strong>Organiza. Cria. Brilha. ✨</strong>
+    Agora com abas funcionando, conteúdo editável, cadastro e espaço para vídeos.
+  </div>
+</aside>
+
+<main class="content">
+  <header class="topbar">
+    <div class="headline">
+      <small>Boa noite, Aline ✨</small>
+      <h2>Seu painel de hoje</h2>
+    </div>
+    <div class="top-actions">
+      <button class="pill" id="todayLabel">Hoje</button>
+      <button class="action-btn" type="button" onclick="goSection('clientes')">+ Novo pedido</button>
+      <button class="action-btn secondary" type="button" onclick="goSection('materiais')">+ Novo material</button>
+    </div>
+  </header>
+
+  <section class="section active" id="visao-geral">
+    <section class="hero">
+      <div>
+        <h3>💸 A receber agora</h3>
+        <div class="money content-editable" contenteditable="true" data-key="heroMoney">R$ 1.480,00</div>
+        <p class="content-editable" contenteditable="true" data-key="heroText">Você tem um painel unificado para clientes, materiais e vídeos. Clique nas abas, edite os textos e salve tudo automaticamente no navegador.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="glass-card">
+          <span>clientes cadastrados</span>
+          <strong id="countClientes">0</strong>
+        </div>
+        <div class="glass-card">
+          <span>materiais cadastrados</span>
+          <strong id="countMateriais">0</strong>
+        </div>
+        <div class="glass-card">
+          <span>vídeos salvos</span>
+          <strong id="countVideos">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-4">
+      <article class="card metric-card">
+        <div>
+          <div class="emoji">💌</div>
+          <div class="label">Pedidos ativos</div>
+        </div>
+        <strong id="metricPedidos">0</strong>
+      </article>
+      <article class="card metric-card">
+        <div>
+          <div class="emoji">👩‍💼</div>
+          <div class="label">Clientes</div>
+        </div>
+        <strong id="metricClientes">0</strong>
+      </article>
+      <article class="card metric-card">
+        <div>
+          <div class="emoji">🗂️</div>
+          <div class="label">Materiais</div>
+        </div>
+        <strong id="metricMateriais">0</strong>
+      </article>
+      <article class="card metric-card">
+        <div>
+          <div class="emoji">🎬</div>
+          <div class="label">Vídeos</div>
+        </div>
+        <strong id="metricVideos">0</strong>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Ações rápidas</div>
+          <div class="section-subtitle">Sem caça ao tesouro no computador.</div>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <button type="button" onclick="goSection('clientes')">Adicionar cliente</button>
+        <button type="button" onclick="goSection('materiais')">Salvar material</button>
+        <button type="button" onclick="goSection('videos')">Adicionar vídeo</button>
+        <button type="button" onclick="limparTudo()">Limpar tudo</button>
+      </div>
+      <div class="note-box">Tudo que você cadastrar aqui fica salvo no navegador com <strong>localStorage</strong>. Se abrir no mesmo navegador, os dados continuam lá.</div>
+    </section>
+  </section>
+
+  <section class="section" id="clientes">
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Cadastrar cliente</div>
+            <div class="section-subtitle">Adiciona pedido, tema, status e observações.</div>
+          </div>
+        </div>
+
+        <form id="clienteForm">
+          <div class="field-group">
+            <label for="clienteNome">Nome da cliente</label>
+            <input id="clienteNome" required>
+          </div>
+          <div class="field-group">
+            <label for="clienteServico">Serviço</label>
+            <input id="clienteServico" placeholder="Ex: Convite interativo">
+          </div>
+          <div class="field-group">
+            <label for="clienteTema">Tema</label>
+            <input id="clienteTema" placeholder="Ex: Jardim encantado">
+          </div>
+          <div class="field-group">
+            <label for="clienteData">Data do evento</label>
+            <input id="clienteData" type="date">
+          </div>
+          <div class="field-group">
+            <label for="clienteStatus">Status</label>
+            <select id="clienteStatus">
+              <option value="aguardando">Aguardando</option>
+              <option value="criacao">Em criação</option>
+              <option value="aprovado">Aprovado</option>
+              <option value="entregue">Pronto</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="clienteObs">Observações</label>
+            <textarea id="clienteObs" placeholder="Ex: falta aprovação final"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="action-btn" type="submit">Salvar cliente</button>
+            <button class="mini-btn" type="reset">Limpar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Clientes salvos</div>
+            <div class="section-subtitle">Clique nos textos dos cards para editar.</div>
+          </div>
+        </div>
+        <div class="cards-list" id="clientesList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="materiais">
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Cadastrar material</div>
+            <div class="section-subtitle">Packs, cursos, templates e referências.</div>
+          </div>
+        </div>
+
+        <form id="materialForm">
+          <div class="field-group">
+            <label for="materialNome">Nome</label>
+            <input id="materialNome" required>
+          </div>
+          <div class="field-group">
+            <label for="materialTipo">Tipo</label>
+            <select id="materialTipo">
+              <option value="pack">Pack</option>
+              <option value="curso">Curso</option>
+              <option value="video">Referência</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="materialCategoria">Categoria</label>
+            <input id="materialCategoria" placeholder="Ex: Animado, interativo, cinematográfico">
+          </div>
+          <div class="field-group">
+            <label for="materialQuantidade">Quantidade</label>
+            <input id="materialQuantidade" type="number" min="0" placeholder="Ex: 24">
+          </div>
+          <div class="field-group">
+            <label for="materialObs">Observações</label>
+            <textarea id="materialObs" placeholder="Ex: organizado por estilo"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="action-btn secondary" type="submit">Salvar material</button>
+            <button class="mini-btn" type="reset">Limpar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Materiais salvos</div>
+            <div class="section-subtitle">Tudo editável direto nos cards.</div>
+          </div>
+        </div>
+        <div class="cards-list" id="materiaisList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="videos">
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Adicionar vídeo</div>
+            <div class="section-subtitle">Aceita YouTube, Vimeo ou arquivo mp4/webm/ogg.</div>
+          </div>
+        </div>
+
+        <form id="videoForm">
+          <div class="field-group">
+            <label for="videoTitulo">Título</label>
+            <input id="videoTitulo" required>
+          </div>
+          <div class="field-group">
+            <label for="videoUrl">Link do vídeo</label>
+            <input id="videoUrl" placeholder="Cole aqui um link do YouTube, Vimeo ou vídeo direto (.mp4)">
+          </div>
+          <div class="field-group">
+            <label for="videoObs">Observações</label>
+            <textarea id="videoObs" placeholder="Ex: referência para convite cinematográfico"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="action-btn" type="submit">Salvar vídeo</button>
+            <button class="mini-btn" type="reset">Limpar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Vídeos salvos</div>
+            <div class="section-subtitle">Linka, incorpora e mantém tudo junto.</div>
+          </div>
+        </div>
+        <div class="cards-list" id="videosList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="anotacoes">
+    <div class="card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Anotações rápidas</div>
+          <div class="section-subtitle">Você escreve e ele salva sozinho.</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="notesBox">Notas</label>
+        <textarea id="notesBox" placeholder="Ex: separar referências do pack da Pâmela, cobrar sinal, revisar briefing..."></textarea>
+      </div>
+      <div class="note-box">Dica esperta: use esse campo como mini central da semana.</div>
+    </div>
+  </section>
+</main>
+
+  </div>  <script>
+    const STORAGE_KEY = 'qc_hub_data_v2';
+    const defaultData = {
+      heroMoney: 'R$ 1.480,00',
+      heroText: 'Você tem um painel unificado para clientes, materiais e vídeos. Clique nas abas, edite os textos e salve tudo automaticamente no navegador.',
+      notes: '',
+      clientes: [],
+      materiais: [],
+      videos: []
+    };
+
+    let data = loadData();
+
+    function loadData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return saved ? { ...defaultData, ...saved } : structuredClone(defaultData);
+      } catch (e) {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function goSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.toggle('active', section.id === sectionId);
+      });
+
+      document.querySelectorAll('#mainNav button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.section === sectionId);
+      });
+    }
+
+    document.querySelectorAll('#mainNav button').forEach(btn => {
+      btn.addEventListener('click', () => goSection(btn.dataset.section));
+    });
+
+    function formatDateBR(dateStr) {
+      if (!dateStr) return 'Sem data definida';
+      const date = new Date(dateStr + 'T00:00:00');
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    function todayLabel() {
+      const now = new Date();
+      document.getElementById('todayLabel').textContent = now.toLocaleDateString('pt-BR', {
+        weekday: 'long', day: '2-digit', month: 'long'
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function statusLabel(status) {
+      const map = {
+        aguardando: 'Aguardando',
+        criacao: 'Em criação',
+        aprovado: 'Aprovado',
+        entregue: 'Pronto'
+      };
+      return map[status] || status;
+    }
+
+    function renderClientes() {
+      const wrap = document.getElementById('clientesList');
+      if (!data.clientes.length) {
+        wrap.innerHTML = '<div class="empty-state"><strong>Nenhum cliente ainda</strong><p>Cadastre o primeiro pedido e ele aparece aqui.</p></div>';
+      } else {
+        wrap.innerHTML = data.clientes.map((item, index) => `
+          <div class="data-card">
+            <div class="data-card-top">
+              <div>
+                <h4 class="content-editable" contenteditable="true" data-type="cliente" data-index="${index}" data-field="nome">${escapeHtml(item.nome)}</h4>
+                <span class="small content-editable" contenteditable="true" data-type="cliente" data-index="${index}" data-field="servico">${escapeHtml(item.servico || 'Sem serviço definido')}</span>
+                <span class="small content-editable" contenteditable="true" data-type="cliente" data-index="${index}" data-field="tema">Tema: ${escapeHtml(item.tema || 'Sem tema')}</span>
+                <span class="small">Data: <span class="content-editable" contenteditable="true" data-type="cliente" data-index="${index}" data-field="dataRaw">${escapeHtml(item.dataRaw || '')}</span> ${item.dataRaw ? '• ' + formatDateBR(item.dataRaw) : ''}</span>
+                <span class="small content-editable" contenteditable="true" data-type="cliente" data-index="${index}" data-field="obs">${escapeHtml(item.obs || 'Sem observações')}</span>
+              </div>
+              <button class="tag ${escapeHtml(item.status)}" type="button" onclick="alternarStatusCliente(${index})">${statusLabel(item.status)}</button>
+            </div>
+            <div class="actions-line">
+              <button class="btn-danger" type="button" onclick="removerItem('clientes', ${index})">Excluir</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      updateMetrics();
+      bindEditableFields();
+    }
+
+    function renderMateriais() {
+      const wrap = document.getElementById('materiaisList');
+      if (!data.materiais.length) {
+        wrap.innerHTML = '<div class="empty-state"><strong>Nenhum material ainda</strong><p>Adicione packs, cursos, referências e templates.</p></div>';
+      } else {
+        wrap.innerHTML = data.materiais.map((item, index) => `
+          <div class="data-card">
+            <div class="data-card-top">
+              <div>
+                <h4 class="content-editable" contenteditable="true" data-type="material" data-index="${index}" data-field="nome">${escapeHtml(item.nome)}</h4>
+                <span class="small"><button class="tag ${escapeHtml(item.tipo)}" type="button" onclick="alternarTipoMaterial(${index})">${escapeHtml(capitalizar(item.tipo))}</button></span>
+                <span class="small content-editable" contenteditable="true" data-type="material" data-index="${index}" data-field="categoria">${escapeHtml(item.categoria || 'Sem categoria')}</span>
+                <span class="small">Quantidade: <span class="content-editable" contenteditable="true" data-type="material" data-index="${index}" data-field="quantidade">${escapeHtml(item.quantidade || '0')}</span></span>
+                <span class="small content-editable" contenteditable="true" data-type="material" data-index="${index}" data-field="obs">${escapeHtml(item.obs || 'Sem observações')}</span>
+              </div>
+            </div>
+            <div class="actions-line">
+              <button class="btn-danger" type="button" onclick="removerItem('materiais', ${index})">Excluir</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      updateMetrics();
+      bindEditableFields();
+    }
+
+    function renderVideos() {
+      const wrap = document.getElementById('videosList');
+      if (!data.videos.length) {
+        wrap.innerHTML = '<div class="empty-state"><strong>Nenhum vídeo ainda</strong><p>Adicione referências do YouTube, Vimeo ou arquivos diretos.</p></div>';
+      } else {
+        wrap.innerHTML = data.videos.map((item, index) => `
+          <div class="data-card">
+            <div class="data-card-top">
+              <div>
+                <h4 class="content-editable" contenteditable="true" data-type="video" data-index="${index}" data-field="titulo">${escapeHtml(item.titulo)}</h4>
+                <span class="small content-editable" contenteditable="true" data-type="video" data-index="${index}" data-field="obs">${escapeHtml(item.obs || 'Sem observações')}</span>
+                <span class="small content-editable" contenteditable="true" data-type="video" data-index="${index}" data-field="url">${escapeHtml(item.url)}</span>
+              </div>
+              <span class="tag video">Vídeo</span>
+            </div>
+            ${renderVideoEmbed(item.url)}
+            <div class="actions-line">
+              <button class="btn-danger" type="button" onclick="removerItem('videos', ${index})">Excluir</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      updateMetrics();
+      bindEditableFields();
+    }
+
+    function renderVideoEmbed(url) {
+      const parsed = parseVideoUrl(url);
+      if (!parsed) return '<div class="note-box">Não foi possível incorporar este link. Você ainda pode guardá-lo como referência.</div>';
+      if (parsed.type === 'file') {
+        return `<div class="embed-wrap"><video controls src="${escapeHtml(parsed.src)}"></video></div>`;
+      }
+      return `<div class="embed-wrap"><iframe src="${escapeHtml(parsed.src)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+    }
+
+    function parseVideoUrl(url) {
+      if (!url) return null;
+      const clean = url.trim();
+      if (!clean) return null;
+
+      if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(clean)) {
+        return { type: 'file', src: clean };
+      }
+
+      const ytMatch = clean.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{6,})/);
+      if (ytMatch) {
+        return { type: 'embed', src: `https://www.youtube.com/embed/${ytMatch[1]}` };
+      }
+
+      const vimeoMatch = clean.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+      if (vimeoMatch) {
+        return { type: 'embed', src: `https://player.vimeo.com/video/${vimeoMatch[1]}` };
+      }
+
+      return null;
+    }
+
+    function capitalizar(texto) {
+      if (!texto) return '';
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
+    }
+
+    function updateMetrics() {
+      document.getElementById('countClientes').textContent = data.clientes.length;
+      document.getElementById('countMateriais').textContent = data.materiais.length;
+      document.getElementById('countVideos').textContent = data.videos.length;
+      document.getElementById('metricPedidos').textContent = data.clientes.length;
+      document.getElementById('metricClientes').textContent = data.clientes.length;
+      document.getElementById('metricMateriais').textContent = data.materiais.length;
+      document.getElementById('metricVideos').textContent = data.videos.length;
+    }
+
+    function bindEditableFields() {
+      document.querySelectorAll('.content-editable[data-type]').forEach(el => {
+        el.addEventListener('blur', handleEditableCard);
+      });
+
+      document.querySelectorAll('.content-editable[data-key]').forEach(el => {
+        el.removeEventListener('blur', handleEditableStatic);
+        el.addEventListener('blur', handleEditableStatic);
+      });
+    }
+
+    function handleEditableStatic(e) {
+      const key = e.target.dataset.key;
+      data[key] = e.target.innerText.trim();
+      saveData();
+    }
+
+    function handleEditableCard(e) {
+      const el = e.target;
+      const type = el.dataset.type;
+      const index = Number(el.dataset.index);
+      const field = el.dataset.field;
+      let value = el.innerText.trim();
+
+      if (field === 'tema' && value.startsWith('Tema:')) {
+        value = value.replace(/^Tema:\s*/, '').trim();
+      }
+
+      if (field === 'servico' && value === 'Sem serviço definido') value = '';
+      if (field === 'tema' && value === 'Sem tema') value = '';
+      if (field === 'obs' && value === 'Sem observações') value = '';
+      if (field === 'categoria' && value === 'Sem categoria') value = '';
+      if (field === 'quantidade' && value === '0') value = '0';
+
+      if (type === 'cliente') data.clientes[index][field] = value;
+      if (type === 'material') data.materiais[index][field] = value;
+      if (type === 'video') data.videos[index][field] = value;
+
+      saveData();
+      if (type === 'video') renderVideos();
+      else if (type === 'cliente') renderClientes();
+      else if (type === 'material') renderMateriais();
+    }
+
+    function alternarStatusCliente(index) {
+      const ordem = ['aguardando', 'criacao', 'aprovado', 'entregue'];
+      const atual = data.clientes[index].status || 'aguardando';
+      const prox = ordem[(ordem.indexOf(atual) + 1) % ordem.length];
+      data.clientes[index].status = prox;
+      saveData();
+      renderClientes();
+    }
+
+    function alternarTipoMaterial(index) {
+      const ordem = ['pack', 'curso', 'video'];
+      const atual = data.materiais[index].tipo || 'pack';
+      const prox = ordem[(ordem.indexOf(atual) + 1) % ordem.length];
+      data.materiais[index].tipo = prox;
+      saveData();
+      renderMateriais();
+    }
+
+    function removerItem(chave, index) {
+      if (!confirm('Deseja excluir este item?')) return;
+      data[chave].splice(index, 1);
+      saveData();
+      renderAll();
+    }
+
+    document.getElementById('clienteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      data.clientes.unshift({
+        nome: document.getElementById('clienteNome').value.trim(),
+        servico: document.getElementById('clienteServico').value.trim(),
+        tema: document.getElementById('clienteTema').value.trim(),
+        dataRaw: document.getElementById('clienteData').value,
+        status: document.getElementById('clienteStatus').value,
+        obs: document.getElementById('clienteObs').value.trim()
+      });
+      saveData();
+      this.reset();
+      renderClientes();
+      goSection('clientes');
+    });
+
+    document.getElementById('materialForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      data.materiais.unshift({
+        nome: document.getElementById('materialNome').value.trim(),
+        tipo: document.getElementById('materialTipo').value,
+        categoria: document.getElementById('materialCategoria').value.trim(),
+        quantidade: document.getElementById('materialQuantidade').value.trim(),
+        obs: document.getElementById('materialObs').value.trim()
+      });
+      saveData();
+      this.reset();
+      renderMateriais();
+      goSection('materiais');
+    });
+
+    document.getElementById('videoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      data.videos.unshift({
+        titulo: document.getElementById('videoTitulo').value.trim(),
+        url: document.getElementById('videoUrl').value.trim(),
+        obs: document.getElementById('videoObs').value.trim()
+      });
+      saveData();
+      this.reset();
+      renderVideos();
+      goSection('videos');
+    });
+
+    document.getElementById('notesBox').addEventListener('input', function() {
+      data.notes = this.value;
+      saveData();
+    });
+
+    function limparTudo() {
+      if (!confirm('Isso vai apagar clientes, materiais, vídeos e anotações salvos neste navegador. Continuar?')) return;
+      data = structuredClone(defaultData);
+      saveData();
+      renderAll();
+    }
+
+    function exportarDados() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'qc-hub-dados.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderStatic() {
+      document.querySelector('[data-key="heroMoney"]').innerText = data.heroMoney;
+      document.querySelector('[data-key="heroText"]').innerText = data.heroText;
+      document.getElementById('notesBox').value = data.notes || '';
+    }
+
+    function renderAll() {
+      renderStatic();
+      renderClientes();
+      renderMateriais();
+      renderVideos();
+      updateMetrics();
+      bindEditableFields();
+    }
+
+    todayLabel();
+    renderAll();
+  </script></body>
 </html>
