@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acervo da QC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#f8dce7;--mint:#e1f5eb;--sky:#ddeefe;--butter:#fff2cb;--lilac:#e9defd;--paper:rgba(255,255,255,.95);--text:#5d4a57;--text2:#7f6d79;--line:#eadfe7;--shadow:0 15px 40px rgba(170,140,162,.16)}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;color:var(--text);min-height:100vh;background:linear-gradient(135deg,#fff7fa 0%, #fdf8ff 45%, #f3fbff 75%, #f7fff9 100%)}
+.hidden{display:none!important}.container{max-width:1450px;margin:0 auto;padding:22px}.script{font-family:'Parisienne',cursive;font-weight:400;color:#8c6882;line-height:1}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{width:min(500px,100%);background:rgba(255,255,255,.93);border:1px solid rgba(255,255,255,.8);border-radius:34px;box-shadow:var(--shadow);padding:32px 24px 28px;text-align:center;position:relative;overflow:hidden}
+.login-card::before,.login-card::after{content:"";position:absolute;border-radius:999px;filter:blur(18px);opacity:.8}
+.login-card::before{width:220px;height:220px;background:var(--rose);top:-80px;left:-80px}.login-card::after{width:200px;height:200px;background:var(--lilac);right:-70px;bottom:-70px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:999px;background:#f4efff;border:1px solid #eadff8;color:#7b638f;font-weight:800;font-size:13px;position:relative;z-index:1}
+.login-title{font-size:50px;margin:12px 0 10px;position:relative;z-index:1}.login-sub{color:var(--text2);font-size:15px;max-width:340px;margin:0 auto 18px;position:relative;z-index:1}
+.input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:18px;padding:14px 16px;font-size:15px;outline:none;transition:.2s ease;font-family:'Nunito',sans-serif}
+.input:focus,select:focus,textarea:focus{border-color:#dcc6da;box-shadow:0 0 0 4px rgba(239,223,238,.55)} textarea{min-height:110px;resize:vertical}
+.btn{border:none;border-radius:18px;padding:14px 18px;font-weight:900;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;transition:.2s ease}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}
+.btn-main{background:linear-gradient(135deg,#f3bfd2,#d8c8ff,#cdeaff);color:#5c4860;box-shadow:0 10px 22px rgba(191,159,193,.26)}
+.btn-soft{background:#fff;color:var(--text);border:1px solid var(--line)}.btn-danger{background:#fff3f5;color:#9b6171;border:1px solid #f0d7de}.btn-icon{padding:9px 12px;border-radius:14px;font-size:13px;font-weight:800}
+.field{display:flex;flex-direction:column;gap:8px}.field label{font-size:14px;font-weight:800;color:#755f6f}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+.password-wrap{position:relative}.password-wrap .input{padding-right:98px}.toggle-pass{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:#f7eff6;color:#755f6f;border-radius:12px;padding:8px 10px;font-weight:800;cursor:pointer}
+.topbar{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.brand{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand-icon{width:66px;height:66px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#ffe3ec,#e8defd,#dff1ff);box-shadow:var(--shadow);font-size:28px}
+.brand h1{margin:0;font-size:34px;font-family:'Parisienne',cursive;font-weight:400;color:#846177}.muted{color:var(--text2);font-size:14px;margin-top:2px}.top-actions{display:flex;gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tab{border:none;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer;color:#6d5868;box-shadow:0 8px 18px rgba(186,164,181,.14);transition:.2s ease}
+.tab[data-tab="painel"]{background:var(--rose)}.tab[data-tab="cadastro"]{background:var(--mint)}.tab[data-tab="biblioteca"]{background:var(--sky)}.tab[data-tab="estatisticas"]{background:var(--butter)}.tab[data-tab="config"]{background:var(--lilac)}.tab.active{transform:translateY(-1px);border:1px solid rgba(255,255,255,.75);box-shadow:0 10px 22px rgba(171,146,165,.2)}
+.view{display:none}.view.active{display:block}.grid-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-bottom:18px}
+.card{background:var(--paper);border:1px solid rgba(255,255,255,.8);border-radius:28px;box-shadow:var(--shadow);padding:20px}.mini{position:relative;overflow:hidden;min-height:125px}.mini .emoji{position:absolute;right:16px;top:14px;font-size:24px}
+.mini h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.3px;color:var(--text2)}.mini .number{font-size:29px;font-weight:900;color:#685363;margin-bottom:6px}.mini .small{font-size:13px;color:var(--text2)}
+.rose{background:linear-gradient(180deg, rgba(255,228,236,.92), rgba(255,255,255,.93))}.mint{background:linear-gradient(180deg, rgba(225,245,235,.92), rgba(255,255,255,.93))}.sky{background:linear-gradient(180deg, rgba(224,240,255,.92), rgba(255,255,255,.93))}.butter{background:linear-gradient(180deg, rgba(255,242,203,.92), rgba(255,255,255,.93))}.lilac{background:linear-gradient(180deg, rgba(233,222,253,.92), rgba(255,255,255,.93))}
+.section-title{margin:0 0 8px;font-size:28px;font-family:'Parisienne',cursive;font-weight:400;color:#815f75}.section-sub{color:var(--text2);font-size:14px;margin:0 0 16px}.layout-2{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1 / -1}.range-wrap{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:18px;background:#fff}
+input[type="range"]{width:100%;accent-color:#dca9be}.pill{min-width:74px;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;background:#f4efff;color:#765f86;font-size:14px;font-weight:900}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar>*{flex:1 1 170px}.list{display:grid;gap:14px}
+.item{background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,249,253,.96));border:1px solid var(--line);border-radius:26px;box-shadow:0 10px 20px rgba(194,179,193,.14);overflow:hidden}
+.item-inner{display:grid;grid-template-columns:180px 1fr;align-items:stretch;overflow:hidden}.cover{width:100%;height:100%;max-height:260px;background:linear-gradient(135deg,#ffe7ef,#ebdfff,#e0f0ff,#e3faee);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:contain;padding:10px;display:block}.cover-placeholder{padding:18px;text-align:center;color:#8a6f82}.cover-placeholder .big{font-size:42px;display:block;margin-bottom:8px}
+.content{padding:18px;min-width:0}.item-top{display:flex;gap:14px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}.item-title{margin:0 0 6px;font-size:21px;color:#6d5767;font-weight:900}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:8px 12px;border-radius:999px;background:#f6edf6;border:1px solid #eadfea;font-size:13px;font-weight:800;color:#735f71}.chip.ok{background:#eafaf1;color:#4d7d60;border-color:#d5eddc}.chip.wait{background:#fff5da;color:#8a7244;border-color:#efe2b4}.chip.alert{background:#fff0f3;color:#a96174;border-color:#f0d7df}
+.item-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}.info{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.3px;color:var(--text2);font-weight:900;margin-bottom:5px}.value{font-size:14px;font-weight:700;color:#5f5160;word-break:break-word}.access-link{color:#755c94;text-decoration:none;font-weight:900;word-break:break-all}
+.secret-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.secret-value{display:inline-flex;align-items:center;min-height:20px;padding:2px 0;font-weight:700;word-break:break-word}.blurred{filter:blur(6px);user-select:none}
+.progress{height:14px;border-radius:999px;overflow:hidden;border:1px solid #eadfea;background:#f0eaf4;margin:12px 0 6px}.progress>div{height:100%;border-radius:999px;background:linear-gradient(90deg,#f3bacf,#d3c5ff,#bde6ff,#ccefd9);width:0%;transition:width .25s ease}
+.item-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.tiny{font-size:13px;color:var(--text2)}.empty{text-align:center;padding:30px 20px;border:2px dashed #eadfea;border-radius:24px;background:rgba(255,255,255,.7);color:var(--text2)}
+.legend{display:grid;gap:12px}.legend-row{display:grid;grid-template-columns:140px 1fr auto;gap:12px;align-items:center}.bar{height:12px;border-radius:999px;overflow:hidden;background:#f1ebf5;border:1px solid #eadfea}.bar>div{height:100%;background:linear-gradient(90deg,#f5c1d5,#d5c7ff);width:0%;border-radius:999px}
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.note{padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:#fff;color:var(--text2);font-size:14px}.footer{margin-top:18px;text-align:center;color:#8a7784;font-size:13px}
+@media (max-width:1200px){.grid-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.layout-2,.config-grid{grid-template-columns:1fr}}
+@media (max-width:900px){.item-inner{grid-template-columns:1fr}.cover{max-height:200px;border-right:none;border-bottom:1px solid var(--line)}.item-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.container{padding:16px}.form-grid{grid-template-columns:1fr}.grid-cards{grid-template-columns:1fr}.item-grid{grid-template-columns:1fr}.toolbar>*{flex:1 1 100%}.tab{width:100%;text-align:center}.login-title{font-size:40px}.brand h1{font-size:30px}}
+</style>
+</head>
+<body>
+<section id="loginView" class="login-wrap">
+  <div class="login-card">
+    <div class="badge">🔐 Acervo privado da QC</div>
+    <div class="script login-title">Meu Acervo Fofo</div>
+    <p class="login-sub">Um lugar só para guardar packs, cursos, mentorias, acessos, senhas, capas e seu avanço real no conteúdo ✨</p>
+    <div class="field" style="position:relative;z-index:1;text-align:left;">
+      <label for="password">Senha de acesso</label>
+      <div class="password-wrap">
+        <input id="password" class="input" type="password" placeholder="Digite sua senha">
+        <button class="toggle-pass" type="button" onclick="alternarSenhaLogin()">Mostrar</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:16px;position:relative;z-index:1;">
+      <button class="btn btn-main" onclick="login()">Entrar no acervo 💗</button>
+    </div>
+    <p id="loginError" class="tiny hidden" style="margin-top:14px;color:#b2667c;font-weight:900;position:relative;z-index:1;">Senha incorreta. Tenta outra vez 🌷</p>
+  </div>
+</section>
+
+<main id="appView" class="container hidden">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-icon">🧁</div>
+      <div>
+        <h1>Acervo da QC</h1>
+        <div class="muted">Organize seus cursos e packs com elegância e clareza.</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn btn-soft" onclick="exportarDados()">Exportar backup 💾</button>
+      <label for="importFile" class="btn btn-soft" style="display:inline-flex;align-items:center;justify-content:center;">Importar backup 📥</label>
+      <input id="importFile" class="hidden" type="file" accept=".json" onchange="importarDados(event)">
+      <button class="btn btn-soft" onclick="logout()">Sair 🔒</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="painel" onclick="abrirAba('painel', this)">🌷 Painel</button>
+    <button class="tab" data-tab="cadastro" onclick="abrirAba('cadastro', this)">📝 Cadastro</button>
+    <button class="tab" data-tab="biblioteca" onclick="abrirAba('biblioteca', this)">📚 Biblioteca</button>
+    <button class="tab" data-tab="estatisticas" onclick="abrirAba('estatisticas', this)">📊 Estatísticas</button>
+    <button class="tab" data-tab="config" onclick="abrirAba('config', this)">⚙️ Configurações</button>
+  </div>
+
+  <section id="painel" class="view active">
+    <div class="grid-cards">
+      <div class="card mini rose"><div class="emoji">🛍️</div><h3>Total de itens</h3><div class="number" id="totalItens">0</div><div class="small">Tudo que já foi cadastrado</div></div>
+      <div class="card mini lilac"><div class="emoji">💸</div><h3>Valor investido</h3><div class="number" id="valorTotal">R$ 0,00</div><div class="small">Seu investimento total</div></div>
+      <div class="card mini mint"><div class="emoji">✅</div><h3>Conferidos</h3><div class="number" id="itensConferidos">0</div><div class="small">Itens já revisados</div></div>
+      <div class="card mini sky"><div class="emoji">🚀</div><h3>Progresso médio</h3><div class="number" id="mediaProgresso">0%</div><div class="small">Média geral de avanço</div></div>
+      <div class="card mini butter"><div class="emoji">🚨</div><h3>Parados</h3><div class="number" id="itensParados">0</div><div class="small">Sem atualização há 30+ dias</div></div>
+    </div>
+
+    <div class="layout-2">
+      <div class="card">
+        <h2 class="section-title">Últimos itens cadastrados</h2>
+        <p class="section-sub">Os mais recentes para você localizar rapidinho.</p>
+        <div id="ultimosItens" class="list"></div>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Materiais pedindo atenção</h2>
+        <p class="section-sub">Conteúdos parados ou ainda não conferidos.</p>
+        <div id="alertasLista" class="list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cadastro" class="view">
+    <div class="card">
+      <h2 class="section-title">Cadastrar ou editar item</h2>
+      <p class="section-sub">Preencha uma vez e deixe tudo arrumadinho.</p>
+      <form id="itemForm" class="form-grid">
+        <div class="field"><label for="titulo">Nome do item</label><input class="input" id="titulo" required placeholder="Ex: Curso de Convites Cinematográficos"></div>
+        <div class="field"><label for="tipo">Tipo</label><select id="tipo"><option value="Pack">Pack</option><option value="Curso">Curso</option><option value="Mentoria">Mentoria</option><option value="Outro">Outro</option></select></div>
+        <div class="field"><label for="dataCompra">Dia da compra</label><input class="input" id="dataCompra" type="date"></div>
+        <div class="field"><label for="valor">Valor pago</label><input class="input" id="valor" type="number" min="0" step="0.01" placeholder="0,00"></div>
+        <div class="field"><label for="plataforma">Plataforma</label><input class="input" id="plataforma" placeholder="Ex: Hotmart, Kiwify, Google Drive..."></div>
+        <div class="field"><label for="categoria">Categoria / tema</label><input class="input" id="categoria" placeholder="Ex: Infantil, Casamento, IA, Identidade..."></div>
+        <div class="field"><label for="acesso">Link ou local de acesso</label><input class="input" id="acesso" placeholder="Cole o link ou descreva onde acessar"></div>
+        <div class="field"><label for="senhaItem">Senha individual do conteúdo</label><input class="input" id="senhaItem" placeholder="Ex: senha da plataforma ou acesso"></div>
+        <div class="field"><label for="conferido">Já conferiu?</label><select id="conferido"><option value="nao">Ainda não</option><option value="sim">Sim</option></select></div>
+        <div class="field"><label for="ultimaAtualizacao">Última vez que você mexeu nele</label><input class="input" id="ultimaAtualizacao" type="date"></div>
+        <div class="field full"><label for="conteudo">O que possui o produto</label><textarea id="conteudo" placeholder="Aulas, bônus, packs editáveis, molduras, PSDs, templates, suporte, fontes, módulos..."></textarea></div>
+        <div class="field full"><label>Porcentagem de avanço</label><div class="range-wrap"><input id="progresso" type="range" min="0" max="100" value="0" oninput="atualizarPreviewProgresso(this.value)"><div id="previewProgresso" class="pill">0%</div></div></div>
+        <div class="field full"><label for="capaFile">Capa / imagem do item</label><input class="input" id="capaFile" type="file" accept="image/*" onchange="carregarPreviewImagem(event)"></div>
+        <div class="field full"><label>Prévia da capa</label><div id="previewCoverBox" class="cover" style="max-width:260px;border-radius:24px;border:1px solid var(--line);"><div class="cover-placeholder"><span class="big">🖼️</span>Sem capa por enquanto</div></div></div>
+        <div class="field full"><label for="obs">Observações</label><textarea id="obs" placeholder="Ex: parei no módulo 3, gostei mais da parte X, preciso baixar os arquivos, revisar aula tal..."></textarea></div>
+        <div class="field full"><div class="row"><button type="submit" class="btn btn-main" id="saveBtn">Salvar item ✨</button><button type="button" class="btn btn-soft" onclick="limparFormulario()">Limpar</button></div></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="biblioteca" class="view">
+    <div class="card">
+      <h2 class="section-title">Biblioteca do acervo</h2>
+      <p class="section-sub">Pesquise, filtre e encontre sem sofrimento o que você comprou.</p>
+      <div class="toolbar">
+        <input class="input" id="busca" placeholder="Pesquisar por nome, categoria, conteúdo ou plataforma..." oninput="renderizarLista()">
+        <select id="filtroTipo" onchange="renderizarLista()"><option value="">Todos os tipos</option><option value="Pack">Pack</option><option value="Curso">Curso</option><option value="Mentoria">Mentoria</option><option value="Outro">Outro</option></select>
+        <select id="filtroConferido" onchange="renderizarLista()"><option value="">Conferidos e não conferidos</option><option value="sim">Só conferidos</option><option value="nao">Só não conferidos</option></select>
+        <select id="filtroParado" onchange="renderizarLista()"><option value="">Todos os status</option><option value="sim">Só parados</option><option value="nao">Só ativos</option></select>
+        <select id="ordenacao" onchange="renderizarLista()"><option value="recentes">Mais recentes</option><option value="antigos">Mais antigos</option><option value="maiorProgresso">Maior progresso</option><option value="menorProgresso">Menor progresso</option><option value="maiorValor">Maior valor</option><option value="menorValor">Menor valor</option><option value="az">Nome A-Z</option></select>
+      </div>
+      <div id="listaItens" class="list"></div>
+    </div>
+  </section>
+
+  <section id="estatisticas" class="view">
+    <div class="layout-2">
+      <div class="card"><h2 class="section-title">Resumo geral</h2><p class="section-sub">Pra enxergar sua evolução sem adivinhar no escuro.</p><div id="resumoStats" class="legend"></div></div>
+      <div class="card"><h2 class="section-title">Plataformas</h2><p class="section-sub">Onde suas compras estão concentradas.</p><div id="plataformasStats" class="legend"></div></div>
+    </div>
+  </section>
+
+  <section id="config" class="view">
+    <div class="config-grid">
+      <div class="card">
+        <h2 class="section-title">Configurações úteis</h2>
+        <p class="section-sub">Pequenos ajustes que facilitam seu uso diário.</p>
+        <div class="field"><label for="diasParado">Quantidade de dias para considerar “parado”</label><input class="input" id="diasParado" type="number" min="1" step="1"></div>
+        <div class="row" style="margin-top:14px;"><button class="btn btn-main" onclick="salvarConfiguracoes()">Salvar configurações 🌷</button></div>
+        <div class="note" style="margin-top:14px;">Você pode ajustar quantos dias um item fica sem atualização antes de aparecer como parado.</div>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Sobre este sistema</h2>
+        <p class="section-sub">O essencial, sem enfeite demais.</p>
+        <div class="note">🔒 A senha de entrada não aparece mais na tela inicial.</div>
+        <div class="note" style="margin-top:12px;">👀 As senhas dos itens ficam ocultas por padrão e só aparecem quando você clicar em mostrar.</div>
+        <div class="note" style="margin-top:12px;">📱 No celular, você pode abrir no navegador e usar como um mini app pessoal.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Feito para uso pessoal 💗 Seu acervo salvo com carinho no navegador.</div>
+</main>
+
+<script>
+const APP_PASSWORD = "qcacervo123";
+const STORAGE_KEYS = ["qc_acervo_premium_v4","qc_acervo_premium_v3","qc_acervo_premium_v2","qc_acervo_premium_v1","qc_organizador_packs_cursos_v1"];
+const SETTINGS_KEYS = ["qc_acervo_settings_v4","qc_acervo_settings_v3","qc_acervo_settings_v2"];
+const CURRENT_STORAGE_KEY = "qc_acervo_premium_v4";
+const CURRENT_SETTINGS_KEY = "qc_acervo_settings_v4";
+let itens = [];
+let editandoId = null;
+let capaAtualBase64 = "";
+const defaultSettings = { diasParado: 30 };
+
+function login(){
+  const senha = document.getElementById('password').value;
+  const erro = document.getElementById('loginError');
+  if(senha === APP_PASSWORD){
+    sessionStorage.setItem('qc_logged_v4','true');
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('appView').classList.remove('hidden');
+    carregarTudo();
+  }else{ erro.classList.remove('hidden'); }
+}
+function alternarSenhaLogin(){
+  const input = document.getElementById('password');
+  const btn = document.querySelector('.toggle-pass');
+  if(input.type === 'password'){ input.type = 'text'; btn.textContent = 'Ocultar'; }
+  else { input.type = 'password'; btn.textContent = 'Mostrar'; }
+}
+function logout(){
+  sessionStorage.removeItem('qc_logged_v4');
+  document.getElementById('appView').classList.add('hidden');
+  document.getElementById('loginView').classList.remove('hidden');
+  document.getElementById('password').value = '';
+  document.getElementById('password').type = 'password';
+  const btn = document.querySelector('.toggle-pass');
+  if(btn) btn.textContent = 'Mostrar';
+}
+function verificarSessao(){
+  if(sessionStorage.getItem('qc_logged_v4') === 'true'){
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('appView').classList.remove('hidden');
+    carregarTudo();
+  }
+}
+function abrirAba(id, el){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el) el.classList.add('active');
+  if(id === 'estatisticas') renderizarEstatisticas();
+}
+function carregarTudo(){
+  carregarDados(); carregarConfiguracoes(); atualizarPainel(); renderizarLista(); renderizarEstatisticas();
+  if(!document.getElementById('ultimaAtualizacao').value){ document.getElementById('ultimaAtualizacao').value = hojeISO(); }
+}
+function carregarDados(){
+  itens = [];
+  for(const key of STORAGE_KEYS){
+    try{
+      const data = JSON.parse(localStorage.getItem(key));
+      if(Array.isArray(data)){ itens = data; break; }
+    }catch(e){}
+  }
+}
+function salvarDados(){ localStorage.setItem(CURRENT_STORAGE_KEY, JSON.stringify(itens)); atualizarPainel(); renderizarLista(); renderizarEstatisticas(); }
+function carregarConfiguracoes(){
+  let settings = defaultSettings;
+  for(const key of SETTINGS_KEYS){
+    try{
+      const data = JSON.parse(localStorage.getItem(key));
+      if(data){ settings = {...defaultSettings, ...data}; break; }
+    }catch(e){}
+  }
+  document.getElementById('diasParado').value = settings.diasParado;
+}
+function obterConfiguracoes(){
+  for(const key of SETTINGS_KEYS){
+    try{
+      const data = JSON.parse(localStorage.getItem(key));
+      if(data) return {...defaultSettings, ...data};
+    }catch(e){}
+  }
+  return {...defaultSettings};
+}
+function salvarConfiguracoes(){
+  const config = { diasParado: Math.max(1, parseInt(document.getElementById('diasParado').value || '30', 10)) };
+  localStorage.setItem(CURRENT_SETTINGS_KEY, JSON.stringify(config));
+  atualizarPainel(); renderizarLista(); renderizarEstatisticas(); alert('Configurações salvas com sucesso ✨');
+}
+function atualizarPreviewProgresso(valor){ document.getElementById('previewProgresso').textContent = `${valor}%`; }
+function carregarPreviewImagem(event){
+  const file = event.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){ capaAtualBase64 = e.target.result; renderizarPreviewCapa(capaAtualBase64); };
+  reader.readAsDataURL(file);
+}
+function renderizarPreviewCapa(src){
+  const box = document.getElementById('previewCoverBox');
+  box.innerHTML = src ? `<img src="${src}" alt="Prévia da capa">` : `<div class="cover-placeholder"><span class="big">🖼️</span>Sem capa por enquanto</div>`;
+}
+function limparFormulario(){
+  document.getElementById('itemForm').reset(); editandoId = null; capaAtualBase64 = "";
+  document.getElementById('saveBtn').textContent = 'Salvar item ✨';
+  document.getElementById('progresso').value = 0; document.getElementById('previewProgresso').textContent = '0%';
+  document.getElementById('ultimaAtualizacao').value = hojeISO(); document.getElementById('capaFile').value = '';
+  renderizarPreviewCapa("");
+}
+document.getElementById('itemForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const agora = new Date().toISOString();
+  const item = {
+    id: editandoId || Date.now(),
+    titulo: document.getElementById('titulo').value.trim(),
+    tipo: document.getElementById('tipo').value,
+    dataCompra: document.getElementById('dataCompra').value,
+    valor: parseFloat(document.getElementById('valor').value || 0),
+    plataforma: document.getElementById('plataforma').value.trim(),
+    categoria: document.getElementById('categoria').value.trim(),
+    acesso: document.getElementById('acesso').value.trim(),
+    senhaItem: document.getElementById('senhaItem').value.trim(),
+    conferido: document.getElementById('conferido').value,
+    ultimaAtualizacao: document.getElementById('ultimaAtualizacao').value || hojeISO(),
+    conteudo: document.getElementById('conteudo').value.trim(),
+    progresso: parseInt(document.getElementById('progresso').value || 0, 10),
+    capa: capaAtualBase64,
+    obs: document.getElementById('obs').value.trim(),
+    criadoEm: editandoId ? (itens.find(i => i.id === editandoId)?.criadoEm || agora) : agora
+  };
+  if(editandoId){ itens = itens.map(i => i.id === editandoId ? item : i); } else { itens.unshift(item); }
+  salvarDados(); limparFormulario(); abrirAba('biblioteca', document.querySelector('.tab[data-tab="biblioteca"]')); window.scrollTo({top:0, behavior:'smooth'});
+});
+function diasSemAtualizar(item){
+  if(!item.ultimaAtualizacao) return 9999;
+  const hoje = new Date(); const data = new Date(item.ultimaAtualizacao + 'T00:00:00');
+  return Math.floor((hoje - data) / (1000*60*60*24));
+}
+function itemParado(item){ const settings = obterConfiguracoes(); return diasSemAtualizar(item) >= settings.diasParado && Number(item.progresso || 0) < 100; }
+function atualizarPainel(){
+  const total = itens.length, soma = itens.reduce((a,i) => a + (Number(i.valor) || 0), 0), conferidos = itens.filter(i => i.conferido === 'sim').length;
+  const media = total ? Math.round(itens.reduce((a,i) => a + (Number(i.progresso) || 0), 0) / total) : 0;
+  const parados = itens.filter(itemParado).length;
+  document.getElementById('totalItens').textContent = total;
+  document.getElementById('valorTotal').textContent = formatarMoeda(soma);
+  document.getElementById('itensConferidos').textContent = conferidos;
+  document.getElementById('mediaProgresso').textContent = media + '%';
+  document.getElementById('itensParados').textContent = parados;
+
+  const ultimos = [...itens].sort((a,b) => new Date(b.criadoEm) - new Date(a.criadoEm)).slice(0,3);
+  const wrap = document.getElementById('ultimosItens');
+  wrap.innerHTML = !ultimos.length ? `<div class="empty">Nada cadastrado ainda. Comece pelo primeiro item ✨</div>` : ultimos.map(item => `
+    <div class="item"><div class="item-inner"><div class="cover">${renderCover(item)}</div><div class="content">
+      <div class="item-top"><div><h3 class="item-title">${escapeHtml(item.titulo)}</h3><div class="chips"><span class="chip">${escapeHtml(item.tipo || 'Item')}</span><span class="chip">${escapeHtml(item.plataforma || 'Sem plataforma')}</span></div></div><div class="pill">${Number(item.progresso || 0)}%</div></div>
+      <div class="progress"><div style="width:${Number(item.progresso || 0)}%"></div></div><div class="tiny">Atualizado há ${diasSemAtualizar(item)} dia(s).</div>
+    </div></div></div>`).join('');
+
+  const alertas = itens.filter(item => itemParado(item) || item.conferido === 'nao').sort((a,b) => diasSemAtualizar(b) - diasSemAtualizar(a)).slice(0,4);
+  const alertBox = document.getElementById('alertasLista');
+  alertBox.innerHTML = !alertas.length ? `<div class="empty">Tudo sob controle por aqui 💛</div>` : alertas.map(item => `
+    <div class="info"><div class="label">${itemParado(item) ? 'Conteúdo parado' : 'Ainda não conferido'}</div><div class="value"><strong>${escapeHtml(item.titulo)}</strong><br>Há ${diasSemAtualizar(item)} dia(s) sem atualização • ${Number(item.progresso || 0)}% concluído</div></div>`).join('');
+}
+function obterItensFiltrados(){
+  const busca = (document.getElementById('busca')?.value || '').toLowerCase().trim();
+  const filtroTipo = document.getElementById('filtroTipo')?.value || '';
+  const filtroConferido = document.getElementById('filtroConferido')?.value || '';
+  const filtroParado = document.getElementById('filtroParado')?.value || '';
+  const ordenacao = document.getElementById('ordenacao')?.value || 'recentes';
+  let filtrados = [...itens].filter(item => {
+    const texto = `${item.titulo} ${item.plataforma} ${item.categoria} ${item.conteudo} ${item.obs} ${item.acesso}`.toLowerCase();
+    const bateBusca = !busca || texto.includes(busca);
+    const bateTipo = !filtroTipo || item.tipo === filtroTipo;
+    const bateConferido = !filtroConferido || item.conferido === filtroConferido;
+    const bateParado = !filtroParado || (filtroParado === 'sim' ? itemParado(item) : !itemParado(item));
+    return bateBusca && bateTipo && bateConferido && bateParado;
+  });
+  filtrados.sort((a,b) => {
+    switch(ordenacao){
+      case 'antigos': return new Date(a.criadoEm) - new Date(b.criadoEm);
+      case 'maiorProgresso': return (b.progresso||0) - (a.progresso||0);
+      case 'menorProgresso': return (a.progresso||0) - (b.progresso||0);
+      case 'maiorValor': return (b.valor||0) - (a.valor||0);
+      case 'menorValor': return (a.valor||0) - (b.valor||0);
+      case 'az': return (a.titulo || '').localeCompare(b.titulo || '', 'pt-BR');
+      default: return new Date(b.criadoEm) - new Date(a.criadoEm);
+    }
+  });
+  return filtrados;
+}
+function renderizarLista(){
+  const lista = document.getElementById('listaItens');
+  const filtrados = obterItensFiltrados();
+  if(!filtrados.length){ lista.innerHTML = `<div class="empty">Nenhum item encontrado com esses filtros 🌼</div>`; return; }
+  lista.innerHTML = filtrados.map(item => `
+    <article class="item"><div class="item-inner">
+      <div class="cover">${renderCover(item)}</div>
+      <div class="content">
+        <div class="item-top">
+          <div>
+            <h3 class="item-title">${escapeHtml(item.titulo)}</h3>
+            <div class="chips">
+              <span class="chip">${escapeHtml(item.tipo || 'Item')}</span>
+              ${item.categoria ? `<span class="chip">${escapeHtml(item.categoria)}</span>` : ''}
+              <span class="chip ${item.conferido === 'sim' ? 'ok' : 'wait'}">${item.conferido === 'sim' ? 'Conferido ✅' : 'Não conferido ⏳'}</span>
+              ${itemParado(item) ? `<span class="chip alert">Parado 🚨</span>` : ''}
+            </div>
+          </div>
+          <div class="pill">${Number(item.progresso || 0)}%</div>
+        </div>
+
+        <div class="item-grid">
+          <div class="info"><div class="label">Valor</div><div class="value">${formatarMoeda(item.valor || 0)}</div></div>
+          <div class="info"><div class="label">Plataforma</div><div class="value">${escapeHtml(item.plataforma || 'Não informado')}</div></div>
+          <div class="info">
+            <div class="label">Senha do item</div>
+            <div class="value secret-row">
+              <span class="secret-value blurred" id="secret-${item.id}">${escapeHtml(item.senhaItem || 'Não informada')}</span>
+              <button class="btn btn-soft btn-icon" type="button" onclick="alternarSenhaItem(${item.id})">Mostrar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-grid">
+          <div class="info"><div class="label">Acesso</div><div class="value">${renderAcesso(item.acesso)}</div></div>
+          <div class="info" style="grid-column: span 2;"><div class="label">O que possui</div><div class="value">${quebrarLinha(item.conteudo || 'Sem descrição')}</div></div>
+        </div>
+
+        ${item.obs ? `<div class="info" style="margin-top:12px;"><div class="label">Observações</div><div class="value">${quebrarLinha(item.obs)}</div></div>` : ''}
+        <div class="progress"><div style="width:${Number(item.progresso || 0)}%"></div></div>
+        <div class="tiny">Progresso atual: ${Number(item.progresso || 0)}%</div>
+        <div class="item-actions">
+          <button class="btn btn-soft" onclick="editarItem(${item.id})">Editar ✏️</button>
+          <button class="btn btn-soft" onclick="duplicarItem(${item.id})">Duplicar 📋</button>
+          <button class="btn btn-danger" onclick="apagarItem(${item.id})">Excluir 🗑️</button>
+        </div>
+      </div>
+    </div></article>`).join('');
+}
+function alternarSenhaItem(id){
+  const el = document.getElementById(`secret-${id}`);
+  const btn = el?.nextElementSibling;
+  if(!el || !btn) return;
+  if(el.classList.contains('blurred')){ el.classList.remove('blurred'); btn.textContent = 'Ocultar'; }
+  else { el.classList.add('blurred'); btn.textContent = 'Mostrar'; }
+}
+function renderizarEstatisticas(){
+  const resumo = document.getElementById('resumoStats'), plataformas = document.getElementById('plataformasStats'), total = itens.length;
+  if(!total){
+    resumo.innerHTML = `<div class="empty">Cadastre itens para visualizar estatísticas 💛</div>`;
+    plataformas.innerHTML = `<div class="empty">Ainda não há plataformas cadastradas 🌸</div>`; return;
+  }
+  const packs = itens.filter(i => i.tipo === 'Pack').length, cursos = itens.filter(i => i.tipo === 'Curso').length, mentorias = itens.filter(i => i.tipo === 'Mentoria').length, concluidos = itens.filter(i => Number(i.progresso) === 100).length, media = Math.round(itens.reduce((a,i) => a + (Number(i.progresso) || 0), 0) / total);
+  const dadosResumo = [{label:'Packs', valor:packs},{label:'Cursos', valor:cursos},{label:'Mentorias', valor:mentorias},{label:'Concluídos', valor:concluidos},{label:'Progresso médio', valor:media, sufixo:'%'}];
+  resumo.innerHTML = dadosResumo.map(d => { const percent = d.label === 'Progresso médio' ? Math.min(d.valor,100) : Math.round((d.valor / total) * 100); return `<div class="legend-row"><strong>${d.label}</strong><div class="bar"><div style="width:${percent}%"></div></div><span class="tiny">${d.valor}${d.sufixo || ''}</span></div>`; }).join('');
+  const mapa = {}; itens.forEach(item => { const chave = item.plataforma?.trim() || 'Não informado'; mapa[chave] = (mapa[chave] || 0) + 1; });
+  plataformas.innerHTML = Object.entries(mapa).sort((a,b) => b[1] - a[1]).slice(0,8).map(([nome,qtd]) => `<div class="legend-row"><strong>${escapeHtml(nome)}</strong><div class="bar"><div style="width:${Math.round((qtd / total) * 100)}%"></div></div><span class="tiny">${qtd}</span></div>`).join('');
+}
+function editarItem(id){
+  const item = itens.find(i => i.id === id); if(!item) return;
+  editandoId = id;
+  document.getElementById('titulo').value = item.titulo || '';
+  document.getElementById('tipo').value = item.tipo || 'Pack';
+  document.getElementById('dataCompra').value = item.dataCompra || '';
+  document.getElementById('valor').value = item.valor || '';
+  document.getElementById('plataforma').value = item.plataforma || '';
+  document.getElementById('categoria').value = item.categoria || '';
+  document.getElementById('acesso').value = item.acesso || '';
+  document.getElementById('senhaItem').value = item.senhaItem || '';
+  document.getElementById('conferido').value = item.conferido || 'nao';
+  document.getElementById('ultimaAtualizacao').value = item.ultimaAtualizacao || hojeISO();
+  document.getElementById('conteudo').value = item.conteudo || '';
+  document.getElementById('progresso').value = item.progresso || 0;
+  document.getElementById('obs').value = item.obs || '';
+  capaAtualBase64 = item.capa || ""; renderizarPreviewCapa(capaAtualBase64); atualizarPreviewProgresso(item.progresso || 0);
+  document.getElementById('saveBtn').textContent = 'Atualizar item 💖';
+  abrirAba('cadastro', document.querySelector('.tab[data-tab="cadastro"]')); window.scrollTo({top:0, behavior:'smooth'});
+}
+function duplicarItem(id){ const item = itens.find(i => i.id === id); if(!item) return; itens.unshift({...item, id: Date.now(), titulo: `${item.titulo} (cópia)`, criadoEm: new Date().toISOString()}); salvarDados(); }
+function apagarItem(id){ if(!confirm('Tem certeza que deseja excluir este item?')) return; itens = itens.filter(i => i.id !== id); salvarDados(); }
+function exportarDados(){
+  const blob = new Blob([JSON.stringify({itens, configuracoes: obterConfiguracoes()}, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'backup-acervo-qc.json'; a.click(); URL.revokeObjectURL(url);
+}
+function importarDados(event){
+  const file = event.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const dados = JSON.parse(e.target.result);
+      if(Array.isArray(dados)){ itens = dados; }
+      else if(dados && Array.isArray(dados.itens)){ itens = dados.itens; if(dados.configuracoes){ localStorage.setItem(CURRENT_SETTINGS_KEY, JSON.stringify({...defaultSettings, ...dados.configuracoes})); } }
+      else{ throw new Error('Formato inválido'); }
+      salvarDados(); carregarConfiguracoes(); alert('Backup importado com sucesso ✨');
+    }catch(err){ alert('Não consegui importar esse arquivo. Verifique se ele é um backup JSON válido.'); }
+  };
+  reader.readAsText(file); event.target.value = '';
+}
+function renderCover(item){
+  if(item.capa){ return `<img src="${item.capa}" alt="Capa de ${escapeHtml(item.titulo)}">`; }
+  const emoji = item.tipo === 'Curso' ? '🎓' : item.tipo === 'Mentoria' ? '💬' : item.tipo === 'Pack' ? '📦' : '🗂️';
+  return `<div class="cover-placeholder"><span class="big">${emoji}</span>${escapeHtml(item.tipo || 'Item')}</div>`;
+}
+function renderAcesso(acesso){ if(!acesso) return 'Não informado'; const seguro = escapeHtml(acesso); return /^https?:\/\//i.test(acesso) ? `<a class="access-link" href="${seguro}" target="_blank" rel="noopener noreferrer">Abrir acesso 🔗</a>` : seguro; }
+function formatarMoeda(valor){ return Number(valor || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+function quebrarLinha(texto){ return escapeHtml(texto).replace(/\n/g,'<br>'); }
+function escapeHtml(texto){ return String(texto || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
+function hojeISO(){ const d = new Date(), m = String(d.getMonth()+1).padStart(2,'0'), day = String(d.getDate()).padStart(2,'0'); return `${d.getFullYear()}-${m}-${day}`; }
+document.getElementById('password').addEventListener('keydown', e => { if(e.key === 'Enter') login(); });
+document.getElementById('ultimaAtualizacao').value = hojeISO();
+verificarSessao();
+</script>
+</body>
+</html>
