@@ -1,0 +1,792 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Casa em Ordem | Checklist Luxo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f4ef;
+      --bg-soft:#f2ece5;
+      --card:rgba(255,255,255,.88);
+      --line:#e8ddd0;
+      --text:#4f4338;
+      --muted:#8a7b6d;
+      --accent:#bfa07a;
+      --accent-deep:#9b7a58;
+      --green:#b9c7b1;
+      --shadow:0 12px 30px rgba(107,84,61,.10);
+      --radius:24px;
+    }*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:linear-gradient(180deg,#fbf8f4 0%, #f3ede6 100%);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  padding:18px 14px 96px;
+}
+
+.app{
+  max-width:760px;
+  margin:0 auto;
+}
+
+.hero{
+  background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(248,241,233,.92));
+  border:1px solid rgba(191,160,122,.18);
+  border-radius:32px;
+  padding:24px 18px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  right:-40px;
+  top:-50px;
+  background:radial-gradient(circle, rgba(191,160,122,.20) 0%, rgba(191,160,122,0) 70%);
+  pointer-events:none;
+}
+
+h1,h2,h3{
+  font-family:'Cormorant Garamond',serif;
+  margin:0;
+  line-height:1;
+  letter-spacing:.2px;
+}
+
+h1{font-size:2.2rem;margin-bottom:10px}
+h2{font-size:1.7rem;margin-bottom:14px}
+h3{font-size:1.25rem;margin-bottom:10px}
+
+.subtitle{
+  color:var(--muted);
+  font-size:.97rem;
+  line-height:1.5;
+  max-width:92%;
+}
+
+.status-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:16px 0;
+}
+
+.mini-card{
+  background:rgba(255,255,255,.75);
+  border:1px solid rgba(191,160,122,.14);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 8px 20px rgba(107,84,61,.06);
+}
+
+.mini-label{
+  font-size:.78rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+  display:block;
+}
+
+.mini-value{
+  font-size:1rem;
+  font-weight:700;
+  color:var(--accent-deep);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+button, select, input, textarea{
+  font:inherit;
+}
+
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s ease;
+}
+
+.btn:active{transform:scale(.98)}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  color:#fff;
+  box-shadow:0 10px 24px rgba(155,122,88,.22);
+}
+
+.btn-secondary{
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--line);
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:0 0 16px;
+  position:sticky;
+  top:8px;
+  z-index:20;
+  background:rgba(247,244,239,.85);
+  backdrop-filter:blur(10px);
+  padding:8px;
+  border-radius:22px;
+  border:1px solid rgba(191,160,122,.12);
+}
+
+.tab-btn{
+  border:none;
+  border-radius:16px;
+  background:#fff;
+  padding:12px 8px;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--muted);
+  box-shadow:0 5px 12px rgba(0,0,0,.04);
+  cursor:pointer;
+}
+
+.tab-btn.active{
+  background:linear-gradient(135deg,var(--green),#dbe5d7);
+  color:#3d4c38;
+}
+
+.panel{display:none}
+.panel.active{display:block}
+
+.card{
+  background:var(--card);
+  border:1px solid rgba(191,160,122,.14);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+  backdrop-filter:blur(10px);
+}
+
+.field-label{
+  display:block;
+  font-size:.82rem;
+  color:var(--muted);
+  margin-bottom:8px;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+
+.text-input, .select-input, .text-area{
+  width:100%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.92);
+  color:var(--text);
+  border-radius:18px;
+  padding:14px 14px;
+  outline:none;
+}
+
+.text-area{
+  min-height:110px;
+  resize:vertical;
+  line-height:1.5;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.weekday-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.weekday-btn{
+  padding:14px 12px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+}
+
+.weekday-btn.active{
+  background:linear-gradient(135deg,#efe4d7,#f6efe8);
+  border-color:rgba(191,160,122,.5);
+  color:var(--accent-deep);
+}
+
+.room-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.room-counter{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--muted);
+  background:#fff;
+  border:1px solid var(--line);
+  padding:7px 10px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+.check-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px dashed rgba(191,160,122,.22);
+}
+
+.check-item:last-child{border-bottom:none}
+
+.check-item input[type="checkbox"]{
+  width:21px;
+  height:21px;
+  margin-top:2px;
+  accent-color:var(--accent-deep);
+  flex:0 0 auto;
+}
+
+.check-item label{
+  line-height:1.45;
+  font-size:.96rem;
+  flex:1;
+}
+
+.completed{
+  text-decoration:line-through;
+  color:#9c9085;
+}
+
+.section-note{
+  color:var(--muted);
+  line-height:1.55;
+  font-size:.94rem;
+  margin-top:6px;
+}
+
+.functionary-box{
+  background:linear-gradient(135deg,#fff,#f7f2ec);
+  border:1px solid rgba(191,160,122,.18);
+  border-radius:22px;
+  padding:16px;
+}
+
+.today-list{
+  margin:12px 0 0;
+  padding-left:18px;
+  line-height:1.7;
+}
+
+.footer-note{
+  text-align:center;
+  color:var(--muted);
+  font-size:.85rem;
+  margin-top:16px;
+}
+
+@media (min-width:700px){
+  body{padding-left:20px;padding-right:20px}
+  .status-row{grid-template-columns:repeat(4,1fr)}
+  .weekday-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="hero">
+      <h1>Casa em Ordem</h1>
+      <p class="subtitle">Um organizador doméstico pensado para rotina real. Tudo salvo no celular, com checklist detalhado por cômodo, planejamento semanal e cardápio do dia.</p><div class="status-row">
+    <div class="mini-card">
+      <span class="mini-label">Dia selecionado</span>
+      <div class="mini-value" id="currentDayLabel">Segunda-feira</div>
+    </div>
+    <div class="mini-card">
+      <span class="mini-label">Progresso do dia</span>
+      <div class="mini-value" id="globalProgress">0%</div>
+    </div>
+    <div class="mini-card">
+      <span class="mini-label">Checklist concluído</span>
+      <div class="mini-value"><span id="doneCount">0</span>/<span id="totalCount">0</span></div>
+    </div>
+    <div class="mini-card">
+      <span class="mini-label">Salvamento</span>
+      <div class="mini-value" id="saveStatus">Automático</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="clearDayBtn">Limpar dia atual</button>
+    <button class="btn btn-secondary" id="clearAllBtn">Zerar tudo</button>
+  </div>
+</section>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="painel">Painel</button>
+  <button class="tab-btn" data-tab="rotina">Rotina</button>
+  <button class="tab-btn" data-tab="cardapio">Cardápio</button>
+  <button class="tab-btn" data-tab="funcionaria">Do Dia</button>
+</nav>
+
+<section class="panel active" id="painel">
+  <div class="card">
+    <h2>Planejamento semanal</h2>
+    <p class="section-note">Escolha um dia da semana para visualizar e controlar as tarefas. Você pode usar esse sistema como guia fixo da casa, sem precisar repetir tudo no boca a boca.</p>
+    <div class="weekday-grid" id="weekdayGrid"></div>
+  </div>
+
+  <div class="card">
+    <h2>Agenda da semana</h2>
+    <label class="field-label" for="weekNotes">Anotações gerais</label>
+    <textarea id="weekNotes" class="text-area" placeholder="Ex.: trocar roupa de cama na terça, limpar vidros na sexta, revisar despensa no sábado..."></textarea>
+  </div>
+
+  <div class="card">
+    <h2>Resumo rápido</h2>
+    <div class="grid-2">
+      <div>
+        <label class="field-label" for="todayFocus">Foco do dia</label>
+        <input id="todayFocus" class="text-input" type="text" placeholder="Ex.: banheiros e cozinha" />
+      </div>
+      <div>
+        <label class="field-label" for="specialNote">Observação importante</label>
+        <input id="specialNote" class="text-input" type="text" placeholder="Ex.: usar produto no box" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="rotina"></section>
+
+<section class="panel" id="cardapio">
+  <div class="card">
+    <h2>Cardápio do dia</h2>
+    <p class="section-note">Planeje as refeições e deixe tudo claro para o dia correr liso, sem aquele caos da pergunta eterna sobre o almoço.</p>
+    <div class="grid-2">
+      <div>
+        <label class="field-label" for="breakfast">Café da manhã</label>
+        <textarea id="breakfast" class="text-area" placeholder="Ex.: frutas, café, pão, ovos..."></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="lunch">Almoço</label>
+        <textarea id="lunch" class="text-area" placeholder="Ex.: arroz, feijão, frango, salada..."></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="snack">Lanche</label>
+        <textarea id="snack" class="text-area" placeholder="Ex.: iogurte, bolo, suco... "></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="dinner">Jantar</label>
+        <textarea id="dinner" class="text-area" placeholder="Ex.: sopa, sanduíche, massa... "></textarea>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <label class="field-label" for="menuNotes">Observações do cardápio</label>
+      <textarea id="menuNotes" class="text-area" placeholder="Ex.: descongelar carne cedo, deixar salada pronta, comprar pão..."></textarea>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="funcionaria">
+  <div class="card functionary-box">
+    <h2>Roteiro do dia</h2>
+    <p class="section-note">Uma versão rápida para consulta. Ideal para você bater o olho e saber exatamente o que precisa ser feito no dia, sem esquecer nenhum detalhe.</p>
+    <h3 id="functionaryTitle" style="margin-top:14px;">Segunda-feira</h3>
+    <ul class="today-list" id="todayTaskList"></ul>
+  </div>
+</section>
+
+<p class="footer-note">Tudo o que você marcar ou escrever fica salvo automaticamente no próprio navegador do celular.</p>
+
+  </div>  <script>
+    const STORAGE_KEY = 'casa_em_ordem_luxo_v1';
+
+    const weekdays = [
+      'Segunda-feira',
+      'Terça-feira',
+      'Quarta-feira',
+      'Quinta-feira',
+      'Sexta-feira',
+      'Sábado',
+      'Domingo'
+    ];
+
+    const cleaningData = {
+      'Segunda-feira': {
+        'Sala': [
+          'Tirar pó dos móveis e aparadores',
+          'Limpar painel, televisão e controles',
+          'Aspirar sofá e almofadas',
+          'Organizar mantas e objetos fora do lugar',
+          'Limpar mesas laterais e de centro',
+          'Passar pano no chão',
+          'Verificar rodapés e cantinhos'
+        ],
+        'Varanda': [
+          'Varrer o chão',
+          'Limpar móveis da varanda',
+          'Retirar poeira de cantos e grades',
+          'Regar plantas, se houver',
+          'Passar pano no piso'
+        ]
+      },
+      'Terça-feira': {
+        'Suíte 1': [
+          'Arrumar a cama',
+          'Trocar roupa de cama, se necessário',
+          'Tirar pó de criados, cabeceira e armários',
+          'Limpar espelhos',
+          'Organizar objetos soltos',
+          'Esvaziar lixeira',
+          'Passar pano no chão'
+        ],
+        'Suíte 2': [
+          'Arrumar a cama',
+          'Tirar pó dos móveis e armários',
+          'Limpar espelhos',
+          'Organizar superfícies',
+          'Verificar lixeira',
+          'Passar pano no chão'
+        ],
+        'Suíte 3': [
+          'Arrumar a cama',
+          'Tirar pó de móveis e nichos',
+          'Organizar objetos e roupas fora do lugar',
+          'Limpar espelhos',
+          'Verificar lixeira',
+          'Passar pano no chão'
+        ]
+      },
+      'Quarta-feira': {
+        'Banheiros das suítes': [
+          'Lavar pia e bancada',
+          'Limpar espelhos',
+          'Higienizar vaso sanitário',
+          'Lavar box e metais',
+          'Repor papel e sabonete, se necessário',
+          'Esvaziar lixeira',
+          'Passar pano no chão'
+        ],
+        'Banheiro social': [
+          'Lavar pia e bancada',
+          'Limpar espelho',
+          'Higienizar vaso sanitário',
+          'Limpar detalhes e metais',
+          'Conferir lixeira',
+          'Passar pano no chão'
+        ]
+      },
+      'Quinta-feira': {
+        'Cozinha': [
+          'Limpar fogão e bancada',
+          'Limpar mesa e cadeiras',
+          'Limpar frente dos armários',
+          'Tirar pó de eletroportáteis',
+          'Organizar pia e utensílios',
+          'Verificar geladeira por fora',
+          'Retirar lixo',
+          'Passar pano no chão'
+        ],
+        'Área de serviço': [
+          'Organizar produtos de limpeza',
+          'Limpar tanque',
+          'Limpar máquina por fora',
+          'Verificar roupas para lavar ou recolher',
+          'Varrer e passar pano no chão'
+        ]
+      },
+      'Sexta-feira': {
+        'Revisão geral': [
+          'Retocar pó dos ambientes principais',
+          'Conferir se todos os lixos foram retirados',
+          'Verificar vidros, espelhos e marcas de mão',
+          'Dar atenção aos rodapés',
+          'Checar se banheiro social está impecável',
+          'Revisar cozinha e pia',
+          'Passar pano onde precisar'
+        ]
+      },
+      'Sábado': {
+        'Manutenção leve': [
+          'Organizar o que ficou fora do lugar',
+          'Conferir geladeira e despensa',
+          'Trocar toalhas, se necessário',
+          'Revisar roupas acumuladas',
+          'Varrer áreas de maior uso'
+        ]
+      },
+      'Domingo': {
+        'Casa pronta para a semana': [
+          'Checar cardápio e compras da semana',
+          'Organizar sala e cozinha',
+          'Separar prioridades da segunda-feira',
+          'Recolher itens espalhados',
+          'Deixar tudo alinhado para começar bem'
+        ]
+      }
+    };
+
+    const defaultState = {
+      selectedDay: weekdays[0],
+      checks: {},
+      weekNotes: '',
+      todayFocus: '',
+      specialNote: '',
+      menu: {
+        breakfast: '',
+        lunch: '',
+        snack: '',
+        dinner: '',
+        menuNotes: ''
+      }
+    };
+
+    let state = loadState();
+
+    function loadState(){
+      try{
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return saved ? mergeState(saved) : structuredClone(defaultState);
+      }catch(e){
+        return structuredClone(defaultState);
+      }
+    }
+
+    function mergeState(saved){
+      return {
+        ...structuredClone(defaultState),
+        ...saved,
+        menu:{...defaultState.menu, ...(saved.menu || {})},
+        checks:saved.checks || {}
+      };
+    }
+
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      const el = document.getElementById('saveStatus');
+      el.textContent = 'Salvo';
+      clearTimeout(window.__saveTimer);
+      window.__saveTimer = setTimeout(()=> el.textContent = 'Automático', 1200);
+    }
+
+    function getDayTasks(day){
+      return cleaningData[day] || {};
+    }
+
+    function renderWeekButtons(){
+      const grid = document.getElementById('weekdayGrid');
+      grid.innerHTML = '';
+      weekdays.forEach(day => {
+        const btn = document.createElement('button');
+        btn.className = 'weekday-btn' + (state.selectedDay === day ? ' active' : '');
+        btn.textContent = day.replace('-feira','');
+        btn.addEventListener('click', () => {
+          state.selectedDay = day;
+          saveState();
+          renderAll();
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    function ensureDayCheckStructure(day){
+      if(!state.checks[day]) state.checks[day] = {};
+      const tasksByRoom = getDayTasks(day);
+      Object.entries(tasksByRoom).forEach(([room, tasks]) => {
+        if(!state.checks[day][room]) state.checks[day][room] = {};
+        tasks.forEach((task, idx) => {
+          if(typeof state.checks[day][room][idx] !== 'boolean') {
+            state.checks[day][room][idx] = false;
+          }
+        });
+      });
+    }
+
+    function renderRoutine(){
+      const container = document.getElementById('rotina');
+      container.innerHTML = '';
+      const day = state.selectedDay;
+      ensureDayCheckStructure(day);
+      const tasksByRoom = getDayTasks(day);
+
+      Object.entries(tasksByRoom).forEach(([room, tasks]) => {
+        const checkedMap = state.checks[day][room] || {};
+        const checkedCount = tasks.filter((_,idx)=>checkedMap[idx]).length;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const roomHeader = document.createElement('div');
+        roomHeader.className = 'room-header';
+        roomHeader.innerHTML = `<div><h2>${room}</h2></div><div class="room-counter">${checkedCount}/${tasks.length} concluído</div>`;
+        card.appendChild(roomHeader);
+
+        tasks.forEach((task, idx) => {
+          const row = document.createElement('div');
+          row.className = 'check-item';
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = !!checkedMap[idx];
+          checkbox.addEventListener('change', () => {
+            state.checks[day][room][idx] = checkbox.checked;
+            saveState();
+            renderAll();
+          });
+
+          const label = document.createElement('label');
+          label.textContent = task;
+          if(checkbox.checked) label.classList.add('completed');
+
+          row.appendChild(checkbox);
+          row.appendChild(label);
+          card.appendChild(row);
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function updateSummary(){
+      const day = state.selectedDay;
+      ensureDayCheckStructure(day);
+      const tasksByRoom = getDayTasks(day);
+      let total = 0;
+      let done = 0;
+
+      Object.entries(tasksByRoom).forEach(([room, tasks]) => {
+        total += tasks.length;
+        tasks.forEach((_, idx) => {
+          if(state.checks[day][room][idx]) done++;
+        });
+      });
+
+      const pct = total ? Math.round((done/total)*100) : 0;
+      document.getElementById('currentDayLabel').textContent = day;
+      document.getElementById('functionaryTitle').textContent = day;
+      document.getElementById('globalProgress').textContent = pct + '%';
+      document.getElementById('doneCount').textContent = done;
+      document.getElementById('totalCount').textContent = total;
+    }
+
+    function renderTodayList(){
+      const list = document.getElementById('todayTaskList');
+      list.innerHTML = '';
+      const day = state.selectedDay;
+      const tasksByRoom = getDayTasks(day);
+
+      Object.entries(tasksByRoom).forEach(([room, tasks]) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${room}:</strong> ${tasks.join(', ')}.`;
+        list.appendChild(li);
+      });
+    }
+
+    function bindInputs(){
+      const fields = [
+        ['weekNotes', 'weekNotes'],
+        ['todayFocus', 'todayFocus'],
+        ['specialNote', 'specialNote']
+      ];
+
+      fields.forEach(([id, key]) => {
+        const el = document.getElementById(id);
+        el.value = state[key] || '';
+        el.oninput = () => {
+          state[key] = el.value;
+          saveState();
+        };
+      });
+
+      ['breakfast','lunch','snack','dinner','menuNotes'].forEach(key => {
+        const el = document.getElementById(key);
+        el.value = state.menu[key] || '';
+        el.oninput = () => {
+          state.menu[key] = el.value;
+          saveState();
+        };
+      });
+    }
+
+    function renderTabs(){
+      const buttons = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.panel');
+      buttons.forEach(btn => {
+        btn.onclick = () => {
+          buttons.forEach(b=>b.classList.remove('active'));
+          panels.forEach(p=>p.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(btn.dataset.tab).classList.add('active');
+          window.scrollTo({top:0,behavior:'smooth'});
+        };
+      });
+    }
+
+    function attachActions(){
+      document.getElementById('clearDayBtn').onclick = () => {
+        const day = state.selectedDay;
+        if(!confirm(`Deseja limpar todas as marcações de ${day}?`)) return;
+        const rooms = getDayTasks(day);
+        state.checks[day] = {};
+        Object.entries(rooms).forEach(([room,tasks]) => {
+          state.checks[day][room] = {};
+          tasks.forEach((_,idx)=>state.checks[day][room][idx] = false);
+        });
+        saveState();
+        renderAll();
+      };
+
+      document.getElementById('clearAllBtn').onclick = () => {
+        if(!confirm('Deseja zerar todo o sistema, incluindo checklist e textos salvos?')) return;
+        state = structuredClone(defaultState);
+        saveState();
+        renderAll();
+      };
+    }
+
+    function renderAll(){
+      renderWeekButtons();
+      renderRoutine();
+      updateSummary();
+      renderTodayList();
+      bindInputs();
+    }
+
+    renderTabs();
+    attachActions();
+    renderAll();
+  </script></body>
+</html>
